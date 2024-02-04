@@ -1,3 +1,4 @@
 <template>
-    <h1>Product</h1>
+        <ProductsSlideBar />
+        <ProductsCard/>
 </template>
