@@ -1,3 +1,4 @@
 <template>
-    <h1>Piano Shop</h1>
+   <div class="relative h-screen w-full bg-cover bg-gray-800">
+   </div>
 </template>
