@@ -1,5 +1,3 @@
-
-import type { _size } from '#tailwind-config/theme';
 <template>
     <div class="bg-gray-800 py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,13 +9,15 @@ import type { _size } from '#tailwind-config/theme';
                 <div class="flex -mx-2 mb-4">
                     <div class="w-1/2 px-2">
                         <UButton color="primary" variant="solid"  block> Add To Cart </UButton>
-
                     </div>
                     <div class="w-1/2 px-2">
-                        <UButton color="primary" variant="solid" block> Add to Wish </UButton>
+                        <UButton color="primary" variant="solid" block @click="isOpen=true" > Add to Wish </UButton>
+
+  
                     </div>
                 </div>
             </div>
+
             <div class="md:flex-1 px-4">
                 <h2 class="text-2xl font-bold text-white mb-2">Product Name</h2>
                 <p class="text-gray-300 text-sm mb-4">
@@ -59,3 +59,8 @@ import type { _size } from '#tailwind-config/theme';
     </div>
 </div>
 </template>
+<script setup lang="ts">
+import type { _size } from '#tailwind-config/theme';
+let isOpen = ref(false);
+
+</script>

@@ -1,6 +1,6 @@
 <template>
     
-    <div class="bg-gray-900 py-16">
+    <div class="bg-gray-800 py-16">
     <div class="container ml-72 mx-auto px-4">
         <h2 class="text-3xl font-bold text-white mb-8">Products</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
