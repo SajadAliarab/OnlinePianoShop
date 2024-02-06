@@ -7,7 +7,7 @@
 
             <div class="bg-gray-800 rounded-lg shadow-lg p-8">
                 <div class="relative overflow-hidden">
-                    <img class="object-cover w-full h-full" src="/assests/images/piano1.avif" alt="Product">
+                    <img class="object-cover w-full h-full" src="/assets/images/piano1.avif" alt="Product">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <UButton color="primary" variant="outline">View Product</UButton>
                     </div>
@@ -23,7 +23,7 @@
 
             <div class="bg-gray-800 rounded-lg shadow-lg p-8">
                 <div class="relative overflow-hidden">
-                    <img class="object-cover w-full h-full" src="/assests/images/piano1.avif" alt="Product">
+                    <img class="object-cover w-full h-full" src="/assets/images/piano1.avif" alt="Product">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <UButton color="primary" variant="outline">View Product</UButton>
                     </div>
@@ -39,7 +39,7 @@
 
             <div class="bg-gray-800 rounded-lg shadow-lg p-8">
                 <div class="relative overflow-hidden">
-                    <img class="object-cover w-full h-full" src="/assests/images/piano1.avif" alt="Product">
+                    <img class="object-cover w-full h-full" src="/assets/images/piano1.avif" alt="Product">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <UButton color="primary" variant="outline">View Product</UButton>
                     </div>
@@ -62,7 +62,6 @@
 
 </template>
 <script setup lang="ts">
-import type { variants } from '#tailwind-config';
 
 import type { UButton } from '#build/components';
 </script>
