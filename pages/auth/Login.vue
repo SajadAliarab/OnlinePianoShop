@@ -1,7 +1,11 @@
 <template>
  <div class="relative h-screen w-full bg-cover bg-gray-800">
     <form class="max-w-sm mx-auto">
-      <div class="mb-5 pt-20">
+      <div class="mb-5 pt-20  border-solid border-white">
+        <UIcon name="i-heroicons-lock-closed"  class=" max-w-sm w-full text-2xl"/>
+        <h1 class="w-ful text-center text-2xl font-bold">Login</h1>
+        <p class=" text-gray-400 p-2">Enter your credentials to access your account.</p>
+        <p class=" text-gray-400 p-2">Don't have an account? <NuxtLink to="/auth/register" class="text-primary font-medium">Sign Up</NuxtLink></p>
         <UFormGroup label="Email" required>
         <UInput color="primary" type="email" id="email" class=" w-full p-2.5" placeholder="Enter Your Email Address" />
       </UFormGroup>
