@@ -11,7 +11,7 @@ import type { ULink } from '#build/components';
     <TheSearch/>
   </div>
   <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <UButton class="text-white font-medium rounded-lg text-sm px-4 py-2 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800">LogIn</UButton>
+      <UButton color="primary" to="/auth/Login" class=" font-medium text-sm px-4 py-2 text-center">LogIn</UButton>
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
