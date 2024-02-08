@@ -19,7 +19,7 @@
           <UCheckbox name="remember" label="Remeber me"/>
         </div>
         </div>
-      <UButton color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mb-5">Log In</UButton>
+      <UButton color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5">Log In</UButton>
     </div>
     </form>
   </div>
