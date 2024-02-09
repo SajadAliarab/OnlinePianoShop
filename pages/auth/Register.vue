@@ -58,7 +58,7 @@ const isEqualPassword = computed(()=>{
 const submitForm = async ()=>{
   if(isValidEmail.value&&isValidPassword.value&&isEqualPassword.value&&selected.value){
     try{
-    const response = await $fetch('https://piano-shop-default-rtdb.europe-west1.firebasedatabase.app/users.json', {
+     await $fetch('https://piano-shop-default-rtdb.europe-west1.firebasedatabase.app/users.json', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,9 +70,8 @@ const submitForm = async ()=>{
     });
     warning.value=[true,"Congras! Your make your Account sucessfully "];
   } catch (error) {
-    warning.value=[false,"Can not access to database , please try again"]
+    warning.value=[false,"Can not access to database , please try again later"]
   }
-    
     email.value='';
     password.value='';
     confirmPassword.value='';
