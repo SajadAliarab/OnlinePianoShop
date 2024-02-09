@@ -5,19 +5,19 @@
         <h1 class="w-ful text-center text-2xl font-bold">Create an account</h1>
         <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
         <UFormGroup label="Your Email" required>
-        <UInput color="primary" type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address" v-model="email" />
-        <p v-if="!isValidEmail&&email" class="mb-5 text-red-700">Please Enter valid Email!</p>
+        <UInput color="primary" type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address" v-model="userData.email" />
+        <p v-if="!isValidEmail&&userData.email" class="mb-5 text-red-700">Please Enter valid Email!</p>
       </UFormGroup>
       <div class="mb-5">
         <UFormGroup label="Password" required>
-        <UInput color="primary" type="password" id="password" class="w-full p-2.5" placeholder="Please Enter aleast 8 digit" v-model="password"/>
-        <p v-if="!isValidPassword&&password" class="mb-5 text-red-700">Password should be at least 8 characters long!</p>
+        <UInput color="primary" type="password" id="password" class="w-full p-2.5" placeholder="Please Enter aleast 8 digit" v-model="userData.password"/>
+        <p v-if="!isValidPassword&&userData.password" class="mb-5 text-red-700">Password should be at least 8 characters long!</p>
     </UFormGroup>
       </div>
       <div class="mb-5">
         <UFormGroup label="Confirm Password" required>
-        <UInput color="primary" type="password" id="confirmPassword" class="w-full p-2.5" placeholder="Please Enter your Password Again" v-model="confirmPassword"/>
-        <p v-if="!isEqualPassword&&confirmPassword" class="mb-5 text-red-700"> Password is not equal!</p>
+        <UInput color="primary" type="password" id="confirmPassword" class="w-full p-2.5" placeholder="Please Enter your Password Again" v-model="userData.confirmPassword"/>
+        <p v-if="!isEqualPassword&&userData.confirmPassword" class="mb-5 text-red-700"> Password is not equal!</p>
     </UFormGroup>
       </div>
       <div class="flex items-start mb-5">
@@ -25,7 +25,7 @@
           <UCheckbox name="accept" label="I accept all policy and terms" v-model="selected"/>
         </div>
         </div>
-      <UButton color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5">Submit</UButton>
+      <UButton color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" :disabled="!(isValidEmail&&isValidPassword&&isEqualPassword&&selected)">Submit</UButton>
       <div v-if="warning[1]" :class="{'text-green-700':warning[0],'text-red-700':!warning[0]}">
         <h5 v-text="warning[1]"></h5>
       </div>
@@ -35,22 +35,24 @@
   </div>
 </template>
 <script setup lang="ts" >
-const email= ref('');
-const password = ref('');
-const confirmPassword = ref('');
+const userData = reactive({
+  email:'',
+  password:'',
+  confirmPassword:''
+})
 const selected =ref<boolean>(false);
 const warning =ref<[boolean,string]>([false,'']);
 const isValidEmail = computed(() => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email.value);
+  return re.test(userData.email);
 });
 const isValidPassword = computed(()=>{
-  if(password.value.length>=8){
+  if(userData.password.length>=8){
     return true;
   }
 });
 const isEqualPassword = computed(()=>{
-  if(password.value==confirmPassword.value){
+  if(userData.password==userData.confirmPassword){
     return true;
   }
 });
@@ -64,26 +66,18 @@ const submitForm = async ()=>{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: email.value,
-        password: password.value,
+        email: userData.email,
+        password: userData.password,
       }),
     });
     warning.value=[true,"Congras! Your make your Account sucessfully "];
   } catch (error) {
     warning.value=[false,"Can not access to database , please try again later"]
   }
-    email.value='';
-    password.value='';
-    confirmPassword.value='';
+    userData.email='';
+    userData.password='';
+    userData.confirmPassword='';
     selected.value=false;
-  }else if(!selected.value){
-    warning.value=[false,"Please accept our policy!"]
-  }else if(!isValidEmail.value){
-    warning.value=[false,"Please enter valid Email"]
-  }else if(!isValidPassword.value){
-    warning.value=[false,"Please enter atleast 8 character for password"]
-  }else if(!isEqualPassword.value){
-    warning.value=[false,"Your passwords not equal"]
-  }
+}
 }
 </script>
