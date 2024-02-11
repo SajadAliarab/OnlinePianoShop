@@ -35,7 +35,7 @@
 </template>
 <script setup lang="ts" >
 import * as yup from 'yup';
-import {auth} from '../../server/firbase';
+import {auth} from '../../firbase';
 import {createUserWithEmailAndPassword } from "firebase/auth";
 const userSchema = yup.object({
   email:yup.string().email('Please enter valid email!').required('Reqiured!'),
@@ -80,4 +80,4 @@ const submitForm = async ()=>{
     userData.confirmPassword='';
     userData.selected=false;
 }
-</script>
+</script>./firbase
