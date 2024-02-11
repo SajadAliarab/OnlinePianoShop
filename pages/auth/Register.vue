@@ -37,6 +37,7 @@
 import * as yup from 'yup';
 import {auth} from '../../firbase';
 import {createUserWithEmailAndPassword } from "firebase/auth";
+const router = useRouter();
 const userSchema = yup.object({
   email:yup.string().email('Please enter valid email!').required('Reqiured!'),
   password:yup.string().min(8,'Please enter atleast 8 character').required('Required!'),
@@ -52,14 +53,14 @@ const userData = reactive({
 const warning =ref<[boolean,string]>([false,'']);
 const submitForm = async ()=>{
       try {
-        // Create new user with email and password
         await createUserWithEmailAndPassword(auth,userData.email, userData.password);
         warning.value=[true,"Congras! Your make your Account sucessfully "];
+        setTimeout(()=>router.push('Login'),3000)
 
-      } catch (err) {
-        warning.value=[false,"Can not access to database , please try again later"];
+      } catch (err:any) {
+        warning.value=[false,err.message];
       }
-      
+  //********if we want add to dataBase********    
   //   try{
   //    await $fetch('https://piano-shop-default-rtdb.europe-west1.firebasedatabase.app/users.json', {
   //     method: 'POST',
@@ -75,9 +76,10 @@ const submitForm = async ()=>{
   // } catch (error) {
   //   warning.value=[false,"Can not access to database , please try again later"]
   // }
+  //*****************************************************************
     userData.email='';
     userData.password='';
     userData.confirmPassword='';
     userData.selected=false;
 }
-</script>./firbase
+</script>

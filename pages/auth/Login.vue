@@ -1,6 +1,6 @@
 <template>
  <div class="relative h-screen w-full bg-cover bg-gray-800">
-    <UForm :schema="schemaUser" :state="userData"  class="max-w-sm mx-auto pt-20" >
+    <UForm :schema="schemaUser" :state="userData" @submit="logIn"  class="max-w-sm mx-auto pt-20" >
         <UIcon name="i-heroicons-lock-closed"  class=" max-w-sm w-full text-2xl"/>
         <h1 class="w-ful text-center text-2xl font-bold">Login</h1>
         <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
@@ -20,14 +20,18 @@
         </div>
         </div>
       <UButton color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5">Log In</UButton>
+      <p class="font-medium text-red-800" v-text="warning"></p>
     </div>
     </UForm>
   </div>
     
   </template>
 <script setup lang="ts">
-import { object, string,} from 'yup'
+import { object, string,} from 'yup';
+import {auth} from '../../firbase';
+import {signInWithEmailAndPassword } from "firebase/auth";
 
+const router = useRouter();
 const schemaUser = object({
   email: string().email('Invalid email').required('Required!'),
   password: string()
@@ -40,6 +44,18 @@ const userData = reactive({
   email: '',
   password: ''
 })
+const warning = ref('');
+const logIn=async()=> {
+  try{
+    await signInWithEmailAndPassword(auth,userData.email,userData.password);
+    router.push('/');  
+  }catch(err:any){
+    warning.value = err.message;
+    
+
+  }
+  
+}
 
 
 </script>
