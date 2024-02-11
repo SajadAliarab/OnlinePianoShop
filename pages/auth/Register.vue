@@ -35,7 +35,8 @@
 </template>
 <script setup lang="ts" >
 import * as yup from 'yup';
-
+import {auth} from '../../server/firbase';
+import {createUserWithEmailAndPassword } from "firebase/auth";
 const userSchema = yup.object({
   email:yup.string().email('Please enter valid email!').required('Reqiured!'),
   password:yup.string().min(8,'Please enter atleast 8 character').required('Required!'),
@@ -49,23 +50,31 @@ const userData = reactive({
   selected:false
 })
 const warning =ref<[boolean,string]>([false,'']);
-
 const submitForm = async ()=>{
-    try{
-     await $fetch('https://piano-shop-default-rtdb.europe-west1.firebasedatabase.app/users.json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: userData.email,
-        password: userData.password,
-      }),
-    });
-    warning.value=[true,"Congras! Your make your Account sucessfully "];
-  } catch (error) {
-    warning.value=[false,"Can not access to database , please try again later"]
-  }
+      try {
+        // Create new user with email and password
+        await createUserWithEmailAndPassword(auth,userData.email, userData.password);
+        warning.value=[true,"Congras! Your make your Account sucessfully "];
+
+      } catch (err) {
+        warning.value=[false,"Can not access to database , please try again later"];
+      }
+      
+  //   try{
+  //    await $fetch('https://piano-shop-default-rtdb.europe-west1.firebasedatabase.app/users.json', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       email: userData.email,
+  //       password: userData.password,
+  //     }),
+  //   });
+  //   warning.value=[true,"Congras! Your make your Account sucessfully "];
+  // } catch (error) {
+  //   warning.value=[false,"Can not access to database , please try again later"]
+  // }
     userData.email='';
     userData.password='';
     userData.confirmPassword='';
