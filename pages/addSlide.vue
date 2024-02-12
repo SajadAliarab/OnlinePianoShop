@@ -1,3 +1,3 @@
 <template>
-    <AddSlider/>
+    <SlidesAdd/>
 </template>

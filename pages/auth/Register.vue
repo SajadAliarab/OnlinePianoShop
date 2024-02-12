@@ -4,16 +4,16 @@
         <UIcon name="i-heroicons-user-circle"  class=" max-w-sm w-full text-2xl"/>
         <h1 class="w-ful text-center text-2xl font-bold">Create an account</h1>
         <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
-        <UFormGroup label="Your Email" name="email">
+        <UFormGroup label="Your Email" name="email" required>
         <UInput color="primary" type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address" v-model="userData.email" />
       </UFormGroup>
       <div class="mb-5">
-        <UFormGroup label="Password" name="password">
+        <UFormGroup label="Password" name="password" required>
         <UInput color="primary" type="password" id="password" class="w-full p-2.5" placeholder="Please Enter aleast 8 digit" v-model="userData.password"/>
     </UFormGroup>
       </div>
       <div class="mb-5">
-        <UFormGroup label="Confirm Password" name="confirmPassword">
+        <UFormGroup label="Confirm Password" name="confirmPassword" required>
         <UInput color="primary" type="password" id="confirmPassword" class="w-full p-2.5" placeholder="Please Enter your Password Again" v-model="userData.confirmPassword"/>
     </UFormGroup>
       </div>

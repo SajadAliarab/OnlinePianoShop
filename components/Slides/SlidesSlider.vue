@@ -23,9 +23,9 @@ getItem();
 </script>
 
 <template>
- <UCarousel v-slot="{ item }" :items="slideData"  class="w-auto h-3/4 overflow-hidden p-5 " indicators>
+ <UCarousel v-slot="{ item }" :items="slideData"  class="w-auto h-3/4 overflow-hidden p-5 " indicators arrows>
 
-    <img :src="item.image" class=" w-screen rounded-lg" draggable="true">
+    <img :src="item.image" class=" w-screen h-3/4" draggable="true">
 
   </UCarousel>
 
