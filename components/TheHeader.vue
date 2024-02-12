@@ -37,7 +37,13 @@ import type { ULink } from '#build/components';
         <ULink 
         to="/addSlide"
         active-class="text-primary"
-        inactive-class="text-gray-400 hover:text-gray-200">AddSlide</ULink>
+        inactive-class="text-gray-400 hover:text-gray-200">Add Slide</ULink>
+      </li>
+      <li>
+        <ULink 
+        to="/productAdd"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200">Add Product</ULink>
       </li>
     </ul>
   </div>
