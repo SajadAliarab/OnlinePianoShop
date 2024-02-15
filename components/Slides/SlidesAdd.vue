@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-screen w-full bg-cover bg-gray-800">
+  <div class="relative h-auto w-full bg-cover bg-gray-800 pb-10">
 <UForm :schema="schema" :state="state" class="max-w-sm mx-auto pt-20" @submit="submitImage" >
   <UIcon name="i-heroicons-plus-circle"  class=" max-w-sm w-full text-2xl"/>
         <h1 class="w-ful text-center text-2xl font-bold">Add Slide</h1>

@@ -1,5 +1,5 @@
 <template>
-   <div class="relative h-screen w-full bg-cover bg-gray-800">
+   <div class="relative h-auto w-full bg-cover bg-gray-800 pb-10">
       <SlidesSlider/>
    </div>
 </template>
