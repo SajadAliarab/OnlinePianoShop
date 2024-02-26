@@ -40,6 +40,7 @@
 import * as yup from 'yup';
 import {auth} from '../../firbase';
 import {createUserWithEmailAndPassword } from "firebase/auth";
+import { RegisterUser } from '~/servies/AuthService';
 const router = useRouter();
 const userSchema = yup.object({
   name:yup.string().required('Required!'),
@@ -57,30 +58,21 @@ const userData = reactive({
 })
 const warning =ref<[boolean,string]>([false,'']);
 const submitForm = async ()=>{
-      try {
-        await createUserWithEmailAndPassword(auth,userData.email, userData.password);
-        warning.value=[true,"Congrats! You make your Account sucessfully "];
-        setTimeout(()=>router.push('Login'),3000)
+      // try {
+      //   await createUserWithEmailAndPassword(auth,userData.email, userData.password);
+      //   warning.value=[true,"Congrats! You make your Account sucessfully "];
+      //   setTimeout(()=>router.push('Login'),3000)
 
-      } catch (err:any) {
-        warning.value=[false,err.message];
-      }
+      // } catch (err:any) {
+      //   warning.value=[false,err.message];
+      // }
   //********if we want add to dataBase********    
-  //   try{
-  //    await $fetch('https://piano-shop-default-rtdb.europe-west1.firebasedatabase.app/users.json', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       email: userData.email,
-  //       password: userData.password,
-  //     }),
-  //   });
-  //   warning.value=[true,"Congras! Your make your Account sucessfully "];
-  // } catch (error) {
-  //   warning.value=[false,"Can not access to database , please try again later"]
-  // }
+    try{
+     await RegisterUser(userData);
+    warning.value=[true,"Congras! Your make your Account sucessfully "];
+  } catch (error) {
+    warning.value=[false,"Can not access to database , please try again later"];
+  }
   //*****************************************************************
     userData.name='';
     userData.email='';

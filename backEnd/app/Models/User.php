@@ -43,11 +43,5 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public static function createUser($name,$email,$password){
-        self::query()->create([
-            'name'=> $name,
-            'email'=>$email,
-            'password'=>$password
-        ]);
-    }
+   
 }

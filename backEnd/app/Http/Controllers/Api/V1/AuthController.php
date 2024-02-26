@@ -48,7 +48,12 @@ class AuthController extends Controller
     $name= $request->input('name');
     $email=$request->input('email');
     $password=$request->input('password');
-    User::createUser($name,$email,$password);
+      User::query()->create([
+          'name'=> $name,
+          'email'=>$email,
+          'password'=>$password
+      ]);
+
     return Response()->json([
         'result'=>true,
         'message'=>"user have inserted",
