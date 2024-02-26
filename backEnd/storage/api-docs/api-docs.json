@@ -6,13 +6,13 @@
     },
     "paths": {
         "/api": {},
-        "/api/v1/insert_user": {
+        "/api/v1/register_user": {
             "post": {
                 "tags": [
                     "Auth Api"
                 ],
-                "description": "use for insert user to database",
-                "operationId": "cfa1eb670bc0c104919bf7dae2030078",
+                "description": "use for register user to database",
+                "operationId": "4b0da3d32d94b5863496e2f1d0b49060",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -23,6 +23,43 @@
                                         "description": "Enter your name",
                                         "type": "string"
                                     },
+                                    "email": {
+                                        "description": "Enter your email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Enter your password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/login_user": {
+            "post": {
+                "tags": [
+                    "Auth Api"
+                ],
+                "description": "use for login user ",
+                "operationId": "8d024b1de171512d2fba029968905c03",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
                                     "email": {
                                         "description": "Enter your email",
                                         "type": "string"

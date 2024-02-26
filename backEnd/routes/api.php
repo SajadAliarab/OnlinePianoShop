@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::prefix('v1')->namespace('api\v1')->group(function(){
-    Route::post('insert_user',[AuthController::class,'insertUser']);
+    Route::post('register_user',[AuthController::class,'RegisterUser']);
+    Route::post('login_user',[AuthController::class,'LoginUser']);
 });

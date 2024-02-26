@@ -2,7 +2,7 @@ import type { RegisterUser } from "~/models/auth/RegisterModel";
 
 export function RegisterUser(userData:RegisterUser){
 
-          return $fetch('http://localhost:8000/api/v1/insert_user', {
+          return $fetch('http://localhost:8000/api/v1/register_user', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -13,4 +13,17 @@ export function RegisterUser(userData:RegisterUser){
               password: userData.password,
             },
           });
+}
+export function LoginUser($email:string,$password:string){
+
+  return $fetch('http://localhost:8000/api/v1/login_user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: {
+      email: $email,
+      password:$password,
+    },
+  });
 }
