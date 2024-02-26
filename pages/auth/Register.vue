@@ -4,6 +4,9 @@
         <UIcon name="i-heroicons-user-circle"  class=" max-w-sm w-full text-2xl"/>
         <h1 class="w-ful text-center text-2xl font-bold">Create an account</h1>
         <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
+          <UFormGroup label="Your Name" name="name" required>
+        <UInput color="primary" type="text" id="name" class=" w-full p-2.5 " placeholder="Enter Your Full Name" v-model="userData.name" />
+      </UFormGroup>
         <UFormGroup label="Your Email" name="email" required>
         <UInput color="primary" type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address" v-model="userData.email" />
       </UFormGroup>
@@ -39,12 +42,14 @@ import {auth} from '../../firbase';
 import {createUserWithEmailAndPassword } from "firebase/auth";
 const router = useRouter();
 const userSchema = yup.object({
+  name:yup.string().required('Required!'),
   email:yup.string().email('Please enter valid email!').required('Reqiured!'),
   password:yup.string().min(8,'Please enter atleast 8 character').required('Required!'),
   confirmPassword:yup.string().oneOf([yup.ref('password'), undefined], 'Passwords must match').required('Required!'),
   selected:yup.boolean().oneOf([true],'Please accept our terms and condition')
 })
 const userData = reactive({
+  name:'',
   email:'',
   password:'',
   confirmPassword:'',
@@ -54,7 +59,7 @@ const warning =ref<[boolean,string]>([false,'']);
 const submitForm = async ()=>{
       try {
         await createUserWithEmailAndPassword(auth,userData.email, userData.password);
-        warning.value=[true,"Congras! Your make your Account sucessfully "];
+        warning.value=[true,"Congrats! You make your Account sucessfully "];
         setTimeout(()=>router.push('Login'),3000)
 
       } catch (err:any) {
@@ -77,6 +82,7 @@ const submitForm = async ()=>{
   //   warning.value=[false,"Can not access to database , please try again later"]
   // }
   //*****************************************************************
+    userData.name='';
     userData.email='';
     userData.password='';
     userData.confirmPassword='';
