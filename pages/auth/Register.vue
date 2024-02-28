@@ -31,7 +31,7 @@
             </UFormGroup>
           </div>
         </div>
-        <UButton  :loading="loadingBtn" color="primary" type="submit"
+        <UButton  :loading="loadingBtn"  color="primary" type="submit"
           class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5">Submit</UButton>
         <div v-if="warning[1]" :class="{ 'text-green-700': warning[0], 'text-red-700': !warning[0] }">
           <h5 v-text="warning[1]"></h5>

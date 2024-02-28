@@ -23,7 +23,7 @@
             <UCheckbox name="remember" label="Remeber me" />
           </div>
         </div>
-        <UButton color="primary" type="submit"
+        <UButton :loading="loadingBtn" color="primary" type="submit"
           class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5">Log In</UButton>
         <p class="font-medium text-red-800" v-text="warning"></p>
       </div>
@@ -51,13 +51,19 @@ const warning = ref('');
 const loadingBtn=ref(false)
 const logIn = async () => {
   try {
-  const result=await LoginUser(userData.email,userData.password);
- //result.token
-  router.push('/');
+  loadingBtn.value=true;
+  const result:any=await LoginUser(userData.email,userData.password);
+ 
+ localStorage.setItem('auth-data',JSON.stringify(result.data));
+ router.push('/').then(() => {
+  window.location.reload();
+});
   } catch (err: any) {
-    warning.value = err.message;
+    warning.value = "Your Email or Password is not Authorization";
 
   }
+userData.password="";
+loadingBtn.value=false;
 
 
 }
