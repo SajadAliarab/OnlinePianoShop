@@ -9,7 +9,8 @@
                 <div class="relative overflow-hidden">
                     <img class="object-cover w-full h-full" src="/assets/images/piano1.jpg" alt="Product">
                     <div class="absolute inset-0 flex items-center justify-center">
-                        <UButton color="primary" variant="outline">View Product</UButton>
+                        <UButton color="primary" variant="outline"><ULink 
+        to="/productTest">View Product</ULink></UButton>
                     </div>
                 </div>
                 <h3 class="text-xl font-bold text-white mt-4">Product Name</h3>
@@ -26,7 +27,8 @@
                 <div class="relative overflow-hidden">
                     <img class="object-cover w-full h-full" src="/assets/images/piano1.jpg" alt="Product">
                     <div class="absolute inset-0 flex items-center justify-center">
-                        <UButton color="primary" variant="outline">View Product</UButton>
+                        <UButton color="primary" variant="outline"><ULink 
+        to="/productTest">View Product</ULink></UButton>
                     </div>
                 </div>
                 <h3 class="text-xl font-bold text-white mt-4">Product Name</h3>

@@ -83,6 +83,84 @@
                     }
                 }
             }
+        },
+        "/api/v1/upload_file": {
+            "post": {
+                "tags": [
+                    "Upload File Api"
+                ],
+                "description": "use for upload a file to public folder",
+                "operationId": "a9ad685a886801e3146628e24beea75f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "add your file",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/slide_create": {
+            "post": {
+                "tags": [
+                    "Slide Api"
+                ],
+                "description": "use for insert slide to database",
+                "operationId": "9eaa8ba74d1494899899ca58956d8ed2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Enter image title",
+                                        "type": "string"
+                                    },
+                                    "link": {
+                                        "description": "Enter your link",
+                                        "type": "link"
+                                    },
+                                    "file": {
+                                        "description": "add your file",
+                                        "type": "file"
+                                    },
+                                    "alt": {
+                                        "description": "image alt",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
         }
     }
 }

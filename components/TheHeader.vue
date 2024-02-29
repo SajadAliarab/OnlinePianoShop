@@ -63,12 +63,7 @@ const logout = () => {
         active-class="text-primary"
         inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
       </li>
-      <li>
-        <ULink 
-        to="/productTest"
-        active-class="text-primary"
-        inactive-class="text-gray-400 hover:text-gray-200">Test</ULink>
-      </li>
+
         <li>
         <ULink 
         to="/addSlide"
