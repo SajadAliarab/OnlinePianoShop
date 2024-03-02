@@ -8,9 +8,13 @@ const checkAuthentication = () => {
   if (userData) {
     authenticated.value = true;
     user.value = JSON.parse(userData);
+  }else{
+    authenticated.value =false;
   }
 };
-onMounted(checkAuthentication);
+
+onMounted(()=>{checkAuthentication();});
+
 // onBeforeRouteUpdate(() => {
 
 //   checkAuthentication();
@@ -31,8 +35,6 @@ const logout = () => {
 //   authenticated.value==true;
 
 // }
-
-
 </script>
 <template>
 <nav class="bg-gray-900  w-full z-20 top-0 start-0 border-b border-gray-600 sticky">
@@ -47,7 +49,7 @@ const logout = () => {
   <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <UButton v-if="!authenticated" color="primary" to="/auth/Login" class=" font-medium text-sm px-4 py-2 text-center">LogIn</UButton>     
       <UButton v-if="authenticated" color="primary" to="/profile/" class="mx-4 font-medium text-sm px-4 py-2 text-center">{{ user.user.name }}</UButton>
-      <UButton d v-if="authenticated" color="red" @click="logout" class=" font-medium text-sm px-4 py-2 text-center">Log Out</UButton>
+      <UButton v-if="authenticated" color="red" @click="logout" class=" font-medium text-sm px-4 py-2 text-center">Log Out</UButton>
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">

@@ -116,6 +116,7 @@ class AuthController extends Controller
         'result'=>true,
         'message' => 'Login successful',
         'data'=>[
+          'user'=>$user,
           'token' => $token,
         ]
       ], 200);
