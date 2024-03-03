@@ -8,7 +8,7 @@
         <UInput color="primary" type="text" id="imageTitle" class=" w-full p-2.5 " placeholder="Enter Image Title" v-model="state.imageTitle" />
       </UFormGroup>
       <UFormGroup label="Image File" name="imageFile" required>
-        <UInput color="primary" type="file" id="imageFile" class=" w-full p-2.5 " v-model="state.imageFile"  />
+        <input color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged" capture />
       </UFormGroup>
       <UFormGroup label="Image alt" name="imageAlt" required>
         <UInput color="primary" type="text" id="imageAlt" class=" w-full p-2.5 " v-model="state.imageAlt" placeholder="Enter image alt name" />
@@ -41,15 +41,22 @@ const state:SlidesModel= reactive({
   imageFile : '',
   imageAlt:''
 })
+const imageData= ref();
 const loadingBtn=ref(false);
 const warning =ref<[boolean,string]>([false,'']);
+const fileInput = ref<HTMLInputElement | null>(null);
+function onFileChanged() {
+                imageData.value = fileInput.value?.files
+                console.log(imageData.value[0]);
+}
 const submitImage=async()=>{
 try{
   loadingBtn.value=true;
-    //await uploadFile(state.imageFile);
+    await uploadFile(imageData.value[0]);
+    state.imageFile=imageData.value[0].name;
     await createSlide(state);
-    warning.value=[true,"You add a slide! "];
-    loadingBtn.value=false;
+     warning.value=[true,"You add a slide! "];
+     loadingBtn.value=false;
     state.imageAlt='';
     state.imageFile='';
     state.imageLink='';
