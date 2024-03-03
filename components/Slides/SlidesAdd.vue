@@ -47,7 +47,6 @@ const warning =ref<[boolean,string]>([false,'']);
 const fileInput = ref<HTMLInputElement | null>(null);
 function onFileChanged() {
                 imageData.value = fileInput.value?.files
-                console.log(imageData.value[0]);
 }
 const submitImage=async()=>{
 try{
@@ -55,7 +54,7 @@ try{
     await uploadFile(imageData.value[0]);
     state.imageFile=imageData.value[0].name;
     await createSlide(state);
-     warning.value=[true,"You add a slide! "];
+     warning.value=[true,"You have added a slide! "];
      loadingBtn.value=false;
     state.imageAlt='';
     state.imageFile='';

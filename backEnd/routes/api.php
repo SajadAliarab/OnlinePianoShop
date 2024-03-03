@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::post('register_user',[AuthController::class,'RegisterUser']);
     Route::post('login_user',[AuthController::class,'LoginUser']);
-    Route::post('slide_create',[SlideController::class,'create']);
     Route::post('upload_file',[FileController::class,'upload']);
+    Route::post('slide_create',[SlideController::class,'create']);
+    Route::get('slide_show',[SlideController::class,'show']);
 });

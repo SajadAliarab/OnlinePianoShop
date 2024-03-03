@@ -1,3 +1,4 @@
 <template>
     <SlidesAdd/>
+    <SlidesShow/>
 </template>

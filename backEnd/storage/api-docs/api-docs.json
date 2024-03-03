@@ -161,6 +161,24 @@
                     }
                 }
             }
+        },
+        "/api/v1/slide_show": {
+            "get": {
+                "tags": [
+                    "Slide Api"
+                ],
+                "description": "use for get slide information",
+                "operationId": "5a1bf819dafd547074ab835eef8533de",
+                "requestBody": {},
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
         }
     }
 }
