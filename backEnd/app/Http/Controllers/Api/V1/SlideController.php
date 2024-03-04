@@ -98,12 +98,60 @@ class SlideController extends Controller
       $slider =  SlidesResource::collection(Slide::all()->keyBy->id);
           return Response()->json([
             'result' => true,
-            'message'=> "you have acess to slides",
+            'message'=> "you have access to slides",
             'data'=>[
               $slider
             ],
           ],200);
         }
-    }
+    
 
+        /**
+          * @OA\Delete(
+          ** path="/api/v1/slide_delete/{id}",
+          *  tags={"Slide Api"},
+          *  description="use for delete slide from database",
+          * @OA\Parameter(
+          *         name="id",
+          *         in="path",
+          *         description="Slide ID",
+          *         required=true,
+          *         @OA\Schema(
+          *             type="integer"
+          *         )
+          *     ),
+          *   @OA\Response(
+          *      response=200,
+          *      description="Slide deleted successfully",
+          *      @OA\MediaType(
+          *           mediaType="application/json",
+          *      )
+          *   ),
+          *   @OA\Response(
+          *      response=404,
+          *      description="Slide not found",
+          *      @OA\MediaType(
+          *           mediaType="application/json",
+          *      )
+          *   )
+          *)
+          **/
+          public function delete($id) {
+            $slide = Slide::find($id);
+        
+            if (!$slide) {
+                return response()->json([
+                    'result' => false,
+                    'message' => "Slide not found",
+                ], 404);
+            }
+        
+            $slide->delete();
+        
+            return response()->json([
+                'result' => true,
+                'message' => "Slide deleted successfully",
+            ], 200);
+        }
+    }
 

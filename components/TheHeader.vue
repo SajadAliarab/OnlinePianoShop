@@ -12,8 +12,8 @@ const checkAuthentication = () => {
     authenticated.value =false;
   }
 };
-
 onMounted(()=>{checkAuthentication();});
+
 
 // onBeforeRouteUpdate(() => {
 

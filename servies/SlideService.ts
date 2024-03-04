@@ -17,3 +17,9 @@ export function createSlide(slideData:SlidesModel){
 export function showSlide(){
   return $fetch('http://localhost:8000/api/v1/slide_show');
 }
+
+export function deleteSlide(slideId:number){
+  return $fetch(`http://localhost:8000/api/v1/slide_delete/${slideId}`, {
+          method: 'DELETE',
+        });
+}

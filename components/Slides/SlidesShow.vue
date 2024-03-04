@@ -1,53 +1,77 @@
 <script setup lang="ts">
-import { showSlide } from '~/servies/SlideService';
-const columns = [{
-  key: 'id',
-  label: 'ID'
-}, {
-  key: 'title',
-  label: 'Title'
-}, {
-  key: 'link',
-  label: 'Link'
-}, {
-  key: 'alt',
-  label: 'Alt'
-}, {
-  key: 'file',
-  label: 'Image'
-},{
-  key: 'actions'
-}]
+import { deleteSlide, showSlide } from '~/servies/SlideService';
+import { ref, watch } from 'vue';
+import { get } from 'firebase/database';
+
+const columns = [
+  {
+    key: 'id',
+    label: 'ID'
+  },
+  {
+    key: 'title',
+    label: 'Title'
+  },
+  {
+    key: 'link',
+    label: 'Link'
+  },
+  {
+    key: 'alt',
+    label: 'Alt'
+  },
+  {
+    key: 'file',
+    label: 'Image'
+  },
+  {
+    key: 'actions'
+  }
+];
 
 const slideData = ref([]);
-const getItem=async()=>{
-try{
-    const data:any= await showSlide();
-      
-  let items= data.data[0];
-  slideData.value =items;
-}catch(err){
- console.log(err)
-}   
-}
+const loading = ref(false);
+
+const getItem = async () => {
+  try {
+    loading.value = true;
+    const data: any = await showSlide();
+    loading.value = false;
+    let items = data.data[0];
+    slideData.value = items;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 getItem();
 
-const items = (row:any) => [
-  [{
-    label: 'Edit',
-    icon: 'i-heroicons-pencil-square-20-solid',
-    click: () => console.log('Edit', row.id)
-  }, {
-    label: 'Delete',
-    icon: 'i-heroicons-trash-20-solid',
-    click: () => console.log('Delete', row.id)
-  }]
-]
+const items = (row: any) => [
+  [
+    {
+      label: 'Edit',
+      icon: 'i-heroicons-pencil-square-20-solid',
+      click: () => console.log('Edit', row.id)
+    },
+    {
+      label: 'Delete',
+      icon: 'i-heroicons-trash-20-solid',
+      click: () => {
+        deleteSlide(row.id);
+        getItem();
+        getItem();
+      }
+    }
+  ]
+];
 
 </script>
 
 <template>
-  <UTable  :rows="slideData" :columns="columns">
+     
+  <div class="flex justify-center  h-auto">
+    <UTable :loading="loading" :rows="slideData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
+      getItems();
     <template #name-data="{ row }">
       <span class="text-primary-400">{{ row.name }}</span>
     </template>
@@ -58,4 +82,6 @@ const items = (row:any) => [
       </UDropdown>
     </template>
   </UTable>
+  </div>
 </template>
+

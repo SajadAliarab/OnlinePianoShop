@@ -179,6 +179,40 @@
                     }
                 }
             }
+        },
+        "/api/v1/slide_delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Slide Api"
+                ],
+                "description": "use for delete slide from database",
+                "operationId": "1cb54616a27c2b6007dbcb9b28216750",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Slide ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Slide deleted successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Slide not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
         }
     }
 }
