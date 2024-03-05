@@ -50,4 +50,52 @@ class FileController extends Controller
             ], 400);
         }
     }
+
+    /**
+        * @OA\Delete(
+        ** path="/api/v1/delete_file/{fileName}",
+        *  tags={"Upload File Api"},
+        *  description="use for delete a file from public folder",
+        * @OA\Parameter(
+        *    name="fileName",
+        *    in="path",
+        *    description="The name of the file to delete",
+        *    required=true,
+        *    @OA\Schema(
+        *        type="string"
+        *    )
+        * ),
+        *   @OA\Response(
+        *      response=200,
+        *      description="File deleted successfully",
+        *      @OA\MediaType(
+        *           mediaType="application/json",
+        *      )
+        *   ),
+        *   @OA\Response(
+        *      response=404,
+        *      description="File not found",
+        *      @OA\MediaType(
+        *           mediaType="application/json",
+        *      )
+        *   )
+        *)
+        **/
+    public function deleteFile($fileName)
+    {
+        $filePath = public_path('uploads') . '/' . $fileName;
+        
+        if (file_exists($filePath)) {
+            unlink($filePath);
+            return response()->json([
+                'result' => true,
+                'message' => 'File deleted successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'result' => false,
+                'message' => 'File not found'
+            ], 404);
+        }
+    }
 }

@@ -1,7 +1,7 @@
+
 <template>
     <div class="relative h-auto w-full bg-cover bg-gray-800 pb-10">
-    <SlidesAdd/>
-    <hr class="border-t-2 border-white my-10"/>
-    <SlidesShow/>
+
+    <SlidesShow />
     </div>
 </template>

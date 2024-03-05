@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { deleteSlide, showSlide } from '~/servies/SlideService';
-import { ref, watch } from 'vue';
-import { get } from 'firebase/database';
+import { deleteFile } from '~/servies/UploadFileService';
+
+
 
 const columns = [
   {
@@ -44,7 +45,11 @@ const getItem = async () => {
   }
 };
 
-getItem();
+onMounted(getItem);
+const slideHandler = () => {
+  getItem();
+};
+
 
 const items = (row: any) => [
   [
@@ -58,6 +63,9 @@ const items = (row: any) => [
       icon: 'i-heroicons-trash-20-solid',
       click: () => {
         deleteSlide(row.id);
+        const file = row.file;
+        const fileName = file.substring(file.lastIndexOf('/') + 1);
+        deleteFile(fileName);
         getItem();
         getItem();
       }
@@ -68,7 +76,8 @@ const items = (row: any) => [
 </script>
 
 <template>
-     
+     <SlidesAdd @slideAdded="slideHandler"/>
+     <hr class="border-t-2 border-white my-10"/>
   <div class="flex justify-center  h-auto">
     <UTable :loading="loading" :rows="slideData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
       getItems();

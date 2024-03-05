@@ -117,6 +117,40 @@
                 }
             }
         },
+        "/api/v1/delete_file/{fileName}": {
+            "delete": {
+                "tags": [
+                    "Upload File Api"
+                ],
+                "description": "use for delete a file from public folder",
+                "operationId": "b27c1ab4bf84efc20437682cf5ec5beb",
+                "parameters": [
+                    {
+                        "name": "fileName",
+                        "in": "path",
+                        "description": "The name of the file to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File deleted successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "File not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/slide_create": {
             "post": {
                 "tags": [

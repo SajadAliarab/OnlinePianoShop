@@ -1,4 +1,4 @@
-export function uploadFile(file:any){
+export function insertFile(file:any){
   const formData = new FormData();
     formData.append('file', file);
  
@@ -7,4 +7,9 @@ export function uploadFile(file:any){
             body: formData,
            
           });
+}
+export function deleteFile(fileName: string) {
+  return $fetch(`http://localhost:8000/api/v1/delete_file/${fileName}`, {
+    method: 'DELETE',
+  });
 }

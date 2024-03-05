@@ -26,8 +26,10 @@
 import { object, string } from 'yup';
 import { createSlide } from '~/servies/SlideService';
 import type { SlidesModel } from "~/models/SlidesModel";
-import { uploadFile} from '~/servies/UploadFileService';
+import { insertFile} from '~/servies/UploadFileService';
 
+
+const  emit  = defineEmits(['slideAdded']);
 const schema = object({
   imageTitle:string().required('Required!'),
   imageAlt:string().required('Required'),
@@ -49,7 +51,7 @@ function onFileChanged() {
 const submitImage=async()=>{
 try{
   loadingBtn.value=true;
-    await uploadFile(imageData.value[0]);
+    await insertFile(imageData.value[0]);
     state.imageFile=imageData.value[0].name;
     await createSlide(state);
      warning.value=[true,"You have added a slide! "];
@@ -58,6 +60,7 @@ try{
     state.imageFile='';
     state.imageLink='';
     state.imageTitle='';
+    emit('slideAdded');
   } catch (err:any) {
     warning.value=[false,err.message];
     loadingBtn.value=false;
