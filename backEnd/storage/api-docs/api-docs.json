@@ -247,6 +247,68 @@
                     }
                 }
             }
+        },
+        "/api/v1/slide_update/{id}": {
+            "put": {
+                "tags": [
+                    "Slide Api"
+                ],
+                "description": "use for update slide information",
+                "operationId": "69ef48eb927e6a64db0b730800a39c7f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Slide ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Enter image title",
+                                        "type": "string"
+                                    },
+                                    "link": {
+                                        "description": "Enter your link",
+                                        "type": "link"
+                                    },
+                                    "file": {
+                                        "description": "add your file",
+                                        "type": "string"
+                                    },
+                                    "alt": {
+                                        "description": "image alt",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Slide updated successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Slide not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
         }
     }
 }

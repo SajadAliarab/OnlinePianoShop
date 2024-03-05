@@ -153,5 +153,84 @@ class SlideController extends Controller
                 'message' => "Slide deleted successfully",
             ], 200);
         }
-    }
 
+        /**
+          * @OA\Put(
+          ** path="/api/v1/slide_update/{id}",
+          *  tags={"Slide Api"},
+          *  description="use for update slide information",
+          * @OA\Parameter(
+          *         name="id",
+          *         in="path",
+          *         description="Slide ID",
+          *         required=true,
+          *         @OA\Schema(
+          *             type="integer"
+          *         )
+          *     ),
+          * @OA\RequestBody(
+          *    required=true,
+          * *         @OA\MediaType(
+          *           mediaType="multipart/form-data",
+          *           @OA\Schema(
+          *           @OA\Property(
+          *                  property="title",
+          *                  description="Enter image title",
+          *                  type="string",),
+          *           @OA\Property(
+          *                  property="link",
+          *                  description="Enter your link",
+          *                  type="link",),
+          *           @OA\Property(
+          *                  property="file",
+          *                  description="add your file",
+          *                  type="string",
+          *               ),
+          *           @OA\Property(
+          *                  property="alt",
+          *                  description="image alt",
+          *                  type="string",
+          *               ),
+          *     )
+          *   )
+          * ),
+          *   @OA\Response(
+          *      response=200,
+          *      description="Slide updated successfully",
+          *      @OA\MediaType(
+          *           mediaType="application/json",
+          *      )
+          *   ),
+          *   @OA\Response(
+          *      response=404,
+          *      description="Slide not found",
+          *      @OA\MediaType(
+          *           mediaType="application/json",
+          *      )
+          *   )
+          *)
+          **/
+        public function update(Request $request, $id) {
+          $slide = Slide::find($id);
+      
+          if ($slide) {
+            $slide->title = $request->input('title');
+            $slide->link = $request->input('link');
+            $slide->file = $request->input('file');
+            $slide->alt = $request->input('alt');
+        
+            $slide->save();
+      
+            return Response()->json([
+              'result' => true,
+              'message' => "slide have inserted",
+            ], 200);
+          } else {
+            return Response()->json([
+              'result' => false,
+              'message' => "access denied",
+            ], 404);
+          }
+        }
+        
+  }

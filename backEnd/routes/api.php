@@ -27,5 +27,6 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::delete('delete_file/{fileName}',[FileController::class,'deleteFile']);
     Route::post('slide_create',[SlideController::class,'create']);
     Route::get('slide_show',[SlideController::class,'show']);
+    Route::put('slide_update/{id}',[SlideController::class,'update']);
     Route::delete('slide_delete/{id}',[SlideController::class,'delete']);
 });

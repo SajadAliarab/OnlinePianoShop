@@ -32,7 +32,8 @@ const columns = [
 
 const slideData = ref([]);
 const loading = ref(false);
-
+const editMode = ref(false);
+const selectedSlideData = ref({});
 const getItem = async () => {
   try {
     loading.value = true;
@@ -48,6 +49,7 @@ const getItem = async () => {
 onMounted(getItem);
 const slideHandler = () => {
   getItem();
+  editMode.value = false;
 };
 
 
@@ -56,7 +58,10 @@ const items = (row: any) => [
     {
       label: 'Edit',
       icon: 'i-heroicons-pencil-square-20-solid',
-      click: () => console.log('Edit', row.id)
+      click: () => {
+        editMode.value = true;
+        selectedSlideData.value = { ...row };
+      }
     },
     {
       label: 'Delete',
@@ -76,7 +81,7 @@ const items = (row: any) => [
 </script>
 
 <template>
-     <SlidesAdd @slideAdded="slideHandler"/>
+    <SlidesAdd :slideData="selectedSlideData" :editMode="editMode" @slideAdded="slideHandler"/>
      <hr class="border-t-2 border-white my-10"/>
   <div class="flex justify-center  h-auto">
     <UTable :loading="loading" :rows="slideData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
@@ -84,7 +89,9 @@ const items = (row: any) => [
     <template #name-data="{ row }">
       <span class="text-primary-400">{{ row.name }}</span>
     </template>
-
+    <template #file-data="{ row }">
+      <img :src="row.file" :alt="row.alt" class="h-20 w-20" />
+    </template>
     <template #actions-data="{ row }">
       <UDropdown :items="items(row)">
         <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
