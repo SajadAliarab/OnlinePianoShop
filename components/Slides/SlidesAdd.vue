@@ -22,7 +22,6 @@
         <h5 v-text="warning[1]"></h5>
       </div>
       </div>
-      {{ state.imageFile }}
 </UForm>
 </template>
 <script setup lang="ts">
