@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\SlideController;
 use App\Http\Controllers\Api\V1\FileController;
+use App\Http\Controllers\Api\V1\ProductDetailsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,8 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::get('slide_show',[SlideController::class,'show']);
     Route::put('slide_update/{id}',[SlideController::class,'update']);
     Route::delete('slide_delete/{id}',[SlideController::class,'delete']);
+    Route::post('brand_create',[ProductDetailsController::class,'createBrand']);
+    Route::get('brand_show',[ProductDetailsController::class,'showBrand']);
+    Route::put('brand_update/{id}',[ProductDetailsController::class,'updateBrand']);
+    Route::delete('brand_delete/{id}',[ProductDetailsController::class,'deleteBrand']);
 });

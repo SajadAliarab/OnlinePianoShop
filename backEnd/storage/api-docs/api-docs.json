@@ -151,6 +151,142 @@
                 }
             }
         },
+        "/api/v1/brand_create": {
+            "post": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for insert brand to database",
+                "operationId": "7bc0bab47e75015ab185188576dffe6f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Enter Brand Name",
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "description": "Enter Brand Image Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/brand_show": {
+            "get": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for get all brands",
+                "operationId": "c7a196c7015fdee0593171b6ecc479cb",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/brand_update/{id}": {
+            "put": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for update brand information",
+                "operationId": "a81f23f65b4aa22faf97435fa9cc7441",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Brand ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Enter brand Name",
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "description": "Enter brand Image Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Brand updated successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Brand not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/brand_delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for delete brand from database",
+                "operationId": "22f3646d5c5b05edd3c5ea13eb99604e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Brand ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/slide_create": {
             "post": {
                 "tags": [
