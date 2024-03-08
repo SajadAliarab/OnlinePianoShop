@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Category;
 use App\Http\Resources\ProductDetailsResource;
 class ProductDetailsController extends Controller
 {
@@ -185,4 +186,168 @@ public function showBrand(){
             ],400);
         }
     }
+     /**
+   * @OA\Post(
+   ** path="/api/v1/category_create",
+   *  tags={"Product Details Api"},
+   *  description="use for insert category to database",
+   * @OA\RequestBody(
+   *    required=true,
+   * *         @OA\MediaType(
+   *           mediaType="multipart/form-data",
+   *           @OA\Schema(
+   *           @OA\Property(
+   *                  property="name",
+   *                  description="Enter Brand Name",
+   *                  type="string",),
+   *     )
+   *   )
+   * ),
+   *   @OA\Response(
+   *      response=200,
+   *      description="Its Ok",
+   *      @OA\MediaType(
+   *           mediaType="application/json",
+   *      )
+   *   )
+   *)
+   **/
+  public function createCategory (Request $request){
+    if($request != null){
+        $name = $request->input('name');
+        Category::create([
+            'name'=>$name,
+        ]);
+        return response()->json([
+            'result'=>true,
+            'message'=>'Category Created Successfully'
+        ],200);
+    }else{
+        return response()->json([
+            'result'=>false,
+            'message'=>'Category Not Created'
+        ],400);
+    }
+}
+/**
+    * @OA\Get(
+    ** path="/api/v1/category_show",
+    *  tags={"Product Details Api"},
+    *  description="use for get all categories",
+    *   @OA\Response(
+    *      response=200,
+    *      description="Success",
+    *      @OA\MediaType(
+    *           mediaType="application/json",
+    *      )
+    *   )
+    *)
+    **/
+    public function showCategory(){
+        $category = Category::all();
+        return Response()->json([
+            'result' => true,
+            'message'=> "you have access to categories",
+            'data'=>[
+              $category
+            ],
+          ],200);
+        }
+              /**
+             * @OA\Put(
+             ** path="/api/v1/category_update/{id}",
+             *  tags={"Product Details Api"},
+             *  description="use for update category information",
+             * @OA\Parameter(
+             *         name="id",
+             *         in="path",
+             *         description="Category ID",
+             *         required=true,
+             *         @OA\Schema(
+             *             type="integer"
+             *         )
+             *     ),
+             * @OA\RequestBody(
+             *    required=true,
+             * *         @OA\MediaType(
+             *           mediaType="multipart/form-data",
+             *           @OA\Schema(
+             *           @OA\Property(
+             *                  property="name",
+             *                  description="Enter category Name",
+             *                  type="string",),
+             *     )
+             *   )
+             * ),
+             *   @OA\Response(
+             *      response=200,
+             *      description="Category updated successfully",
+             *      @OA\MediaType(
+             *           mediaType="application/json",
+             *      )
+             *   ),
+             *   @OA\Response(
+             *      response=404,
+             *      description="Category not found",
+             *      @OA\MediaType(
+             *           mediaType="application/json",
+             *      )
+             *   )
+             *)
+             **/
+        public function updateCategory(Request $request,$id){
+            $category = Category::find($id);
+            if($category!=null){
+                $category->name = $request->input('name');
+            $category->save();
+            return response()->json([
+                'result'=>true,
+                'message'=>'Category Updated Successfully'
+            ],200);
+        }else{
+            return response()->json([
+                'result'=>false,
+                'message'=>'Category Not Found'
+            ],400);
+        }
+        }
+        /**
+            * @OA\Delete(
+            ** path="/api/v1/category_delete/{id}",
+            *  tags={"Product Details Api"},
+            *  description="use for delete category from database",
+              * @OA\Parameter(
+              *         name="id",
+              *         in="path",
+              *         description="Category ID",
+              *         required=true,
+              *         @OA\Schema(
+              *             type="integer"
+              *         )
+              *     ),
+     
+            *   @OA\Response(
+            *      response=200,
+            *      description="Its Ok",
+            *      @OA\MediaType(
+            *           mediaType="application/json",
+            *      )
+            *   )
+            *)
+            **/
+        Public function deleteCategory($id){
+            $category = Category::find($id);
+            if($category!=null){
+                $category->delete();
+                return response()->json([
+                    'result'=>true,
+                    'message'=>'Category Deleted Successfully'
+                ],200);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=>'Category Not Found'
+                ],400);
+            }
+        }
 }
