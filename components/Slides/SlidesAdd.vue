@@ -78,6 +78,7 @@ try{
     state.imageFile='';
     state.imageLink='';
     state.imageTitle='';
+    fileInput.value!.value='';
     emit('slideAdded');
   } catch (err:any) {
     warning.value=[false,'Please fill all the fields'];
@@ -99,6 +100,7 @@ try{
     state.imageFile='';
     state.imageLink='';
     state.imageTitle='';
+    fileInput.value!.value='';
     emit('slideAdded');
   
 }catch{

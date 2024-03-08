@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { deleteBrand, showBrand } from '~/servies/BrandService';
+import { deleteColor, showColor } from '~/servies/ColorService';
 import { deleteFile } from '~/servies/UploadFileService';
-import BrandsAdd from './BrandsAdd.vue';
+import ColorsAdd from './ColorsAdd.vue';
 
 
 
@@ -11,11 +11,11 @@ const columns = [
     label: 'ID'
   },
   {
-    key: 'brandName',
+    key: 'colorName',
     label: 'name'
   },
   {
-    key: 'brandImage',
+    key: 'colorImage',
     label: 'Image'
   },
   {
@@ -23,24 +23,24 @@ const columns = [
   }
 ];
 
-const brandData = ref([]);
+const colorData = ref([]);
 const loading = ref(false);
 const editMode = ref(false);
-const selectedBrandData = ref({});
+const selectedColorData = ref({});
 const getItem = async () => {
   try {
     loading.value = true;
-    const data: any = await showBrand();
+    const data: any = await showColor();
     loading.value = false;
     let items = data.data[0];
-    brandData.value = items;
+    colorData.value = items;
   } catch (err) {
     console.log(err);
   }
 };
 
 onMounted(getItem);
-const brandHandler = () => {
+const colorHandler = () => {
   getItem();
   editMode.value = false;
 };
@@ -52,14 +52,14 @@ const items = (row: any) => [
       icon: 'i-heroicons-pencil-square-20-solid',
       click: () => {
         editMode.value = true;
-        selectedBrandData.value = { ...row };
+        selectedColorData.value = { ...row };
       }
     },
     {
       label: 'Delete',
       icon: 'i-heroicons-trash-20-solid',
       click: () => {
-        deleteBrand(row.id);
+        deleteColor(row.id);
         const file = row.image;
         const fileName = file.substring(file.lastIndexOf('/') + 1);
         deleteFile(fileName);
@@ -73,14 +73,14 @@ const items = (row: any) => [
 </script>
 
 <template>
-    <BrandsAdd :brandData="selectedBrandData" :editMode="editMode" @brandAdded="brandHandler"/>
+    <ColorsAdd :colorData="selectedColorData" :editMode="editMode" @colorAdded="colorHandler"/>
      <hr class="border-t-2 border-white my-10"/>
   <div class="flex justify-center  h-auto">
-    <UTable :loading="loading" :rows="brandData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
-    <template #brandName-data="{ row }">
+    <UTable :loading="loading" :rows="colorData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
+    <template #colorName-data="{ row }">
       <span class="text-primary-400">{{ row.name }}</span>
     </template>
-    <template #brandImage-data="{ row }">
+    <template #colorImage-data="{ row }">
       <img :src="row.image"  class="h-20 w-20" />
     </template>
     <template #actions-data="{ row }">

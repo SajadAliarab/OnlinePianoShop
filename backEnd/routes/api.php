@@ -38,4 +38,8 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::get('category_show',[ProductDetailsController::class,'showCategory']);
     Route::put('category_update/{id}',[ProductDetailsController::class,'updateCategory']);
     Route::delete('category_delete/{id}',[ProductDetailsController::class,'deleteCategory']);
+    Route::post('color_create',[ProductDetailsController::class,'createColor']);
+    Route::get('color_show',[ProductDetailsController::class,'showColor']);
+    Route::put('color_update/{id}',[ProductDetailsController::class,'updateColor']);
+    Route::delete('color_delete/{id}',[ProductDetailsController::class,'deleteColor']);
 });

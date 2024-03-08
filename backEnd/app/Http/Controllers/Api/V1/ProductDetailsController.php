@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Http\Resources\ProductDetailsResource;
 class ProductDetailsController extends Controller
 {
@@ -350,4 +351,178 @@ public function showBrand(){
                 ],400);
             }
         }
+        /**
+         * @OA\Post(
+         * path="/api/v1/color_create",
+         * tags={"Product Details Api"},
+         * description="use for insert color to database",
+         * @OA\RequestBody(
+         *   required=true,
+         * *         @OA\MediaType(
+         *          mediaType="multipart/form-data",
+         *         @OA\Schema(
+         *        @OA\Property(
+         *              property="name",
+         *             description="Enter Color Name",
+         *            type="string",),
+         *       @OA\Property(
+         *             property="image",
+         *           description="Enter Color Image Name",
+         *         type="string",),
+         *  )
+         * )
+         * ),
+         *  @OA\Response(
+         *   response=200,
+         *  description="Its Ok",
+         * @OA\MediaType(
+         *     mediaType="application/json",
+         * )
+         * )
+         * )
+         */
+        public function createColor (Request $request){
+            if($request != null){
+                $name = $request->input('name');
+                $image = $request->input('image');
+                Color::create([
+                    'name'=>$name,
+                    'image'=>$image
+                ]);
+                return response()->json([
+                    'result'=>true,
+                    'message'=>'Color Created Successfully'
+                ],200);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=>'Color Not Created'
+                ],400);
+            }
+        }
+        /**
+            * @OA\Get(
+            ** path="/api/v1/color_show",
+            *  tags={"Product Details Api"},
+            *  description="use for get all colors",
+            *   @OA\Response(
+            *      response=200,
+            *      description="Success",
+            *      @OA\MediaType(
+            *           mediaType="application/json",
+            *      )
+            *   )
+            *)
+            **/ 
+            public function showColor(){
+                $color = ProductDetailsResource::collection(Color::all()->keyBy->id);
+                return Response()->json([
+                    'result' => true,
+                    'message'=> "you have access to slides",
+                    'data'=>[
+                      $color
+                    ],
+                  ],200);
+                }
+                  /**
+                 * @OA\Put(
+                 ** path="/api/v1/color_update/{id}",
+                 *  tags={"Product Details Api"},
+                 *  description="use for update color information",
+                 * @OA\Parameter(
+                 *         name="id",
+                 *         in="path",
+                 *         description="Color ID",
+                 *         required=true,
+                 *         @OA\Schema(
+                 *             type="integer"
+                 *         )
+                 *     ),
+                 * @OA\RequestBody(
+                 *    required=true,
+                 * *         @OA\MediaType(
+                 *           mediaType="multipart/form-data",
+                 *           @OA\Schema(
+                 *           @OA\Property(
+                 *                  property="name",
+                 *                  description="Enter color Name",
+                 *                  type="string",),
+                 *           @OA\Property(
+                 *                  property="image",
+                 *                  description="Enter color Image Name",
+                 *                  type="string",),
+                 *     )
+                 *   )
+                 * ),
+                 *   @OA\Response(
+                 *      response=200,
+                 *      description="Color updated successfully",
+                 *      @OA\MediaType(
+                 *           mediaType="application/json",
+                 *      )
+                 *   ),
+                 *   @OA\Response(
+                 *      response=404,
+                 *      description="Color not found",
+                 *      @OA\MediaType(
+                 *           mediaType="application/json",
+                 *      )
+                 *   )
+                 *)
+                 **/
+            public function updateColor(Request $request,$id){
+                $color = Color::find($id);
+                if($color!=null){
+                    $color->name = $request->input('name');
+                    $color->image = $request->input('image');
+                $color->save();
+                return response()->json([
+                    'result'=>true,
+                    'message'=>'Color Updated Successfully'
+                ],200);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=>'Color Not Found'
+                ],400);
+            }
+            }
+            /**
+                * @OA\Delete(
+                ** path="/api/v1/color_delete/{id}",
+                *  tags={"Product Details Api"},
+                *  description="use for delete color from database",
+                  * @OA\Parameter(
+                  *         name="id",
+                  *         in="path",
+                  *         description="Color ID",
+                  *         required=true,
+                  *         @OA\Schema(
+                  *             type="integer"
+                  *         )
+                  *     ),
+                  *   @OA\Response(
+                  *      response=200,
+                  *      description="Its Ok",
+                  *      @OA\MediaType(
+                  *           mediaType="application/json",
+                  *      )
+                  *   )
+                  *)
+                 **/
+            Public function deleteColor($id){  
+                $color = Color::find($id);
+                if($color!=null){
+                    $color->delete();
+                    return response()->json([
+                        'result'=>true,
+                        'message'=>'Color Deleted Successfully'
+                    ],200);
+                }else{
+                    return response()->json([
+                        'result'=>false,
+                        'message'=>'Color Not Found'
+                    ],400);
+                }
+            }
 }

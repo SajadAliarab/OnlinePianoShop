@@ -55,7 +55,7 @@ const handleMouseDown = () => {
 const handleMouseMove = (event: MouseEvent) => {
   if (isDragging.value) {
     const movementX = event.movementX;
-    const threshold = 70; 
+    const threshold = 100; 
     if (movementX > threshold) {
       currentIndex.value = Math.max(currentIndex.value - 1, 0);
     } else if (movementX < -threshold) {

@@ -64,6 +64,7 @@
          loadingBtn.value=false;
             state.brandName='';
             state.brandImage='';
+            fileInput.value!.value='';
         emit('brandAdded');
       } catch (err:any) {
         warning.value=[false,'Please fill all the fields'];
@@ -84,6 +85,7 @@
         emit('brandAdded');
         state.brandName='';
         state.brandImage='';
+        fileInput.value!.value='';
       
     }catch{
       warning.value=[false,'Please fill all the fields'];

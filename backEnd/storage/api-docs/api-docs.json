@@ -415,6 +415,142 @@
                 }
             }
         },
+        "/api/v1/color_create": {
+            "post": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for insert color to database",
+                "operationId": "b62632d475810b478e9ef1bb4ff7f36b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Enter Color Name",
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "description": "Enter Color Image Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/color_show": {
+            "get": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for get all colors",
+                "operationId": "fff87c4145dfe9427db3699772e1c4df",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/color_update/{id}": {
+            "put": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for update color information",
+                "operationId": "9a333f0e136b413d0616cfbec3e8c076",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Color ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Enter color Name",
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "description": "Enter color Image Name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Color updated successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Color not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/color_delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for delete color from database",
+                "operationId": "5b52d0ed94ab1e5b580d6646fe561db6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Color ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/slide_create": {
             "post": {
                 "tags": [
