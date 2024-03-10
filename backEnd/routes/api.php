@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\SlideController;
 use App\Http\Controllers\Api\V1\FileController;
 use App\Http\Controllers\Api\V1\ProductDetailsController;
+use App\Http\Controllers\Api\V1\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,4 +43,8 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::get('color_show',[ProductDetailsController::class,'showColor']);
     Route::put('color_update/{id}',[ProductDetailsController::class,'updateColor']);
     Route::delete('color_delete/{id}',[ProductDetailsController::class,'deleteColor']);
+    Route::post('product_create',[ProductController::class,'createProduct']);
+    Route::get('product_show',[ProductController::class,'showProduct']);
+    Route::put('product_update/{id}',[ProductController::class,'updateProduct']);
+    Route::delete('product_delete/{id}',[ProductController::class,'deleteProduct']);
 });

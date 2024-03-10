@@ -23,7 +23,6 @@
     import { createColor, updateColor } from '~/servies/ColorService';
     import type { ColorsModel } from "~/models/ColorsModel";
     import { insertFile} from '~/servies/UploadFileService';
-    import { defineProps, defineEmits } from 'vue'; 
     const props = defineProps<{
       editMode: boolean;
       colorData: any;

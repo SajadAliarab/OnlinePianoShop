@@ -17,7 +17,6 @@
     </template>
     <script setup lang="ts">
     import { createCategory, updateCategory } from '~/servies/CategoryService';
-    import { defineProps, defineEmits } from 'vue'; 
     const props = defineProps<{
       editMode: boolean;
       categoryData: any;

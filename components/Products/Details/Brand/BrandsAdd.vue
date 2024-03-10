@@ -23,7 +23,6 @@
     import { createBrand, updateBrand } from '~/servies/BrandService';
     import type { BrandsModel } from "~/models/BrandsModel";
     import { insertFile} from '~/servies/UploadFileService';
-    import { defineProps, defineEmits } from 'vue'; 
     const props = defineProps<{
       editMode: boolean;
       brandData: any;
