@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 
 class Product extends Model
 {
@@ -31,5 +32,9 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class);
     }
 }

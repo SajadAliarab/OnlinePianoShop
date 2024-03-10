@@ -214,6 +214,13 @@
                                     "category_id": {
                                         "description": "Category id of the product",
                                         "type": "integer"
+                                    },
+                                    "color_id": {
+                                        "type": "array",
+                                        "items": {
+                                            "description": "Color id of the product",
+                                            "type": "integer"
+                                        }
                                     }
                                 },
                                 "type": "object"

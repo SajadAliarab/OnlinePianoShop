@@ -79,6 +79,14 @@ class ProductController extends Controller
    * type="integer",
    * description="Category id of the product"
    *),
+    * @OA\Property(
+    * property="color_id",
+    * type="array",
+    * @OA\Items(
+    * type="integer",
+    * description="Color id of the product"
+    * )
+    * ),
    * 
    *     )
    *   )
@@ -108,9 +116,11 @@ class ProductController extends Controller
             $product->brand_id = $request->brand_id;
             $product->category_id = $request->category_id;
             $product->save();
+            //add to table color_product
+            $product->colors()->attach($request->color_id);
             return response()->json([
                 'result' => true,
-                'message' => 'Product created successfully'
+                'message' => 'Product created successfully',
             ], 200);
         }else{
             return response()->json([
@@ -252,6 +262,8 @@ class ProductController extends Controller
             $product->brand_id = $request->brand_id;
             $product->category_id = $request->category_id;
             $product->save();
+            //update table color_product
+            $product->colors()->sync($request->color_id);
             return response()->json([
                 'result' => true,
                 'message' => 'Product updated successfully'
@@ -291,6 +303,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         if($product!=null){
             $product->delete();
+            //delete from table color_product
+            $product->colors()->detach();
             return response()->json([
                 'result' => true,
                 'message' => 'Product deleted successfully'

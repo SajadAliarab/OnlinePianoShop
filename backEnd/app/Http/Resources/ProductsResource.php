@@ -27,6 +27,7 @@ class ProductsResource extends JsonResource
             'description' => $this->description,
             'status' => $this->status,
             'brand' => $this->brand_id,
-            'category' => $this->category_id,];
+            'category' => $this->category_id,
+            'colors' => $this->colors->pluck('id')];
     }
 }
