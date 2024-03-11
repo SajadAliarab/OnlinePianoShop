@@ -7,7 +7,7 @@
     @mouseleave="handleMouseLeave">
     <div v-if="slideData.length > 0" class="w-full h-80 slide flex transition-transform duration-500 ease-in-out" :style="{ transform: 'translateX(' + (-currentIndex * 100) + '%)' }">
       <div v-for="(item, index) in slideData" :key="index" class="slide-item w-full flex-shrink-0">
-        <img :src="item.file" :alt="item.alt" class="w-full h-auto object-contain" />
+        <img :src="item.file" :alt="item.alt" class="w-screen h-80 object-contain" />
       </div>
     </div>
   </div>

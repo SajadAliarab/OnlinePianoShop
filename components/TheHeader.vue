@@ -3,6 +3,29 @@ import type { ULink } from '#build/components';
 const router = useRouter();
  const authenticated = ref(false);
 const user:any = ref('');
+const items = [[
+    {
+      label: 'Products',
+      slot:"products"
+    },
+    {
+      label: 'Brands',
+      slot:"brands"
+    },
+    {
+      label: 'Categories',
+      slot:"categories"
+    },
+    {
+      label: 'Colors',
+      slot:"colors"
+    },
+    {
+      label: 'Slides',
+      slot:"slides"
+    }
+
+  ]]
 const checkAuthentication = () => {
   const userData = localStorage.getItem('auth-data');
   if (userData) {
@@ -65,19 +88,46 @@ const logout = () => {
         active-class="text-primary"
         inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
       </li>
-
-        <li>
-        <ULink 
-        to="/addSlide"
-        active-class="text-primary"
-        inactive-class="text-gray-400 hover:text-gray-200">Add Slide</ULink>
-      </li>
       <li>
-        <ULink 
-        to="/productAdd"
+        <UDropdown :items="items" mode="hover" :popper="{ placement: 'bottom-start' }">
+          <ULink 
         active-class="text-primary"
-        inactive-class="text-gray-400 hover:text-gray-200">Add Product</ULink>
-      </li>
+        inactive-class="text-gray-400 hover:text-gray-200">Admin</ULink>
+        <template #products>
+          <ULink
+          to="/admin/addProduct"
+          active-class="text-primary"
+          inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
+          </template>
+          <template #brands>
+          <ULink
+          to="/admin/addBrand"
+          active-class="text-primary"
+          inactive-class="text-gray-400 hover:text-gray-200">Brands</ULink>
+          </template>
+          <template #categories>
+          <ULink
+          to="/admin/addCategory"
+          active-class="text-primary"
+          inactive-class="text-gray-400 hover:text-gray-200">Categories</ULink>
+          </template>
+          <template #colors>
+          <ULink
+          to="/admin/addColor"
+          active-class="text-primary"
+          inactive-class="text-gray-400 hover:text-gray-200">Colors</ULink>
+          </template>
+          <template #slides>
+          <ULink
+          to="/admin/addSlide"
+          active-class="text-primary"
+          inactive-class="text-gray-400 hover:text-gray-200">Slides</ULink>
+          </template>
+      
+  </UDropdown>
+            
+             
+          </li>
     </ul>
   </div>
   
