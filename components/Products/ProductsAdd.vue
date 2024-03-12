@@ -8,30 +8,45 @@
                     <UInput color="primary" type="text" id="title" class=" w-full p-2.5 " placeholder="Enter Product Title"
                         v-model="product.title" />
                 </UFormGroup>
-                <UFormGroup label="Product Price: £" name="price" required>
-                    <UInput color="primary" type="input" id="price" class=" w-full p-2.5 " v-model="product.price"
-                        placeholder="Enter Product Price" />
+                <UFormGroup label="Product Slug" name="slug" required>
+                    <UInput color="primary" type="text" id="slug" class=" w-full p-2.5 " placeholder="Enter Product Slug"
+                        v-model="product.slug" />
                 </UFormGroup>
-                <UFormGroup label="Product Quantity" name="quantity" required>
-                    <UInput color="primary" type="text" id="quantity" class=" w-full p-2.5 " v-model="product.quantity"
-                        placeholder="Enter quantity of product" />
+                <UFormGroup label="Product Price" name="price" required>
+                    <UInput color="primary" type="number" id="price" class=" w-full p-2.5 " placeholder="Enter Product Price"
+                        v-model="product.price" />
+                </UFormGroup>
+                <UFormGroup label="Product Stock" name="stock" required>
+                    <UInput color="primary" type="number" id="stock" class=" w-full p-2.5 " placeholder="Enter Product Stock"
+                        v-model="product.stock" />
                 </UFormGroup>
                 <UFormGroup label="Product Image" name="image" required>
-                    <UInput color="primary" type="file" id="image" class=" w-full p-2.5 " v-model="product.image" />
+                    <input color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"
+                        capture />
+                </UFormGroup>
+                <UFormGroup label="Product Discount" name="discount" required>
+                    <UInput color="primary" type="number" id="discount" class=" w-full p-2.5 "
+                        placeholder="Enter Product Discount" v-model="product.discount" />
+                </UFormGroup>
+
+                <UFormGroup label="Product Status" name="status" required>
+                    <USelectMenu class=" w-full p-2.5 " v-model="product.status" :options="['New', 'Used','Discontinue']"
+                        placeholder="Select status" />
+                </UFormGroup>
+                <UFormGroup label="Product Brand" name="brand" required>
+                    <USelectMenu class=" w-full p-2.5 " v-model="selectedBrand" :options="brandsName"
+                        placeholder="Select brand" />
                 </UFormGroup>
                 <UFormGroup label="Product Category" name="category" required>
-                    <UInputMenu  class=" w-full p-2.5 " selected-icon="i-heroicons-hand-thumb-up-solid" 
-                        placeholder="Select a Category"
-                        :options="['Digital Piano', 'Digital Grand Piano', 'Accustic Piano', 'Accoustic Grand Piano', 'Custom Piano']"
-                        v-model="product.category" />
+                    <USelectMenu class=" w-full p-2.5 " v-model="selectedCategory" :options="categoriesName"
+                        placeholder="Select category" />
                 </UFormGroup>
                 <UFormGroup label="Product Color" name="color" required>
-                    <USelectMenu  class=" w-full p-2.5 " v-model="product.color" :options="['Black', 'White', 'Oak', 'Wood']" multiple placeholder="Select colors" />
+                    <USelectMenu  class=" w-full p-2.5 " v-model="selectedColorIds" :options="colorName" multiple placeholder="Select colors" />
                 </UFormGroup>
                 <UFormGroup label="Product Description" name="description" required>
                     <UTextarea class=" w-full p-2.5 " v-model="product.description"/>
                 </UFormGroup>
-
                 <UButton color="primary" type="submit"
                     class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5">Submit
                 </UButton>
@@ -44,51 +59,136 @@
 </template>
 <script setup lang="ts">
 import { number, object, string } from 'yup';
+import type { ProductsModel } from '~/models/ProductsModel';
+import { showBrand } from '~/servies/BrandService';
+import { showCategory } from '~/servies/CategoryService';
+import { showColor } from '~/servies/ColorService';
+import { createProduct } from '~/servies/ProductService';
+import { insertFile } from '~/servies/UploadFileService';
 
 const schemaProduct = object({
     title: string().required('Required!'),
+    slug: string().required('Required!'),
     price: number().positive('Please enter price more than zero').required('Required!'),
-    quantity: number()
+    stock: number().required('Required!'),
+    status: string().required('Required!'),
+    brand: string().required('Required!'),
+    category: string().required('Required!'),
 })
-const product = reactive({
+const product:ProductsModel = reactive({
     title: '',
-    price: '',
-    quantity: '',
+    slug: '',
+    price: undefined,
+    review:0,
+    rating: 5,
+    stock: undefined,
     image: '',
-    category: '',
-    color: [],
-    description: ''
+    discount: 0,
+    description: '',
+    status:'',
+    brand:undefined,
+    category:undefined,
+    colors: []
 })
 const warning = ref<[boolean, string]>([false, '']);
+const loadingBtn=ref(false);
+const productImage = ref();
+const fileInput = ref<HTMLInputElement | null>(null);
+const onFileChanged = () => {
+    productImage.value = fileInput.value?.files
+    product.image = productImage.value[0].name;
+}
 const submitProduct = async () => {
     try {
-        await $fetch('https://piano-shop-default-rtdb.europe-west1.firebasedatabase.app/products.json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title: product.title,
-                price: product.price,
-                quantity: product.quantity,
-                imageUrl: product.image,
-                category: product.category,
-                color: product.color,
-                description: product.description
+        loadingBtn.value = true;
+        await insertFile(productImage.value[0]);
+        await createProduct(product);
+        warning.value = [true, "You have added a product! "];
+        loadingBtn.value = false;
+        product.title = '';
+        product.slug = '';
+        product.price = undefined;
+        product.stock = undefined;
+        product.image = '';
+        product.discount = 0;
+        product.description = '';
+        product.status = '';
+        product.brand = undefined;
+        product.category = undefined;
+        product.colors = [];
+        fileInput.value!.value = '';
 
-            }),
-        });
-        warning.value = [true, "Product added successfully! "];
-        product.title = ''
-        product.price = ''
-        product.quantity = ''
-        product.image = ''
-        product.category = ''
-        product.color = []
-        product.description = ''
 
     } catch (err: any) {
         warning.value = [false, err.message]
+        loadingBtn.value = false;
     }
 }
+
+const selectedColorIds = computed({
+    get: () => colorId.value,
+    set: (value) => {
+        colorId.value = value;
+        const colorS =colorsArray.value.filter((item:any)=>colorId.value.includes(item.name));
+        product.colors=colorS.map((item:any)=>item.id);
+    }
+});
+
+const colorsArray = ref([]);
+const colorName:any=ref([]);
+const colorId:any=ref([]);
+const getColors = async () => {
+  try {
+    const data: any = await showColor();
+    colorsArray.value = data.data[0];
+    colorName.value = colorsArray.value.map((item: any) => item.name);
+  } catch (err:any) {
+    warning.value = [false, err.message]
+  }
+};
+const brands = ref([]);
+const brandsName = ref('');
+const brandValue = ref('');
+const selectedBrand = computed({
+    get: () => brandValue.value,
+    set: (value) => {
+        brandValue.value = value;
+        const brandS:any =brands.value.filter((item:any)=>item.name===value);
+        product.brand=brandS[0].id;
+    }
+});
+const getBrands = async () => {
+  try {
+    const data: any = await showBrand();
+    brands.value = data.data[0];
+    brandsName.value = data.data[0].map((item: any) => item.name);
+  } catch (err:any) {
+    warning.value = [false, err.message]
+  }
+};
+const categories = ref([]);
+const categoriesName = ref('');
+const categoryValue = ref('');
+const selectedCategory = computed({
+    get: () => categoryValue.value,
+    set: (value) => {
+        categoryValue.value = value;
+        const categoryS:any =categories.value.filter((item:any)=>item.name===value);
+        product.category=categoryS[0].id;
+    }
+});
+const getCategories = async () => {
+  try {
+    const data: any = await showCategory();
+    categories.value = data.data[0];
+    categoriesName.value = data.data[0].map((item: any) => item.name);
+  } catch (err:any) {
+    warning.value = [false, err.message]
+  }
+};
+getColors();
+getBrands();
+getCategories();
+
+
 </script>

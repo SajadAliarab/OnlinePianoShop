@@ -22,8 +22,8 @@ class Product extends Model
         'discount',
         'description',
         'status',
-        'brand_id',
-        'category_id',
+        'brand',
+        'category',
     ];
     public function brand()
     {

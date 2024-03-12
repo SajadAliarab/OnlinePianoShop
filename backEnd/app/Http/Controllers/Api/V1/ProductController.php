@@ -117,10 +117,11 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->save();
             //add to table color_product
-            $product->colors()->attach($request->color_id);
+            $product->colors()->attach($request->colors);
             return response()->json([
                 'result' => true,
                 'message' => 'Product created successfully',
+                'data' => $product
             ], 200);
         }else{
             return response()->json([
