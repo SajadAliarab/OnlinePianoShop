@@ -264,7 +264,7 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->save();
             //update table color_product
-            $product->colors()->sync($request->color_id);
+            $product->colors()->sync($request->colors);
             return response()->json([
                 'result' => true,
                 'message' => 'Product updated successfully'

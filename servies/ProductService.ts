@@ -25,3 +25,34 @@ export function createProduct(productData:ProductsModel){
           });
 
 }
+export function showProduct(){
+  return $fetch('http://localhost:8000/api/v1/product_show');
+}
+export function deleteProduct(productId:number){
+  return $fetch(`http://localhost:8000/api/v1/product_delete/${productId}`, {
+          method: 'DELETE',
+        });
+}
+export function updateProduct(id:number,productData:ProductsModel){
+  return $fetch(`http://localhost:8000/api/v1/product_update/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            title:productData.title,
+            slug:productData.slug,
+            price:productData.price,
+            reviews:productData.review,
+            rating:productData.rating,
+            stock:productData.stock,
+            image:productData.image,
+            discount:productData.discount,
+            description:productData.description,
+            status:productData.status,
+            brand_id:productData.brand,
+            category_id:productData.category,
+            colors:productData.colors
+          },
+        });
+}
