@@ -109,7 +109,7 @@ const items = (row: any) => [
       <img :src="row.image"  class="h-20 w-20" />
     </template>
     <template #status-data="{ row }">
-      <span :class="{'text-green-500':row.status=='New'||'Used','text-red-500':row.status=='Discontinue'}">{{ row.status}}</span>
+      <span :class="{'text-green-500':row.status=='New','text-red-500':row.status=='Used'}">{{ row.status}}</span>
     </template>
     <template #actions-data="{ row }">
       <UDropdown :items="items(row)">

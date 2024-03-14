@@ -374,6 +374,34 @@
                 }
             }
         },
+        "/api/v1/product_show_by_slug/{slug}": {
+            "get": {
+                "tags": [
+                    "Product Api"
+                ],
+                "description": "use for show product by slug from database",
+                "operationId": "96dda50d683f97694ec8392e3d0cd8eb",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "ID of the product",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/brand_create": {
             "post": {
                 "tags": [
@@ -510,6 +538,40 @@
                 }
             }
         },
+        "/api/v1/brand_show_by_id/{id}": {
+            "get": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for get brand by id",
+                "operationId": "b8bd6d1d4070924630a35a6717733257",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Brand ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Brand not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/category_create": {
             "post": {
                 "tags": [
@@ -631,6 +693,40 @@
                 "responses": {
                     "200": {
                         "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/category_show_by_id/{id}": {
+            "get": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for get category by id",
+                "operationId": "5c143e1d9d5303e9b7cd33e68a595254",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
                         "content": {
                             "application/json": {}
                         }

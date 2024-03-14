@@ -317,4 +317,45 @@ class ProductController extends Controller
             ], 400);
         }
     }
+
+    /**
+     * @OA\Get(
+     * path="/api/v1/product_show_by_slug/{slug}",
+     * tags={"Product Api"},
+     * description="use for show product by slug from database",
+     * @OA\Parameter(
+     * name="slug",
+     * in="path",
+     * description="ID of the product",
+     * required=true,
+     * @OA\Schema(
+     * type="string"
+     * )
+     * ),
+     * @OA\Response(
+     * response=200,
+     * description="Its Ok",
+     * @OA\MediaType(
+     * mediaType="application/json",
+     * )
+     * )
+     * )
+     */
+    public function showProductBySlug($slug){
+        $product = Product::where('slug', $slug)->first();
+        if($product!=null){
+            $colors = $product->colors()->get();
+            return response()->json([
+                'result' => true,
+                'message' => 'Product show successfully',
+                'data' => $product,
+                'colors' => $colors
+            ], 200);
+        }else{
+            return response()->json([
+                'result' => false,
+                'message' => 'Product not found'
+            ], 400);
+        }
+    }
 }

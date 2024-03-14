@@ -56,3 +56,6 @@ export function updateProduct(id:number,productData:ProductsModel){
           },
         });
 }
+export function showProductBySlug(slug:string){
+  return $fetch(`http://localhost:8000/api/v1/product_show_by_slug/${slug}`);
+}

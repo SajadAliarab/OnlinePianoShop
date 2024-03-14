@@ -36,3 +36,6 @@ export function updateBrand(id:number,brandData:BrandsModel){
           },
         });
 }
+export function showBrandById(id:number){
+  return $fetch(`http://localhost:8000/api/v1/brand_show_by_id/${id}`);
+}

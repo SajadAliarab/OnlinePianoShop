@@ -31,7 +31,7 @@
                 </UFormGroup>
 
                 <UFormGroup label="Product Status" name="status" required>
-                    <USelectMenu class=" w-full p-2.5 " v-model="product.status" :options="['New', 'Used','Discontinue']"
+                    <USelectMenu class=" w-full p-2.5 " v-model="product.status" :options="['New', 'Used']"
                         placeholder="Select status" />
                 </UFormGroup>
                 <UFormGroup label="Product Brand" name="brand" required>

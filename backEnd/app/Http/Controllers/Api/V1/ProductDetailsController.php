@@ -187,6 +187,55 @@ public function showBrand(){
             ],400);
         }
     }
+
+    /**
+     * @OA\Get(
+     ** path="/api/v1/brand_show_by_id/{id}",
+     *  tags={"Product Details Api"},
+     *  description="use for get brand by id",
+     * @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Brand ID",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *   @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="Brand not found",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   )
+     *)
+     **/
+
+    public function showBrandById($id){
+        $brand = Brand::find($id);
+        if($brand!=null){
+            return response()->json([
+                'result'=>true,
+                'message'=>'Brand Found',
+                'data'=>[
+                    $brand
+                ]
+            ],200);
+        }else{
+            return response()->json([
+                'result'=>false,
+                'message'=>'Brand Not Found'
+            ],400);
+        }
+    }
      /**
    * @OA\Post(
    ** path="/api/v1/category_create",
@@ -343,6 +392,55 @@ public function showBrand(){
                 return response()->json([
                     'result'=>true,
                     'message'=>'Category Deleted Successfully'
+                ],200);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=>'Category Not Found'
+                ],400);
+            }
+        }
+
+        /**
+         * @OA\Get(
+         ** path="/api/v1/category_show_by_id/{id}",
+         *  tags={"Product Details Api"},
+         *  description="use for get category by id",
+         * @OA\Parameter(
+         *         name="id",
+         *         in="path",
+         *         description="Category ID",
+         *         required=true,
+         *         @OA\Schema(
+         *             type="integer"
+         *         )
+         *     ),
+         *   @OA\Response(
+         *      response=200,
+         *      description="Success",
+         *      @OA\MediaType(
+         *           mediaType="application/json",
+         *      )
+         *   ),
+         *   @OA\Response(
+         *      response=404,
+         *      description="Category not found",
+         *      @OA\MediaType(
+         *           mediaType="application/json",
+         *      )
+         *   )
+         *)
+         **/
+
+        public function showCategoryById($id){
+            $category = Category::find($id);
+            if($category!=null){
+                return response()->json([
+                    'result'=>true,
+                    'message'=>'Category Found',
+                    'data'=>[
+                        $category
+                    ]
                 ],200);
             }else{
                 return response()->json([

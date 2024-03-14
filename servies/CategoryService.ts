@@ -34,3 +34,6 @@ export function updateCategory(id:number,categoryName:string){
           },
         });
 }
+export function showCategoryById(id:number){
+  return $fetch(`http://localhost:8000/api/v1/category_show_by_id/${id}`);
+}

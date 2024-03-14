@@ -50,5 +50,4 @@
 </template>
 <script setup lang="ts">
 
-import type { UButton } from '#build/components';
 </script>
