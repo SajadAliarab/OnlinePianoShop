@@ -1,9 +1,15 @@
 <template>
-     <div class="bg-gray-800 py-8">
+    <UProgress v-if="loading" animation="carousel" />
+     <USkeleton v-if="loading" class="h-[460px] w-screen" />
+        
+    
+     <div v-if="!loading" class="bg-gray-800 py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row -mx-4">
-            <div class="md:flex-1 px-4">
-                <div class="h-[460px] rounded-lg bg-gray-700 mb-4">
+            
+            <div  class="md:flex-1 px-4">
+                <div  class="h-[460px] rounded-lg bg-gray-700 mb-4">
+                    
                     <img class="w-full h-full object-cover" :src="'http://localhost:8000/uploads/'+productData.image" alt="Product Image">
                 </div>
                 <div class="flex -mx-2 mb-4">
@@ -27,7 +33,7 @@
                     <div>
                         <span class="font-bold text-lg text-gray-300">Availability:</span>
                         <span v-if="productData.stock>0" class="font-bold text-gray-300">In Stock</span>
-                        <span v-if="productData.stock==0" class="font-bold text-red-700">Unavailable</span>
+                        <span v-if="productData.stock==0" class="font-bold text-red-700">Out of Stock</span>
                     </div>
                     <div class="ml-4">
                         <span class="font-bold text-lg text-gray-300">Status:</span>
@@ -75,8 +81,10 @@ const productColor: any= ref({});
 const productBrand: any= ref({});
 const productCategory: any= ref('');
 const productBrandImage:any= ref('');
+const loading = ref(false);
 const getItem = async () => {
   try {
+    loading.value = true;
     const data: any = await showProductBySlug(router.params.slug);
     productData.value = data.data;
     productColor.value = data.colors;
@@ -85,6 +93,7 @@ const getItem = async () => {
     productBrandImage.value=brand.data[0].image;
     const category:any = await showCategoryById(data.data.category_id);
     productCategory.value = category.data[0].name;
+    loading.value = false;
    
   } catch (err) {
     console.log(err);

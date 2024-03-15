@@ -1,4 +1,3 @@
 <template>
-        <ProductsSlideBar />
         <ProductsCard/>
 </template>
