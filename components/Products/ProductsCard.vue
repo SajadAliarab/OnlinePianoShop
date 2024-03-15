@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <h3 class="text-xl font-bold text-white mt-4">{{product.title}}</h3>
-                <p class="text-gray-300 text-sm mt-2">{{product.description}}</p>
+                 <p class="text-gray-300 text-sm mt-2">{{truncatedDescription(product.description)}}<span v-if="showMore"> <RouterLink :to="'/product/' + product.slug" class="text-primary-500"> Read More</RouterLink></span></p>
                 <div class="flex items-center justify-between mt-4">
                     <span class="text-white font-bold text-lg"><ThePriceFormmater :price=product.price /></span>
                     <UButton v-if="product.stock>0" color="primary" variants="solid">Add to Cart</UButton>
@@ -38,6 +38,7 @@ import { RouterLink } from 'vue-router';
 import { showProduct } from '~/servies/ProductService';
 const productData:any = ref([]);
 const loading = ref(false);
+const showMore = ref(false);
 const getItem = async () => {
   try {
     loading.value = true;
@@ -47,6 +48,15 @@ const getItem = async () => {
   } catch (err) {
     console.log(err);
   }
+};
+const truncatedDescription =(description:string) =>{
+      if (description.length < 100){
+        showMore.value = false;
+        return description
+      }else{
+        showMore.value = true;
+        return description.slice(0, 100) + '...';
+    }
 };
 
 onMounted(getItem);
