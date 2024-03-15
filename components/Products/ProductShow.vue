@@ -2,6 +2,7 @@
 import { deleteProduct, showProduct } from '~/servies/ProductService';
 import { deleteFile } from '~/servies/UploadFileService';
 import ProductsAdd from './ProductsAdd.vue';
+import ThePriceFormaater from '../ThePriceFormmater.vue';
 
 
 
@@ -101,6 +102,9 @@ const items = (row: any) => [
     <UTable :loading="loading" :rows="productData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
     <template #title-data="{ row }">
       <span class="text-primary-400">{{ row.title}}</span>
+    </template>
+    <template #price-data="{ row }">
+      <span class="text-primary-500"> <ThePriceFormaater :price="row.price" /> </span>
     </template>
     <template #stock-data="{ row }">
       <span :class="{'text-green-500':row.stock>0,'text-red-500':row.stock==0}">{{ row.stock}}</span>

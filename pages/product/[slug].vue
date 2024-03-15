@@ -28,7 +28,7 @@
                 <div class="flex mb-4">
                     <div class="mr-4">
                         <span class="text-lg font-bold text-gray-300">Price:</span>
-                        <span class="font-bold text-gray-300">£{{productData.price}}</span>
+                        <span class="font-bold text-gray-300"><ThePriceFormmater :price=productData.price /></span>
                     </div>
                     <div>
                         <span class="font-bold text-lg text-gray-300">Availability:</span>

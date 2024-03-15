@@ -17,7 +17,7 @@
                 <h3 class="text-xl font-bold text-white mt-4">{{product.title}}</h3>
                 <p class="text-gray-300 text-sm mt-2">{{product.description}}</p>
                 <div class="flex items-center justify-between mt-4">
-                    <span class="text-white font-bold text-lg">£{{product.price}}</span>
+                    <span class="text-white font-bold text-lg"><ThePriceFormmater :price=product.price /></span>
                     <UButton v-if="product.stock>0" color="primary" variants="solid">Add to Cart</UButton>
                     <UButton v-else color="gray" variants="solid">Out of Stock</UButton>
                 </div>
