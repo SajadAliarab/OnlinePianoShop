@@ -7,7 +7,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row -mx-4">
             
-            <div  class="md:flex-1 px-4">
+            <div  class="w-1/2 md:flex-1 px-4">
                 <div  class="h-[460px] rounded-lg bg-gray-700 mb-4">
                     
                     <img class="w-full h-full object-cover" :src="'http://localhost:8000/uploads/'+productData.image" alt="Product Image">
@@ -19,16 +19,23 @@
                 </div>
             </div>
 
-            <div class="md:flex-1 px-4">
+            <div class="w-1/2 md:flex-1 px-4">
                 <h2 class="text-2xl font-bold text-white mb-2">{{productData.title}}</h2>
                 <div class="mb-4">
                         <span class=" text-2xl font-bold text-gray-300">{{productCategory}}</span>
+                    </div>
+                    <div class="mb-4">
+                        <span class=" text-2xl font-bold text-gray-300">{{convertToStars(productData.rating)}}</span>
                     </div>
                
                 <div class="flex mb-4">
                     <div class="mr-4">
                         <span class="text-lg font-bold text-gray-300">Price:</span>
-                        <span class="font-bold text-gray-300"><ThePriceFormmater :price=productData.price /></span>
+                        <span v-if="productData.discount==0" class="font-bold text-gray-300"><ThePriceFormmater :price=productData.price /></span>
+                        <span v-if="productData.discount>0" class="font-bold text-gray-300 line-through"><ThePriceFormmater :price=productData.price /></span>
+                        <br>
+                        <span v-if="productData.discount>0" class="text-lg font-bold text-red-700">Offer Price:</span>
+                        <span v-if="productData.discount>0" class="font-bold text-red-700"><ThePriceFormmater :price=productData.price-productData.discount /></span>
                     </div>
                     <div>
                         <span class="font-bold text-lg text-gray-300">Availability:</span>
@@ -60,9 +67,11 @@
 
                 <div>
                     <span class="font-bold text-gray-300">Product Description:</span>
+                    <div class="flex items-center mt-2">
                     <p class="text-gray-300 text-sm mt-2">
                         {{productData.description}}
                     </p>
+                </div>
                 </div>
             </div>
         </div>
@@ -98,6 +107,10 @@ const getItem = async () => {
   } catch (err) {
     console.log(err);
   }
+};
+const convertToStars = (rating: number) => {
+    const roundedRating = Math.round(rating);
+    return '★'.repeat(roundedRating) + '☆'.repeat(5 - roundedRating);
 };
 getItem();
 </script>

@@ -17,10 +17,13 @@
                 <h3 class="text-xl font-bold text-white mt-4">{{product.title}}</h3>
                  <p class="text-gray-300 text-sm mt-2">{{truncatedDescription(product.description)}}<span v-if="showMore"> <RouterLink :to="'/product/' + product.slug" class="text-primary-500"> Read More</RouterLink></span></p>
                 <div class="flex items-center justify-between mt-4">
-                    <span class="text-white font-bold text-lg"><ThePriceFormmater :price=product.price /></span>
+                    <span v-if="product.discount==0" class="text-white font-bold text-lg"><ThePriceFormmater :price=product.price /></span>
+                    <span v-if="product.discount>0" class="text-white font-bold text-lg line-through"><ThePriceFormmater :price=product.price /></span>
+             
                     <UButton v-if="product.stock>0" color="primary" variants="solid">Add to Cart</UButton>
                     <UButton v-else color="gray" variants="solid">Out of Stock</UButton>
                 </div>
+                <span v-if="product.discount>0" class="text-red-500 font-bold text-lg"><ThePriceFormmater :price=product.price-product.discount /></span>
             </div>
 
 
