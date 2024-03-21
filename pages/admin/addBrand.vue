@@ -6,7 +6,4 @@
 </template>
 <script setup lang="ts">
 import BrandsShow from '~/components/Products/Details/Brand/BrandsShow.vue';
-definePageMeta({
-  middleware: 'admin-auth'
-})
 </script>
