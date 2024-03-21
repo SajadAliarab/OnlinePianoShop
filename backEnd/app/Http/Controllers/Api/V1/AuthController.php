@@ -116,7 +116,8 @@ class AuthController extends Controller
         'result'=>true,
         'message' => 'Login successful',
         'data'=>[
-          'user'=>$user,
+          'user'=>$user->id,
+          'role'=>$user->role,
           'token' => $token,
         ]
       ], 200);
@@ -125,5 +126,37 @@ class AuthController extends Controller
         'message' => 'Invalid credentials'
       ], 401);
     }
+  }
+  /**
+   * @OA\Get(
+   ** path="/api/v1/user_show_by_id/{id}",
+   *  tags={"Auth Api"},
+   *  description="use for get user data",
+   * @OA\Parameter(
+   *      name="id",
+   *      in="path",
+   *      description="ID of the user",
+   *      required=true,
+   *      @OA\Schema(
+   *          type="integer"
+   *      )
+   * ),
+   *   @OA\Response(
+   *      response=200,
+   *      description="Its Ok",
+   *      @OA\MediaType(
+   *           mediaType="application/json",
+   *      )
+   *   )
+   *)
+   **/
+  public function getUserById($id)
+  {
+    $user = User::query()->find($id);
+    return response()->json([
+      'result' => true,
+      'message' => 'User data',
+      'data' => $user
+    ], 200);
   }
 }

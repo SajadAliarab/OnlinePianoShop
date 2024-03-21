@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { ULink } from '#build/components';
+import { getUserData } from '~/servies/AuthService';
+
 const router = useRouter();
  const authenticated = ref(false);
 const user:any = ref('');
@@ -26,11 +28,13 @@ const items = [[
     }
 
   ]]
-const checkAuthentication = () => {
+const checkAuthentication = async () => {
   const userData = localStorage.getItem('auth-data');
   if (userData) {
     authenticated.value = true;
-    user.value = JSON.parse(userData);
+    const userInfo = JSON.parse(userData);
+    const userDb:any = await getUserData(userInfo.user) ;
+    user.value = userDb.data;
   }else{
     authenticated.value =false;
   }
@@ -71,7 +75,7 @@ const logout = () => {
   </div>
   <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <UButton v-if="!authenticated" color="primary" to="/auth/Login" class=" font-medium text-sm px-4 py-2 text-center">LogIn</UButton>     
-      <UButton v-if="authenticated" color="primary" to="/profile/" class="mx-4 font-medium text-sm px-4 py-2 text-center">{{ user.user.name }}</UButton>
+      <UButton v-if="authenticated" color="primary" to="/profile/" class="mx-4 font-medium text-sm px-4 py-2 text-center">{{ user.name}}</UButton>
       <UButton v-if="authenticated" color="red" @click="logout" class=" font-medium text-sm px-4 py-2 text-center">Log Out</UButton>
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
@@ -89,7 +93,7 @@ const logout = () => {
         inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
       </li>
       <li>
-        <UDropdown :items="items" mode="hover" :popper="{ placement: 'bottom-start' }">
+        <UDropdown v-if="user.role==1" :items="items" mode="hover" :popper="{ placement: 'bottom-start' }">
           <ULink 
         active-class="text-primary"
         inactive-class="text-gray-400 hover:text-gray-200">Admin</ULink>

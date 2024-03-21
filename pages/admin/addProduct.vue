@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import ProductShow from '~/components/Products/ProductShow.vue';
-
+definePageMeta({
+  middleware: 'admin-auth'
+})
 
 </script>
 <template>

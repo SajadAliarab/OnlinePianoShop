@@ -27,3 +27,12 @@ export function LoginUser($email:string,$password:string){
     },
   });
 }
+export function getUserData(id:number){
+
+  return $fetch(`http://localhost:8000/api/v1/user_show_by_id/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}

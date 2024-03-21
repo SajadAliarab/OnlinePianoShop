@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::post('register_user',[AuthController::class,'RegisterUser']);
     Route::post('login_user',[AuthController::class,'LoginUser']);
+    Route::get('user_show_by_id/{id}',[AuthController::class,'getUserById']);
     Route::post('upload_file',[FileController::class,'upload']);
     Route::delete('delete_file/{fileName}',[FileController::class,'deleteFile']);
     Route::post('slide_create',[SlideController::class,'create']);

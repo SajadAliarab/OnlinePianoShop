@@ -18,11 +18,11 @@
               placeholder="Please Enter your Password" v-model="userData.password" />
           </UFormGroup>
         </div>
-        <div class="flex items-start mb-5">
+        <!-- <div class="flex items-start mb-5">
           <div class="flex items-center ">
             <UCheckbox name="remember" label="Remeber me" />
           </div>
-        </div>
+        </div> -->
         <UButton :loading="loadingBtn" color="primary" type="submit"
           class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5">Log In</UButton>
         <p class="font-medium text-red-800" v-text="warning"></p>

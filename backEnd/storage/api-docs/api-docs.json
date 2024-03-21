@@ -84,6 +84,34 @@
                 }
             }
         },
+        "/api/v1/user_show_by_id/{id}": {
+            "get": {
+                "tags": [
+                    "Auth Api"
+                ],
+                "description": "use for get user data",
+                "operationId": "90d840b6d7bee43cac8f738eb7e6a90b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/upload_file": {
             "post": {
                 "tags": [
