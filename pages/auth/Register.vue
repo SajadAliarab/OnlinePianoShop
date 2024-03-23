@@ -26,8 +26,8 @@
         </div>
         <div class="flex items-start mb-5">
           <div class="flex items-center ">
-            <UFormGroup name="selected">
-              <UCheckbox id="selected" label="I accept all policy and terms" v-model="userData.selected" />
+            <UFormGroup name="selected" label="I accept all policy and terms">
+              <UToggle id="selected"  v-model="userData.selected" />
             </UFormGroup>
           </div>
         </div>

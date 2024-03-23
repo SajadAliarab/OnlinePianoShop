@@ -8,7 +8,7 @@
             <UInput color="primary" type="text" id="colorName" class=" w-full p-2.5 " placeholder="Enter color Name" v-model="state.colorName" />
           </UFormGroup>
           <UFormGroup label="color Image" name="colorImage" required>
-            <input color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"  capture />
+            <UInput color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"  capture />
           </UFormGroup>
           <UButton v-if="!editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="submitForm">Submit</UButton>
           <UButton v-if="editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="editForm">Edit</UButton>

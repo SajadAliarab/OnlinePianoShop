@@ -22,7 +22,7 @@
                         v-model="product.stock" />
                 </UFormGroup>
                 <UFormGroup label="Product Image" name="image" required>
-                    <input color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"
+                    <UInput color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"
                         capture />
                 </UFormGroup>
                 <UFormGroup label="Product Discount" name="discount" required>
