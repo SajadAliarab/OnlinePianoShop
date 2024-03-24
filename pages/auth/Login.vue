@@ -56,7 +56,7 @@ const logIn = async () => {
  
  localStorage.setItem('auth-data',JSON.stringify(result.data));
  router.push('/').then(() => {
-  window.location.reload();
+ // window.location.reload();
 });
   } catch (err: any) {
     warning.value = "Your Email or Password is not Authorization";

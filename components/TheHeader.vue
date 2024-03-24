@@ -1,68 +1,4 @@
-<script setup lang="ts">
-import type { ULink } from '#build/components';
-import { getUserData } from '~/servies/AuthService';
 
-const router = useRouter();
- const authenticated = ref(false);
-const user:any = ref('');
-const items = [[
-    {
-      label: 'Products',
-      slot:"products"
-    },
-    {
-      label: 'Brands',
-      slot:"brands"
-    },
-    {
-      label: 'Categories',
-      slot:"categories"
-    },
-    {
-      label: 'Colors',
-      slot:"colors"
-    },
-    {
-      label: 'Slides',
-      slot:"slides"
-    }
-
-  ]]
-const checkAuthentication = async () => {
-  const userData = localStorage.getItem('auth-data');
-  if (userData) {
-    authenticated.value = true;
-    const userInfo = JSON.parse(userData);
-    const userDb:any = await getUserData(userInfo.user) ;
-    user.value = userDb.data;
-  }else{
-    authenticated.value =false;
-  }
-};
-onMounted(()=>{checkAuthentication();});
-
-
-// onBeforeRouteUpdate(() => {
-
-//   checkAuthentication();
-// });
-
-
-const logout = () => {
-
-  localStorage.removeItem('auth-data');
-  authenticated.value = false;
-  user.value = {};
-  router.push('/auth/Login');
-};
-// const authStore=useAuthStore();
-// if(authStore&&authStore.isLogin){
-//   const loginData=authStore.loginResult;
-//   console.log(loginData);
-//   authenticated.value==true;
-
-// }
-</script>
 <template>
 <nav class="bg-gray-900  w-full z-20 top-0 start-0 border-b border-gray-600 sticky">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -138,3 +74,69 @@ const logout = () => {
   </div>
 </nav>
 </template>
+<script setup lang="ts">
+import type { ULink } from '#build/components';
+import { getUserData } from '~/servies/AuthService';
+
+const router = useRouter();
+ const authenticated = ref(false);
+const user:any = ref('');
+const userData:any=ref('');
+const items = [[
+    {
+      label: 'Products',
+      slot:"products"
+    },
+    {
+      label: 'Brands',
+      slot:"brands"
+    },
+    {
+      label: 'Categories',
+      slot:"categories"
+    },
+    {
+      label: 'Colors',
+      slot:"colors"
+    },
+    {
+      label: 'Slides',
+      slot:"slides"
+    }
+
+  ]]
+const checkAuthentication = async () => {
+   userData.value = localStorage.getItem('auth-data');
+  if (userData.value) {
+    authenticated.value = true;
+    const userInfo = JSON.parse(userData.value);
+    const userDb:any = await getUserData(userInfo.user) ;
+    user.value = userDb.data;
+  }else{
+    authenticated.value =false;
+  }
+};
+onMounted(()=>{checkAuthentication();});
+
+
+// onBeforeRouteUpdate(() => {
+
+//   checkAuthentication();
+// });
+
+router.beforeEach(async (to, from, next) => {
+  await checkAuthentication();
+  next();
+});
+
+const logout = () => {
+
+  localStorage.removeItem('auth-data');
+  authenticated.value = false;
+  user.value = {};
+  router.push('/auth/Login');
+};
+
+
+
+</script>
