@@ -26,6 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::post('register_user',[AuthController::class,'RegisterUser']);
     Route::post('login_user',[AuthController::class,'LoginUser']);
+    Route::post('user_token/{token}',[AuthController::class,'getUserByToken']);
+    Route::post('user_token_logout/{token}',[AuthController::class,'logoutUser']);
     Route::get('user_show_by_id/{id}',[UserController::class,'getUserById']);
     Route::put('change_password/{id}',[UserController::class,'changePassword']);
     Route::delete('user_delete/{id}',[UserController::class,'deleteUser']);

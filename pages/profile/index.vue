@@ -9,14 +9,17 @@
     </div>
 </template>
 <script setup lang="ts">
+import { getUserToken } from '~/servies/AuthService';
 import { deleteUser } from '~/servies/UserService';
 
 const router = useRouter();
 const DeleteUser = async () => {
-    const localUser = localStorage.getItem('auth-data');
-    if (localUser) {
-        const userInfo = JSON.parse(localUser);
-        const id = userInfo.user;
+    const token = localStorage.getItem('auth-data');
+    if (token) {
+        const userToken = JSON.parse(token);
+        const userInfo:any = await getUserToken(userToken);
+        const userId = userInfo.data;
+        const id = userId.user;
         try {
             await deleteUser(id);
             localStorage.removeItem('auth-data');

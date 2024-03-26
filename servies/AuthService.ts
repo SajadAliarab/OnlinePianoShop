@@ -36,3 +36,26 @@ export function getUserData(id:number){
     },
   });
 }
+
+export function logOutUser(token:string){
+  
+    return $fetch(`http://localhost:8000/api/v1/user_token_logout/${token}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization':`Bearer ${token}`
+      },
+    });
+
+}
+export function getUserToken(token:string){
+
+  return $fetch(`http://localhost:8000/api/v1/user_token/${token}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization':`Bearer ${token}`
+    },
+  });
+
+}

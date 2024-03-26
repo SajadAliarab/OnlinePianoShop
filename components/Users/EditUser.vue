@@ -70,7 +70,7 @@
 import { ref, watch } from 'vue';
 import { object, string } from 'yup';
 import type { UsersModel } from '~/models/UsersModel';
-import { getUserData } from '~/servies/AuthService';
+import { getUserData, getUserToken } from '~/servies/AuthService';
 import { Country } from '~/enums/country.enum';
 import { updateUser, changePassword } from '~/servies/UserService';
 
@@ -102,10 +102,13 @@ const schemaUser = object({
 
 })
 const getUser = async () => {
-    const localUser = localStorage.getItem('auth-data');
-    if (localUser) {
-        const userInfo = JSON.parse(localUser);
-        const userDb: any = await getUserData(userInfo.user);
+    const token = localStorage.getItem('auth-data');
+    if (token) {
+        const userToken = JSON.parse(token);
+        const userInfo:any = await getUserToken(userToken);
+        const userId = userInfo.data;
+        const id = userId.user;
+        const userDb: any = await getUserData(id);
         userData.name = userDb.data.name;
         userData.email = userDb.data.email;
         userData.phone = userDb.data.phone;
@@ -134,10 +137,12 @@ const checkPostCode = async () => {
 };
 const editUser = async () => {
     loadingBtn.value = true;
-    const localUser = localStorage.getItem('auth-data');
-    if (localUser) {
-        const userInfo = JSON.parse(localUser);
-        const id = userInfo.user;
+    const token = localStorage.getItem('auth-data');
+    if (token) {
+        const userToken = JSON.parse(token);
+        const userInfo:any = await getUserToken(userToken);
+        const userId = userInfo.data;
+        const id = userId.user;
         if(password.value){
             if(password.value === confirmPassword.value){
                 try {

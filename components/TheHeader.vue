@@ -76,12 +76,13 @@
 </template>
 <script setup lang="ts">
 import type { ULink } from '#build/components';
-import { getUserData } from '~/servies/AuthService';
+import { getUserData, logOutUser, getUserToken } from '~/servies/AuthService';
 
 const router = useRouter();
  const authenticated = ref(false);
 const user:any = ref('');
 const userData:any=ref('');
+
 const items = [[
     {
       label: 'Products',
@@ -109,8 +110,10 @@ const checkAuthentication = async () => {
    userData.value = localStorage.getItem('auth-data');
   if (userData.value) {
     authenticated.value = true;
-    const userInfo = JSON.parse(userData.value);
-    const userDb:any = await getUserData(userInfo.user) ;
+    const userToken = JSON.parse(userData.value);
+    const userInfo:any = await getUserToken(userToken);
+    const userId = userInfo.data;
+    const userDb:any = await getUserData(userId.user) ;
     user.value = userDb.data;
   }else{
     authenticated.value =false;
@@ -130,7 +133,10 @@ router.beforeEach(async (to, from, next) => {
 });
 
 const logout = () => {
-
+  const data:string|null = localStorage.getItem('auth-data');
+  if (!data) return;
+  const token = JSON.parse(data);
+  logOutUser(token);
   localStorage.removeItem('auth-data');
   authenticated.value = false;
   user.value = {};

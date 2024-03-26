@@ -84,6 +84,62 @@
                 }
             }
         },
+        "/api/v1/user_token_logout/{token}": {
+            "get": {
+                "tags": [
+                    "Auth Api"
+                ],
+                "description": "use for logout user by token",
+                "operationId": "2af7fc401b42c54dfb605d5935112c10",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Enter your token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user_token/{token}": {
+            "get": {
+                "tags": [
+                    "Auth Api"
+                ],
+                "description": "use for get user by token",
+                "operationId": "489470ed044137cf55a7ef2d1feed823",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Enter your token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/upload_file": {
             "post": {
                 "tags": [
@@ -1101,13 +1157,13 @@
                 }
             }
         },
-        "/api/v1/delete_user/{id}": {
+        "/api/v1/user_delete/{id}": {
             "delete": {
                 "tags": [
                     "User Api"
                 ],
                 "description": "use for delete user",
-                "operationId": "142b3900e05505fa3c36fd668a0f2e69",
+                "operationId": "df0912d8678637b1922c0d172ccdd285",
                 "parameters": [
                     {
                         "name": "id",
@@ -1129,13 +1185,13 @@
                 }
             }
         },
-        "/api/v1/update_user/{id}": {
+        "/api/v1/user_update/{id}": {
             "put": {
                 "tags": [
                     "User Api"
                 ],
                 "description": "use for update user",
-                "operationId": "2b4ad7899c13c009ba9209261a41c7fd",
+                "operationId": "bd6410c4c972ba374e8df7b8fa6a0894",
                 "parameters": [
                     {
                         "name": "id",
