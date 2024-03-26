@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('total_price')->default(0);
-            $table->integer('delivery-code')->unique();
+            $table->integer('delivery_code')->unique();
             $table->string('payment_status')->default('pending');
-            $table->string('taransaction_id')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->string('shipping_method')->default('Delivery');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

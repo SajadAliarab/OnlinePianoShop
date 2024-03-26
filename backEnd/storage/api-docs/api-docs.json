@@ -85,12 +85,12 @@
             }
         },
         "/api/v1/user_token_logout/{token}": {
-            "get": {
+            "post": {
                 "tags": [
                     "Auth Api"
                 ],
                 "description": "use for logout user by token",
-                "operationId": "2af7fc401b42c54dfb605d5935112c10",
+                "operationId": "bd10e2acea589108affe46072d7ce6ed",
                 "parameters": [
                     {
                         "name": "token",
@@ -203,6 +203,126 @@
                         "content": {
                             "application/json": {}
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1/payment": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Process payment",
+                "description": "Process payment for the items in the request",
+                "operationId": "25a5dd589a1b1d067212e9ad62f23061",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "userId": {
+                                        "type": "integer"
+                                    },
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "product_id": {
+                                                    "type": "integer"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Payment processed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "order_id": {
+                                            "type": "integer"
+                                        },
+                                        "total_price": {
+                                            "type": "number"
+                                        },
+                                        "delivery_code": {
+                                            "type": "integer"
+                                        },
+                                        "payment_status": {
+                                            "type": "string"
+                                        },
+                                        "transaction_id": {
+                                            "type": "string"
+                                        },
+                                        "shipping_method": {
+                                            "type": "string"
+                                        },
+                                        "user_id": {
+                                            "type": "integer"
+                                        },
+                                        "order_date": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "delivery_date": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "order_details": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "order_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "product_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer"
+                                                    },
+                                                    "price": {
+                                                        "type": "number"
+                                                    },
+                                                    "discount": {
+                                                        "type": "number"
+                                                    },
+                                                    "total_price": {
+                                                        "type": "number"
+                                                    },
+                                                    "order_status": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "Server error"
                     }
                 }
             }
