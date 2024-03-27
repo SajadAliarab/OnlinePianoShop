@@ -20,8 +20,30 @@
                     <span v-if="product.discount==0" class="text-white font-bold text-lg"><ThePriceFormmater :price=product.price /></span>
                     <span v-if="product.discount>0" class="text-white font-bold text-lg line-through"><ThePriceFormmater :price=product.price /></span>
              
-                    <UButton v-if="product.stock>0" color="primary" variants="solid">Add to Cart</UButton>
-                    <UButton v-else color="gray" variants="solid">Out of Stock</UButton>
+                    <UButton v-if="product.stock>0" color="primary" variants="solid" @click="isOpen = true">Add to Cart</UButton>
+                    {{ isOpen }}
+                  <!-- <TheModal v-model="isOpen">
+                    <template #header>
+                        <h2 class="text-2xl font-bold text-gray-800">Add to Cart</h2>
+                    </template>
+                    <template>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-start">
+                                <img class="w-20 h-20 object-cover" :src="product.image" :alt="product.title">
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-bold text-gray-800">{{product.title}}</h3>
+                                    <span class="text-gray-500 text-sm">{{product.category.name}}</span>
+                                </div>
+                            </div>
+                            <div class="flex items
+                            -center">
+                                <UButton color="gray" variants="solid" @click="isOpen = false">Close</UButton>
+                                <UButton color="primary" variants="solid">Add to Cart</UButton>
+                            </div>
+                        </div>
+                    </template>
+                </TheModal> -->
+                    <UButton v-if="product.stock==0" color="gray" variants="solid" disabled>Out of Stock</UButton>
                 </div>
                 <span v-if="product.discount>0" class="text-red-500 font-bold text-lg"><ThePriceFormmater :price=product.price-product.discount /></span>
             </div>
@@ -42,6 +64,7 @@ import { showProduct } from '~/servies/ProductService';
 const productData:any = ref([]);
 const loading = ref(false);
 const showMore = ref(false);
+const isOpen = ref(false);
 const getItem = async () => {
   try {
     loading.value = true;

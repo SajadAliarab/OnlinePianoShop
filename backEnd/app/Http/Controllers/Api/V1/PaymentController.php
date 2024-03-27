@@ -79,7 +79,7 @@ class PaymentController extends Controller
     }
     $order= Order::create([
         'total_price' => $total_price,
-        'delivery_code'=> rand(100,999),
+        'delivery_code'=> rand(1000,9999),
         'payment_status'=> 'pending',
         'transaction_id'=> '0',
         'shipping_method'=> '0',
