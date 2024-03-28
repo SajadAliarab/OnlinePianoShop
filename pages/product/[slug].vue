@@ -43,14 +43,28 @@
                                                     variant="ghost" @click="minusQuantity" />
                                             </div>
                                         </div>
-                                    </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                        <div class="ml-4">
+                                            <h3 class="text-lg font-bold text-gray-300">{{ selectedColor }}</h3>
+                                        </div>
+                                        <div class="ml-7 flex items-center">
+                                            <span class="text-lg font-bold text-gray-300 mr-5">SelecColor:</span>
+                                            <div class="flex items-center">
+                                                <img v-for="color in productColor" class="w-12 h-12 rounded-full bg-gray-200 mr-2"
+                                :src="'http://localhost:8000/uploads/' + color.image" :alt="color.name"
+                                :title="color.name" @click="selectColor(color.name)"></img>
+                                            </div>
+                                        </div>
+                                        </div>
+
 
 
                                     <template #footer>
                                         <Placeholder class="h-8" />
                                         <div class="flex justify-between">
                                             <div>
-                                                <UButton color="primary" variant="solid" @click="isOpen = false">
+                                                <UButton color="primary" variant="solid" @click=continueShop>
                                                     Continue Shopping
                                                 </UButton>
                                             </div>
@@ -64,7 +78,7 @@
                                     </template>
                                 </UCard>
                             </UModal>
-
+                            <UButton v-if="productData.stock==0" color="gray" variants="solid" disabled>Out of Stock</UButton>
                         </div>
                     </div>
                 </div>
@@ -91,7 +105,7 @@
                             <span v-if="productData.discount > 0" class="text-lg font-bold text-red-700">Offer
                                 Price:</span>
                             <span v-if="productData.discount > 0" class="font-bold text-red-700">
-                                <ThePriceFormmater :price=productData.price - productData.discount />
+                                <ThePriceFormmater :price=productData.price-productData.discount />
                             </span>
                         </div>
                         <div>
@@ -115,7 +129,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <span class="text-lg font-bold text-gray-300">Select Color:</span>
+                        <span class="text-lg font-bold text-gray-300">Color:</span>
                         <div class="flex items-center mt-2">
                             <img v-for="color in productColor" class="w-12 h-12 rounded-full bg-gray-200 mr-2"
                                 :src="'http://localhost:8000/uploads/' + color.image" :alt="color.name"
@@ -152,12 +166,16 @@ const productBrandImage: any = ref('');
 const loading = ref(false);
 const isOpen = ref(false);
 const quantity = ref(1);
+const selectedColor = ref('');
 const getItem = async () => {
     try {
         loading.value = true;
         const data: any = await showProductBySlug(router.params.slug);
         productData.value = data.data;
         productColor.value = data.colors;
+        if (data.colors.length == 1) {
+            selectedColor.value = data.colors[0].name;
+        }
         const brand: any = await showBrandById(data.data.brand_id);
         productBrand.value = brand.data[0].name;
         productBrandImage.value = brand.data[0].image;
@@ -181,5 +199,18 @@ const minusQuantity = () => {
         quantity.value--;
     }
 };
+const selectColor = (color: string) => {
+    selectedColor.value = color;
+};
+const continueShop = () => {
+    isOpen.value = false;
+    
+    localStorage.setItem('cart', JSON.stringify({
+        product: productData.value.id,
+        quantity: quantity.value,
+        color: selectedColor.value
+    }));
+};
+
 getItem();
 </script>
