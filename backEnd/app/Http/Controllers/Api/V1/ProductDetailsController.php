@@ -623,4 +623,52 @@ public function showBrand(){
                     ],400);
                 }
             }
+
+            /**
+             * @OA\Get(
+             ** path="/api/v1/color_show_by_id/{id}",
+             *  tags={"Product Details Api"},
+             *  description="use for get color by id",
+             * @OA\Parameter(
+             *         name="id",
+             *         in="path",
+             *         description="Color ID",
+             *         required=true,
+             *         @OA\Schema(
+             *             type="integer"
+             *         )
+             *     ),
+             *   @OA\Response(
+             *      response=200,
+             *      description="Success",
+             *      @OA\MediaType(
+             *           mediaType="application/json",
+             *      )
+             *   ),
+             *   @OA\Response(
+             *      response=404,
+             *      description="Color not found",
+             *      @OA\MediaType(
+             *           mediaType="application/json",
+             *      )
+             *   )
+             *)
+             **/
+            public function getColorById($id){
+                $color = Color::find($id);
+                if($color!=null){
+                    return response()->json([
+                        'result'=>true,
+                        'message'=>'Color Found',
+                        'data'=>[
+                            $color
+                        ]
+                    ],200);
+                }else{
+                    return response()->json([
+                        'result'=>false,
+                        'message'=>'Color Not Found'
+                    ],400);
+                }
+            }
 }

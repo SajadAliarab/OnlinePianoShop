@@ -33,6 +33,9 @@ export function updateColor(id:number,colorData:ColorsModel){
           },
         });
 }
+export function showColorById(id:number){
+  return $fetch(`http://localhost:8000/api/v1/color_show_by_id/${id}`);
+}
 
 
 

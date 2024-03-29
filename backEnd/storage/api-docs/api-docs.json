@@ -578,6 +578,34 @@
                 }
             }
         },
+        "/api/v1/product_show_by_id/{id}": {
+            "get": {
+                "tags": [
+                    "Product Api"
+                ],
+                "description": "use for show product by id from database",
+                "operationId": "013eecc72e12b9d1cf763b23be8818ac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/brand_create": {
             "post": {
                 "tags": [
@@ -1039,6 +1067,40 @@
                 "responses": {
                     "200": {
                         "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/color_show_by_id/{id}": {
+            "get": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for get color by id",
+                "operationId": "ce1f2d5fbd347f066aae27dfa09712ea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Color ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Color not found",
                         "content": {
                             "application/json": {}
                         }

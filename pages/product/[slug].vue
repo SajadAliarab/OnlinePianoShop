@@ -43,20 +43,22 @@
                                                     variant="ghost" @click="minusQuantity" />
                                             </div>
                                         </div>
-                                        </div>
-                                        <div class="flex items-start">
+                                    </div>
+                                    <div class="flex items-start">
                                         <div class="ml-4">
                                             <h3 class="text-lg font-bold text-gray-300">{{ selectedColor }}</h3>
                                         </div>
                                         <div class="ml-7 flex items-center">
                                             <span class="text-lg font-bold text-gray-300 mr-5">SelecColor:</span>
                                             <div class="flex items-center">
-                                                <img v-for="color in productColor" class="w-12 h-12 rounded-full bg-gray-200 mr-2"
-                                :src="'http://localhost:8000/uploads/' + color.image" :alt="color.name"
-                                :title="color.name" @click="selectColor(color.name)"></img>
+                                                <img v-for="color in productColor"
+                                                    class="w-12 h-12 rounded-full bg-gray-200 mr-2"
+                                                    :src="'http://localhost:8000/uploads/' + color.image"
+                                                    :alt="color.name" :title="color.name"
+                                                    @click="selectColor(color.name)"></img>
                                             </div>
                                         </div>
-                                        </div>
+                                    </div>
 
 
 
@@ -69,7 +71,7 @@
                                                 </UButton>
                                             </div>
                                             <div>
-                                                <UButton color="green" variant="solid" @click="isOpen = false">
+                                                <UButton color="green" variant="solid" @click=checkOut>
                                                     Checkout
                                                 </UButton>
                                             </div>
@@ -78,7 +80,8 @@
                                     </template>
                                 </UCard>
                             </UModal>
-                            <UButton v-if="productData.stock==0" color="gray" variants="solid" disabled>Out of Stock</UButton>
+                            <UButton v-if="productData.stock == 0" color="gray" variants="solid" disabled>Out of Stock
+                            </UButton>
                         </div>
                     </div>
                 </div>
@@ -105,7 +108,7 @@
                             <span v-if="productData.discount > 0" class="text-lg font-bold text-red-700">Offer
                                 Price:</span>
                             <span v-if="productData.discount > 0" class="font-bold text-red-700">
-                                <ThePriceFormmater :price=productData.price-productData.discount />
+                                <ThePriceFormmater :price=productData.price - productData.discount />
                             </span>
                         </div>
                         <div>
@@ -204,13 +207,47 @@ const selectColor = (color: string) => {
 };
 const continueShop = () => {
     isOpen.value = false;
-    
-    localStorage.setItem('cart', JSON.stringify({
-        product: productData.value.id,
-        quantity: quantity.value,
-        color: selectedColor.value
-    }));
+
+    let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    const existingItemIndex = existingCart.findIndex((item: any) => {
+        return item.product === productData.value.id && item.color === selectedColor.value;
+    });
+
+    if (existingItemIndex !== -1) {
+        existingCart[existingItemIndex].quantity = quantity.value;
+    } else {
+        existingCart.unshift({
+            product: productData.value.id,
+            quantity: quantity.value,
+            color: selectedColor.value
+        });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(existingCart));
 };
+const checkOut = () => {
+    isOpen.value = false;
+    let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    const existingItemIndex = existingCart.findIndex((item: any) => {
+        return item.product === productData.value.id && item.color === selectedColor.value;
+    });
+
+    if (existingItemIndex !== -1) {
+        existingCart[existingItemIndex].quantity = quantity.value;
+    } else {
+        existingCart.unshift({
+            product: productData.value.id,
+            quantity: quantity.value,
+            color: selectedColor.value
+        });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(existingCart));
+    router.push('/cart');
+};
+
 
 getItem();
 </script>
