@@ -67,6 +67,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div v-if="warning" class="flex items-center mt-4">
+                                        <span class="text-gray-300 font-bold text-lg">warning:</span>
+                                        <span class="text-red-500 font-bold text-lg">{{ warning }}</span>
+                                    </div>
 
                                        
                                     <template #footer>
@@ -115,6 +119,7 @@ const selectedProductCategory = ref('');
 const selectedProductTitle = ref('');
 const selectedProductColor:any = ref({});
 const selectedColor = ref('');
+const warning = ref('');
 const router = useRouter();
 const quantity = ref(1);
 const loading = ref(false);
@@ -165,8 +170,16 @@ const minusQuantity = () => {
 };
 const selectColor = (color: string) => {
     selectedColor.value = color;
+    warning.value = '';
 };
 const continueShop = (productid:number) => {
+
+    if(selectedColor.value === '') {
+        warning.value = 'Please select a color ';
+        return;
+    }else{
+        warning.value = '';
+
     isOpen.value = false;
 
     let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -186,9 +199,15 @@ const continueShop = (productid:number) => {
     }
 
     localStorage.setItem('cart', JSON.stringify(existingCart));
+}
 };
 const checkOut = (productid:number) => {
+    if(selectedColor.value === '') {
+        warning.value = 'Please select a color ';
+        return;
+    }else{
     isOpen.value = false;
+    warning.value = '';
     let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
 
     const existingItemIndex = existingCart.findIndex((item: any) => {
@@ -206,7 +225,8 @@ const checkOut = (productid:number) => {
     }
 
     localStorage.setItem('cart', JSON.stringify(existingCart));
-    router.push('/cart');
+    router.push('/cart/');
+}
 };
 
 onMounted(getItem);

@@ -59,7 +59,10 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div v-if="warning!=''">
+                                        <span class="text-lg font-bold text-gray-300">Warning:</span>
+                                        <span class="text-lg font-bold text-red-700">{{ warning }}</span>
+                                    </div>
 
 
                                     <template #footer>
@@ -160,12 +163,14 @@ import { showBrandById } from '~/servies/BrandService';
 import { showCategoryById } from '~/servies/CategoryService';
 import { showProductBySlug } from '~/servies/ProductService';
 
-const router: any = useRoute();
+const route: any = useRoute();
+const router: any = useRouter();
 const productData: any = ref({});
 const productColor: any = ref({});
 const productBrand: any = ref({});
 const productCategory: any = ref('');
 const productBrandImage: any = ref('');
+const warning = ref('');
 const loading = ref(false);
 const isOpen = ref(false);
 const quantity = ref(1);
@@ -173,7 +178,7 @@ const selectedColor = ref('');
 const getItem = async () => {
     try {
         loading.value = true;
-        const data: any = await showProductBySlug(router.params.slug);
+        const data: any = await showProductBySlug(route.params.slug);
         productData.value = data.data;
         productColor.value = data.colors;
         if (data.colors.length == 1) {
@@ -204,10 +209,16 @@ const minusQuantity = () => {
 };
 const selectColor = (color: string) => {
     selectedColor.value = color;
+    warning.value = '';
 };
 const continueShop = () => {
-    isOpen.value = false;
-
+    
+    if(selectedColor.value == ''){
+        warning.value = 'Please Select Color';
+        return;
+    }else{
+        isOpen.value = false;
+        warning.value = '';
     let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
 
     const existingItemIndex = existingCart.findIndex((item: any) => {
@@ -225,9 +236,16 @@ const continueShop = () => {
     }
 
     localStorage.setItem('cart', JSON.stringify(existingCart));
+}
 };
 const checkOut = () => {
-    isOpen.value = false;
+   
+    if(selectedColor.value == ''){
+        warning.value = 'Please Select Color';
+        return;
+    }else{
+        isOpen.value = false;
+        warning.value = '';
     let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
 
     const existingItemIndex = existingCart.findIndex((item: any) => {
@@ -245,7 +263,8 @@ const checkOut = () => {
     }
 
     localStorage.setItem('cart', JSON.stringify(existingCart));
-    router.push('/cart');
+    router.push('/cart/');
+}
 };
 
 
