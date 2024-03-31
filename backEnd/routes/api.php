@@ -54,6 +54,7 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::put('color_update/{id}',[ProductDetailsController::class,'updateColor']);
     Route::delete('color_delete/{id}',[ProductDetailsController::class,'deleteColor']);
     Route::get('color_show_by_id/{id}',[ProductDetailsController::class,'getColorById']);
+    Route::get('color_show_by_name/{name}',[ProductDetailsController::class,'getColorByName']);
     Route::post('product_create',[ProductController::class,'createProduct']);
     Route::get('product_show',[ProductController::class,'showProduct']);
     Route::put('product_update/{id}',[ProductController::class,'updateProduct']);

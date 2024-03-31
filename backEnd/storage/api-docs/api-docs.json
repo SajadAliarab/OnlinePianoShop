@@ -1108,6 +1108,40 @@
                 }
             }
         },
+        "/api/v1/color_show_by_name/{name}": {
+            "get": {
+                "tags": [
+                    "Product Details Api"
+                ],
+                "description": "use for get color by name",
+                "operationId": "6e27b86abc341709eababec0fc1bceca",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Color Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Color not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/slide_create": {
             "post": {
                 "tags": [

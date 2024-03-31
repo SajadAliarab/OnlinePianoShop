@@ -6,13 +6,13 @@
       <img src="/Piano-shop.svg" class="h-10" alt="Online-Piano-Shop">
       <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Piano Shop</span>
   </a>
-  <div class="flex md:order-2">
-    <TheSearch/>
-  </div>
-  <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <UButton v-if="!authenticated" color="primary" to="/auth/Login" class=" font-medium text-sm px-4 py-2 text-center">LogIn</UButton>     
-      <UButton v-if="authenticated" color="primary" to="/profile/" class="mx-4 font-medium text-sm px-4 py-2 text-center">{{ user.name}}</UButton>
-      <UButton v-if="authenticated" color="red" @click="logout" class=" font-medium text-sm px-4 py-2 text-center">Log Out</UButton>
+
+  <div class="flex md:order-2   rtl:space-x-reverse">
+    <UButton icon="i-heroicons-shopping-cart" color="primary" to="/cart" class="mx-4 font-medium text-sm px-4 py-2 text-center"></UButton>
+      <UButton v-if="!authenticated" color="primary" to="/auth/Login" class="mx-4 font-medium text-sm px-4 py-2  text-center">LogIn</UButton>     
+      <UButton v-if="authenticated" color="primary" to="/profile/" class="mx-4 font-medium text-sm px-4 py-2  text-center">{{ user.name}}</UButton>
+      <UButton v-if="authenticated" color="red" @click="logout" class="mx-4 font-medium text-sm px-4 py-2 text-center">Log Out</UButton>
+  
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
@@ -29,7 +29,19 @@
         inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
       </li>
       <li>
-        <UDropdown v-if="user.role==1" :items="items" mode="hover" :popper="{ placement: 'bottom-start' }">
+        <ULink 
+        to="/brands"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200">About Us</ULink>
+      </li>
+      <li>
+        <ULink 
+        to="/contact"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200">Contact</ULink>
+      </li>
+      <li >
+        <UDropdown v-if="user.role==1" class="bg-red-800" :items="items" mode="hover" :popper="{ placement: 'bottom-start' }">
           <ULink 
         active-class="text-primary"
         inactive-class="text-gray-400 hover:text-gray-200">Admin</ULink>
@@ -138,6 +150,7 @@ const logout = () => {
   const token = JSON.parse(data);
   logOutUser(token);
   localStorage.removeItem('auth-data');
+  localStorage.removeItem('cart');
   authenticated.value = false;
   user.value = {};
   router.push('/auth/Login');

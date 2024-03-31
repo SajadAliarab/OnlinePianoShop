@@ -200,7 +200,9 @@ const convertToStars = (rating: number) => {
     return '★'.repeat(roundedRating) + '☆'.repeat(5 - roundedRating);
 };
 const addQuantity = () => {
+    if(productData.value.stock > quantity.value){
     quantity.value++;
+    }
 };
 const minusQuantity = () => {
     if (quantity.value > 1) {
@@ -215,6 +217,9 @@ const continueShop = () => {
     
     if(selectedColor.value == ''){
         warning.value = 'Please Select Color';
+        return;
+    }else if(quantity.value > productData.value.stock){
+        warning.value = 'The quantity you selected is more than the available stock';
         return;
     }else{
         isOpen.value = false;
@@ -239,11 +244,15 @@ const continueShop = () => {
 }
 };
 const checkOut = () => {
-   
+       
     if(selectedColor.value == ''){
         warning.value = 'Please Select Color';
         return;
+    }else if(quantity.value > productData.value.stock){
+        warning.value = 'The quantity you selected is more than the available stock';
+        return;
     }else{
+
         isOpen.value = false;
         warning.value = '';
     let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');

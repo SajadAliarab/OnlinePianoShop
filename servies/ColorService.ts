@@ -37,6 +37,10 @@ export function showColorById(id:number){
   return $fetch(`http://localhost:8000/api/v1/color_show_by_id/${id}`);
 }
 
+export function showColorByName(name:string){
+  return $fetch(`http://localhost:8000/api/v1/color_show_by_name/${name}`);
+}
+
 
 
 

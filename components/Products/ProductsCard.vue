@@ -22,7 +22,7 @@
              
                     <UButton v-if="product.stock>0" color="primary" variants="solid" @click=openModal(product.id)>Add to Cart</UButton>
     
-                  <UModal v-model="isOpen" prevent-close :overlay="false">
+                  <UModal v-model="isOpen"  :overlay="false">
                     <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
 
                                     <template #header>
@@ -30,7 +30,6 @@
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
               Add to basket
             </h3>
-            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
           </div>
                                     </template>
 
@@ -44,9 +43,8 @@
                                             <span class="text-lg font-bold text-gray-300 mr-5">Quantity:</span>
                                             <div class="flex items-center">
                                                 <UButton icon="i-heroicons-plus" size="sm" color="primary" square
-                                                    variant="ghost" @click="addQuantity" />
-                                                <UInput type="text" size="sm"
-                                                    class="w-10 text-sm font-bold text-gray-300" v-model="quantity" />
+                                                    variant="ghost" @click="addQuantity(selectedProductStock)" />
+                                                <span class="text-lg font-bold text-gray-300">{{ quantity }}</span>
                                                 <UButton icon="i-heroicons-minus" size="sm" color="primary" square
                                                     variant="ghost" @click="minusQuantity" />
                                             </div>
@@ -76,12 +74,12 @@
                                     <template #footer>
                                         <div class="flex justify-between">
                                             <div>
-                                                <UButton color="primary" variant="solid" @click=continueShop(product.id)>
+                                                <UButton color="primary" variant="solid" @click=continueShop(selectedProductId,selectedProductStock)>
                                                     Continue Shopping
                                                 </UButton>
                                             </div>
                                             <div>
-                                                <UButton color="green" variant="solid" @click=checkOut(product.id)>
+                                                <UButton color="green" variant="solid" @click=checkOut(selectedProductId,selectedProductStock)>
                                                     Checkout
                                                 </UButton>
                                             </div>
@@ -118,7 +116,9 @@ const selectedProductBrand = ref('');
 const selectedProductCategory = ref('');
 const selectedProductTitle = ref('');
 const selectedProductColor:any = ref({});
+const selectedProductId = ref(0);
 const selectedColor = ref('');
+const selectedProductStock = ref(0);
 const warning = ref('');
 const router = useRouter();
 const quantity = ref(1);
@@ -146,6 +146,9 @@ const truncatedDescription =(description:string) =>{
 };
 const openModal = async (id:any) => {
     isOpen.value = true;
+    quantity.value = 1;
+    selectedColor.value = '';
+    selectedProductId.value=id;
     const selectedProduct:any = productData.value.find((product:any) => product.id === id);
 
         selectedProductTitle.value = selectedProduct.title;
@@ -157,25 +160,38 @@ const openModal = async (id:any) => {
         const colorPromises = selectedProduct.colors.map((colorId:any) => showColorById(colorId));
         const colorResults = await Promise.all(colorPromises);
         selectedProductColor.value = colorResults.map((color:any) => color.data[0]);
+
+        selectedProductStock.value = selectedProduct.stock;
+    
         
  
 };
-const addQuantity = () => {
+const addQuantity = (productStock:number) => {
+    isOpen.value = true;
+    console.log(productStock);
+    if(quantity.value < productStock){
     quantity.value++;
+    }
 };
 const minusQuantity = () => {
+    isOpen.value = true;
     if (quantity.value > 1) {
         quantity.value--;
     }
 };
 const selectColor = (color: string) => {
     selectedColor.value = color;
+    isOpen.value = true;
     warning.value = '';
 };
-const continueShop = (productid:number) => {
-
+const continueShop = (productid:number,productStock:number) => {
     if(selectedColor.value === '') {
         warning.value = 'Please select a color ';
+        isOpen.value = true;
+        return;
+    }else if(quantity.value > productStock){
+        warning.value = 'The quantity you selected is more than the available stock';
+        isOpen.value = true;    
         return;
     }else{
         warning.value = '';
@@ -197,13 +213,17 @@ const continueShop = (productid:number) => {
             color: selectedColor.value
         });
     }
-
-    localStorage.setItem('cart', JSON.stringify(existingCart));
+   localStorage.setItem('cart', JSON.stringify(existingCart));
 }
 };
-const checkOut = (productid:number) => {
+const checkOut = (productid:number,productStock:number) => {
     if(selectedColor.value === '') {
         warning.value = 'Please select a color ';
+        isOpen.value = true;
+        return;
+    }else if(quantity.value > productStock){
+        warning.value = 'The quantity you selected is more than the available stock';
+        isOpen.value = true;
         return;
     }else{
     isOpen.value = false;
@@ -223,7 +243,6 @@ const checkOut = (productid:number) => {
             color: selectedColor.value
         });
     }
-
     localStorage.setItem('cart', JSON.stringify(existingCart));
     router.push('/cart/');
 }
