@@ -9,21 +9,22 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderDetail;
 
-class PaymentController extends Controller
+class OrderController extends Controller
 {
     /**
      * @OA\Post(
-     *     path="/api/v1/payment",
-     *     summary="Process payment",
-     *     description="Process payment for the items in the request",
-     *     tags={"Payment"},
+     *     path="/api/v1/order_create",
+     *     summary="Order Add",
+     *     description="Process order for the items in the request",
+     *     tags={"Order"},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
      *            @OA\Property(property="userId", type="integer"),
      *             @OA\Property(property="items", type="array", @OA\Items(
-     *                 @OA\Property(property="product_id", type="integer"),
-     *                 @OA\Property(property="quantity", type="integer")
+     *                 @OA\Property(property="product", type="integer"),
+     *                 @OA\Property(property="quantity", type="integer"),
+     *                @OA\Property(property="color", type="string"),
      *             ))
      *         )
      *     ),
@@ -42,7 +43,8 @@ class PaymentController extends Controller
      *             @OA\Property(property="delivery_date", type="string", format="date-time"),
      *             @OA\Property(property="order_details", type="array", @OA\Items(
      *                 @OA\Property(property="order_id", type="integer"),
-     *                 @OA\Property(property="product_id", type="integer"),
+     *                 @OA\Property(property="product", type="integer"),
+     *                @OA\Property(property="color", type="string"),
      *                 @OA\Property(property="quantity", type="integer"),
      *                 @OA\Property(property="price", type="number"),
      *                 @OA\Property(property="discount", type="number"),
@@ -66,15 +68,15 @@ class PaymentController extends Controller
      * )
      */
 
-    public function payment(Request $request){
+    public function orderCreate(Request $request){
         $total_price =0;
 
        foreach($request->items as $item){
-       $product = Product::find($item['product_id']);
+       $product = Product::find($item['product']);
        if($product->discount == 0){
            $total_price += $product->price * $item['quantity'];
        } else{
-              $total_price += $product->price - ($product->price * $product->discount / 100) * $item['quantity'];
+              $total_price += ($product->price - $product->discount) * $item['quantity'];
        }
     }
     $order= Order::create([
@@ -89,14 +91,15 @@ class PaymentController extends Controller
 
     ]);
     foreach($request->items as $item){
-        $product = Product::find($item['product_id']);
+        $product = Product::find($item['product']);
         $orderdetail=OrderDetail::create([
             'order_id'=> $order->id,
-            'product_id'=> $item['product_id'],
+            'product'=> $item['product'],
+            'color'=> $item['color'],
             'quantity'=> $item['quantity'],
             'price'=> $product->price,
             'discount'=> $product->discount,
-            'total_price'=> $product->price * $item['quantity'],
+            'total_price'=> ($product->price-$product->discount) * $item['quantity'],
             'order_status'=> 'pending',
         ]);
     }

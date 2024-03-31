@@ -8,7 +8,10 @@
   </a>
 
   <div class="flex md:order-2   rtl:space-x-reverse">
-    <UButton icon="i-heroicons-shopping-cart" color="primary" to="/cart" class="mx-4 font-medium text-sm px-4 py-2 text-center"></UButton>
+    <UChip v-if="cartItem!=0" :text="cartItem" size="2xl">
+    <UButton icon="i-heroicons-shopping-cart" color="gray" to="/cart" class=" font-medium text-sm px-4 py-2 text-center"></UButton>
+    </UChip>
+    <UButton v-if="cartItem==0" icon="i-heroicons-shopping-cart" color="gray" to="/cart" class=" font-medium text-sm px-4 py-2 text-center"></UButton>
       <UButton v-if="!authenticated" color="primary" to="/auth/Login" class="mx-4 font-medium text-sm px-4 py-2  text-center">LogIn</UButton>     
       <UButton v-if="authenticated" color="primary" to="/profile/" class="mx-4 font-medium text-sm px-4 py-2  text-center">{{ user.name}}</UButton>
       <UButton v-if="authenticated" color="red" @click="logout" class="mx-4 font-medium text-sm px-4 py-2 text-center">Log Out</UButton>
@@ -30,7 +33,7 @@
       </li>
       <li>
         <ULink 
-        to="/brands"
+        to="/aboutUs"
         active-class="text-primary"
         inactive-class="text-gray-400 hover:text-gray-200">About Us</ULink>
       </li>
@@ -94,6 +97,7 @@ const router = useRouter();
  const authenticated = ref(false);
 const user:any = ref('');
 const userData:any=ref('');
+const cartItem = ref(0);
 
 const items = [[
     {
@@ -141,6 +145,7 @@ onMounted(()=>{checkAuthentication();});
 
 router.beforeEach(async (to, from, next) => {
   await checkAuthentication();
+  await cartData();
   next();
 });
 
@@ -155,6 +160,16 @@ const logout = () => {
   user.value = {};
   router.push('/auth/Login');
 };
+
+const cartData=()=>
+{
+  const data= localStorage.getItem('cart');
+  if(data){
+    const dataInfo= JSON.parse(data);
+    cartItem.value=dataInfo.length;
+  }
+}
+onMounted(()=>{cartData();});
 
 
 

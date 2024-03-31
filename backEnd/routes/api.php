@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\V1\FileController;
 use App\Http\Controllers\Api\V1\ProductDetailsController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\UserController;
-use App\Http\Controllers\Api\V1\PaymentController;
+use App\Http\Controllers\Api\V1\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -61,5 +61,5 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::delete('product_delete/{id}',[ProductController::class,'deleteProduct']);
     Route::get('product_show_by_slug/{slug}',[ProductController::class,'showProductBySlug']);
     Route::get('product_show_by_id/{id}',[ProductController::class,'showProductById']);
-    Route::post('payment',[PaymentController::class,'payment']);
+    Route::post('order_create',[OrderController::class,'orderCreate']);
 });

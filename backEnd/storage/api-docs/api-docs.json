@@ -207,14 +207,14 @@
                 }
             }
         },
-        "/api/v1/payment": {
+        "/api/v1/order_create": {
             "post": {
                 "tags": [
-                    "Payment"
+                    "Order"
                 ],
-                "summary": "Process payment",
-                "description": "Process payment for the items in the request",
-                "operationId": "25a5dd589a1b1d067212e9ad62f23061",
+                "summary": "Order Add",
+                "description": "Process order for the items in the request",
+                "operationId": "9099bd4234f84009d310fe121cded5cd",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -228,11 +228,14 @@
                                         "type": "array",
                                         "items": {
                                             "properties": {
-                                                "product_id": {
+                                                "product": {
                                                     "type": "integer"
                                                 },
                                                 "quantity": {
                                                     "type": "integer"
+                                                },
+                                                "color": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "type": "object"
@@ -287,8 +290,11 @@
                                                     "order_id": {
                                                         "type": "integer"
                                                     },
-                                                    "product_id": {
+                                                    "product": {
                                                         "type": "integer"
+                                                    },
+                                                    "color": {
+                                                        "type": "string"
                                                     },
                                                     "quantity": {
                                                         "type": "integer"

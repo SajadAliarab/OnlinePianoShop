@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { showProductById } from '~/servies/ProductService';
 import ThePriceFormaater from '../ThePriceFormmater.vue';
+import { getUserToken } from '~/servies/AuthService';
+import { createOrder } from '~/servies/OrderService';
 
 
 const columns = [
@@ -40,7 +42,10 @@ const columns = [
 
 const orderData:any = ref([]);
 const loading = ref(false);
-const selectedOrderData = ref({});
+const totalQuantity = ref(0);
+const totalPriceOrder = ref(0);
+const router = useRouter();
+
 const getItem = async () => {
     loading.value = true;
   const data= localStorage.getItem('cart');
@@ -53,7 +58,9 @@ const getItem = async () => {
             const productImage = "http://localhost:8000/uploads/"+productData.data.image;
             const productPrice = (productData.data.price-productData.data.discount);
             const quantity = item.quantity;
-            const totalPrice = productData.data.price * quantity;
+            const totalPrice = (productData.data.price-productData.data.discount) * quantity;
+            totalQuantity.value += quantity;
+            totalPriceOrder.value += totalPrice;
             orderData.value.push({
                 id: dataInfo.indexOf(item) + 1,
                 productId: item.product,
@@ -75,16 +82,18 @@ const getItem = async () => {
 onMounted(getItem);
 
 
-const deleteRow = (row: any) => {
+const deleteRow = (row: any,totalPrice:number,quantity:number) => {
       
-         // Find the index of the row with the given id in orderData
+        
     const index = orderData.value.findIndex((product: any) => product.id === row);
     
     if (index !== -1) {
-        // Remove the row from orderData
         orderData.value.splice(index, 1);
-
-        // Update local storage
+        totalQuantity.value -= quantity;
+        totalPriceOrder.value -= totalPrice;
+        if(orderData.value.length === 0){
+            localStorage.removeItem('cart');
+        }else{
         const updatedData = orderData.value.map((item: any) => ({
             product: item.productId,
             quantity: item.quantity,
@@ -92,8 +101,34 @@ const deleteRow = (row: any) => {
         }));
         localStorage.setItem('cart', JSON.stringify(updatedData));
     }
+
+    }
     
 
+}
+const checkOut = async() => {
+    const data:any= localStorage.getItem('cart');
+    const dataInfo= JSON.parse(data);
+    const token:any = localStorage.getItem('auth-data');
+    if(!token){
+        router.push('/auth/login');
+    }else{
+    const userToken=JSON.parse(token);
+    const userData:any = await getUserToken(userToken);
+    const userId = userData.data.user;
+    if(dataInfo){
+        try{
+        await createOrder(userId,dataInfo);
+        localStorage.removeItem('cart');
+        router.push('/cart/checkOut');
+        }catch(e){
+            console.log(e);
+        }
+    }else{
+        alert('Please add some items to cart');}
+ 
+}
+    
 }
 
 </script>
@@ -120,11 +155,18 @@ const deleteRow = (row: any) => {
       <span class="text-primary-500"> <ThePriceFormaater :price="row.totalPrice" /> </span>
     </template>
     <template #actions-data="{ row }">
-      <UButton  icon="i-heroicons-trash" size="sm" color="primary" square variant="solid" @click=deleteRow(row.id) />
+      <UButton  icon="i-heroicons-trash" size="sm" color="primary" square variant="solid" @click=deleteRow(row.id,row.totalPrice,row.quantity) />
     </template>
 
 
   </UTable>
-  </div>
+    </div>
+<div class="flex justify-center my-5">
+    <div class="flex justify-between w-1/2">
+    <span class="text-primary-100 font-extrabold">Total Items: {{ totalQuantity }}</span>
+    <span class="text-primary-100 font-extrabold">Total Price: <ThePriceFormaater :price="totalPriceOrder" /></span>
+    <UButton  color="green" class="mx-4 font-medium text-sm px-4 py-2  text-center" @click=checkOut>Checkout</UButton>
+    </div>
+</div>
 </template>
 

@@ -168,7 +168,6 @@ const openModal = async (id:any) => {
 };
 const addQuantity = (productStock:number) => {
     isOpen.value = true;
-    console.log(productStock);
     if(quantity.value < productStock){
     quantity.value++;
     }
