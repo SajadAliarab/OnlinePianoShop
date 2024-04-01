@@ -111,7 +111,7 @@
                             <span v-if="productData.discount > 0" class="text-lg font-bold text-red-700">Offer
                                 Price:</span>
                             <span v-if="productData.discount > 0" class="font-bold text-red-700">
-                                <ThePriceFormmater :price=productData.price - productData.discount />
+                                <ThePriceFormmater :price=(productData.price-productData.discount) />
                             </span>
                         </div>
                         <div>

@@ -333,6 +333,38 @@
                 }
             }
         },
+        "/api/v1/order_last_user/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get Order by ID",
+                "description": "Get order by ID",
+                "operationId": "d6ee4a2035d845bfa5ca9f32aa2156b5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of order to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                }
+            }
+        },
         "/api/v1/product_create": {
             "post": {
                 "tags": [

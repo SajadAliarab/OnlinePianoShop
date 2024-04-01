@@ -104,4 +104,47 @@ class OrderController extends Controller
         ]);
     }
 }
+
+/**
+ * @OA\Get(
+ *     path="/api/v1/order_last_user/{id}",
+ *     summary="Get Order by ID",
+ *     description="Get order by ID",
+ *     tags={"Order"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID of order to return",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *        response=200,
+ *       description="Order found",
+ *      @OA\MediaType(
+   *           mediaType="application/json",
+   *      )
+   *  ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Order not found"
+ *     )
+ * )
+ */
+public function getLastOrderByUser($id){
+    $order =Order::where('user_id', $id)->orderBy('id', 'desc')->first();
+    if($order){
+        return response()->json(['result'=>true,
+        'message' => 'Order found',
+        'data'=> $order
+      ], 200);
+    } else{
+        return response()->json(['result'=>false,
+        'message' => 'Order not found',
+      ], 404);
+    }
+
+}
 }
