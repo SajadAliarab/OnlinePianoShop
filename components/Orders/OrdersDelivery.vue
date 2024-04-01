@@ -48,20 +48,18 @@
                 </span>
                 <
                 <URadioGroup v-model="orderData.shipping_method" legend="Choose your prefer shipping:" :options="DeliveryMethod" />
-                </div>
+                
 
-                <p v-if="orderData.delivery_date" class=" font-bold text-primary-100 m-5">Perefer Date for Delivery or click and Collect.( After {{format(new Date(orderData.delivery_date), 'd MMM, yyy')  }})</p>
+                <p  class=" font-bold text-primary-100 m-5">Perefer Date for Delivery or click and Collect.</p>
                 <UPopover v-if="orderData.delivery_date" >
     <UButton icon="i-heroicons-calendar-days-20-solid" :label="format(new Date(orderData.delivery_date), 'd MMM, yyy')" />
     <template #panel="{ close }">
-        <VCalendarDatePicker  v-model="orderData.delivery_date" />
+        <VCalendarDatePicker is-dark="true" v-model.string="orderData.delivery_date" :masks="masks" />
     </template>
   </UPopover>
+</div>
 
    
-
-    {{ userData }}
-    {{ orderData }}
     </div>
 </template>
 <script setup lang="ts">
@@ -72,6 +70,8 @@ import { ref, watch } from 'vue';
 import type { UsersModel } from '~/models/UsersModel';
 import {  format } from 'date-fns';
 import { DatePicker as VCalendarDatePicker } from 'v-calendar'
+import 'v-calendar/style.css';
+
 
 
 const userData: UsersModel = reactive({
@@ -99,6 +99,9 @@ const selected: any = ref('');
 const isOpen = ref(false);
 const addresses = ref();
 const loadingBtn = ref(false);
+const masks = ref({
+  modelValue: 'YYYY-MM-DD',
+});
 
 const getData = async () => {
 const token:any = localStorage.getItem('auth-data');
