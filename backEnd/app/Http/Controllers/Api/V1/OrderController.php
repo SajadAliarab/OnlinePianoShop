@@ -147,4 +147,61 @@ public function getLastOrderByUser($id){
     }
 
 }
+
+/**
+ * @OA\Put(
+ *     path="/api/v1/order_update/{id}",
+ *     summary="Update Order",
+ *     description="Update order by ID",
+ *     tags={"Order"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID of order to update",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer"
+ *         )
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *            @OA\Property(property="total_price", type="number"),
+ *             @OA\Property(property="delivery_code", type="integer"),
+ *             @OA\Property(property="payment_status", type="string"),
+ *             @OA\Property(property="transaction_id", type="string"),
+ *             @OA\Property(property="shipping_method", type="string"),
+ *             @OA\Property(property="user_id", type="integer"),
+ *             @OA\Property(property="order_date", type="string", format="date-time"),
+ *             @OA\Property(property="delivery_date", type="string", format="date-time")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Order updated",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="result", type="boolean"),
+ *             @OA\Property(property="message", type="string")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Order not found"
+ *     )
+ * )
+ */
+
+public function updateOrder(Request $request, $id){
+    $order = Order::find($id);#
+    if(!$order){
+        return response()->json(['result'=>false,
+        'message' => 'Order not found',
+      ], 404);
+    }else{
+    $order->update($request->all());
+    return response()->json(['result'=>true,
+    'message' => 'Order updated'],200);
+    }
+
+}
 }
