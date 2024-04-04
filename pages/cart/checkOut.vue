@@ -4,12 +4,12 @@ const items = [{
   label: 'Delivery',
   icon: 'i-heroicons-truck',
   slot: 'Delivery',
-  defaultOpen:(deliveryComplete)? true : false
+  defaultOpen:true
 }, {
   label: 'Payment',
   icon: 'i-heroicons-credit-card',
   slot: 'Payment',
-  defaultOpen:(!deliveryComplete)? true : false
+  defaultOpen:true
 }]
 
 </script>

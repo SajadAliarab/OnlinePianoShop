@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { deleteColor, showColor } from '~/servies/ColorService';
-import { deleteFile } from '~/servies/UploadFileService';
+import { deleteColor, showColor } from '~/services/ColorService';
+import { deleteFile } from '~/services/UploadFileService';
 import ColorsAdd from './ColorsAdd.vue';
 
 

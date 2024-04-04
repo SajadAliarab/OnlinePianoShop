@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { deleteProduct, showProduct } from '~/servies/ProductService';
-import { deleteFile } from '~/servies/UploadFileService';
+import { deleteProduct, showProduct } from '~/services/ProductService';
+import { deleteFile } from '~/services/UploadFileService';
 import ProductsAdd from './ProductsAdd.vue';
 import ThePriceFormaater from '../ThePriceFormmater.vue';
 

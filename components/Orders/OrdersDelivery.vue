@@ -1,6 +1,7 @@
 <template>
-    <div>
-        
+     <UProgress v-if="loading" animation="carousel" />
+     <USkeleton v-if="loading" class="h-[460px] w-screen"/> 
+ <div v-if="!loading">    
 <div class="flex flex-col items-center">
     <h1 class="font-bold text-primary-100">Orders Delivery</h1>
     <span  class="text-center mt-3" v-if="phone">Phone:{{ userData.phone }}
@@ -58,25 +59,23 @@
     </template>
   </UPopover>
 
-                <UButton   variant="solid" icon="i-heroicons-check-circle" size="lg" color="primary" class="mt-5" square @click="orderUpdate" :loading="loadingBtn">Complete Order</UButton>
+                <UButton  variant="solid" icon="i-heroicons-check-circle" size="lg" color="primary" class="mt-5" square @click="orderUpdate" :loading="loadingBtn">Complete Order</UButton>
 
                 <p v-if="warning[0]" class="text-red-800 m-5">{{ warning[1] }}</p>
                 <p v-else-if="!warning[0]" class="text-green-800 m-5">{{ warning[1] }}</p>
-</div>
-
- 
-    </div>
+</div>    
+</div>  
 </template>
 <script setup lang="ts">
-import { getUserData, getUserToken } from '~/servies/AuthService';
-import { getOrderListLast, updateOrder } from '~/servies/OrderService';
+import { getUserData, getUserToken } from '~/services/AuthService';
+import { getOrderListLast, updateOrder } from '~/services/OrderService';
 import { Country } from '~/enums/country.enum';
 import { ref, watch } from 'vue';
 import type { UsersModel } from '~/models/UsersModel';
 import { DatePicker as VCalendarDatePicker } from 'v-calendar'
 import 'v-calendar/style.css';
 import { addDays, format } from 'date-fns';
-import { updateUser } from '~/servies/UserService';
+import { updateUser } from '~/services/UserService';
 
 
 
@@ -110,6 +109,7 @@ const userAddress = ref('');
 const loadingBtn = ref(false);
 const date= ref('');
 const warning = ref<[boolean, string]>([false, '']);
+const loading = ref(false);
 const  emit  = defineEmits(['deliveryComplete']);
 const masks = ref({
   modelValue: 'YYYY-MM-DD',
@@ -119,6 +119,7 @@ const disabledDates = ref([
 ]);
 
 const getData = async () => {
+loading.value = true;
 const token:any = localStorage.getItem('auth-data');
 const tokenData = JSON.parse(token);
 const userByToken:any = await getUserToken(tokenData);
@@ -136,6 +137,7 @@ orderData.value = order.data;
 date.value = order.data.delivery_date;
 phone.value = user.data.phone;
 userAddress.value = user.data.address;
+loading.value = false;
 };
 
 const checkPostCode = async () => {

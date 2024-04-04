@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { deleteCategory, showCategory } from '~/servies/CategoryService';
+import { deleteCategory, showCategory } from '~/services/CategoryService';
 import CategoriesAdd from './CategoriesAdd.vue';
 
 
@@ -78,4 +78,3 @@ const items = (row: any) => [
   </UTable>
   </div>
 </template>
-

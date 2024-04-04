@@ -107,10 +107,10 @@
 </template>
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import { showBrandById } from '~/servies/BrandService';
-import { showCategoryById } from '~/servies/CategoryService';
-import { showProduct } from '~/servies/ProductService';
-import { showColorById } from '~/servies/ColorService';
+import { showBrandById } from '~/services/BrandService';
+import { showCategoryById } from '~/services/CategoryService';
+import { showProduct } from '~/services/ProductService';
+import { showColorById } from '~/services/ColorService';
 const productData:any = ref([]);
 const selectedProductBrand = ref('');
 const selectedProductCategory = ref('');

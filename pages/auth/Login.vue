@@ -32,7 +32,7 @@
 </template>
 <script setup lang="ts">
 import { object, string, } from 'yup';
-import { LoginUser } from '~/servies/AuthService';
+import { LoginUser } from '~/services/AuthService';
 
 const router = useRouter();
 const schemaUser = object({

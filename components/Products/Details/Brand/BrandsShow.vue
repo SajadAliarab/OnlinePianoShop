@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { deleteBrand, showBrand } from '~/servies/BrandService';
-import { deleteFile } from '~/servies/UploadFileService';
+import { deleteBrand, showBrand } from '~/services/BrandService';
+import { deleteFile } from '~/services/UploadFileService';
 import BrandsAdd from './BrandsAdd.vue';
 
 

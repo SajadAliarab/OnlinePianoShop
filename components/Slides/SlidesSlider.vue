@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { showSlide } from '~/servies/SlideService';
+import { showSlide } from '~/services/SlideService';
 
 
 const slideData:any = ref([]);

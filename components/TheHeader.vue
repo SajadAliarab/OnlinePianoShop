@@ -78,6 +78,12 @@
           active-class="text-primary"
           inactive-class="text-gray-400 hover:text-gray-200">Slides</ULink>
           </template>
+          <template #users>
+          <ULink
+          to="/admin/users"
+          active-class="text-primary"
+          inactive-class="text-gray-400 hover:text-gray-200">Users</ULink>
+          </template>
       
   </UDropdown>
             
@@ -91,7 +97,7 @@
 </template>
 <script setup lang="ts">
 import type { ULink } from '#build/components';
-import { getUserData, logOutUser, getUserToken } from '~/servies/AuthService';
+import { getUserData, logOutUser, getUserToken } from '~/services/AuthService';
 
 const router = useRouter();
  const authenticated = ref(false);
@@ -119,7 +125,9 @@ const items = [[
     {
       label: 'Slides',
       slot:"slides"
-    }
+    },{
+      label: 'Users',
+      slot:"users"}
 
   ]]
 const checkAuthentication = async () => {

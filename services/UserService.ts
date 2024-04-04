@@ -35,3 +35,8 @@ export function updateUser(id:number,userData:UsersModel){
             method: 'DELETE',
           });
   }
+  export function getUsers(){
+    return $fetch(`http://localhost:8000/api/v1/users_show`, {
+            method: 'GET',
+          });
+  }

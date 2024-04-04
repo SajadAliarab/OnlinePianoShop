@@ -207,4 +207,34 @@ public  function updateUser(Request $request, $id)
         'message' => 'User updated successfully'
     ], 200);
   }
+
+/** @OA\Get(
+   ** path="/api/v1/users_show",
+   *  tags={"User Api"},
+   *  description="use for get all user data",
+   *   @OA\Response(
+   *      response=200,
+   *      description="Its Ok",
+   *      @OA\MediaType(
+   *           mediaType="application/json",
+   *      )
+   *   )
+   *)
+   **/
+  public function getUsers()
+  {
+    $users = User::query()->get();
+    if($users){
+    return response()->json([
+      'result' => true,
+      'message' => 'User data',
+      'data' => $users
+    ], 200);
+  }else{
+    return response()->json([
+      'result' => false,
+      'message' => 'No data found'
+    ], 404);
+  }
+}
 }

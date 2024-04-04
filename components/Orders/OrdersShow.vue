@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { showProductById } from '~/servies/ProductService';
+import { showProductById } from '~/services/ProductService';
 import ThePriceFormaater from '../ThePriceFormmater.vue';
-import { getUserToken } from '~/servies/AuthService';
-import { createOrder } from '~/servies/OrderService';
+import { getUserToken } from '~/services/AuthService';
+import { createOrder } from '~/services/OrderService';
 
 
 const columns = [

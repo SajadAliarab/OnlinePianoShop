@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { deleteSlide, showSlide } from '~/servies/SlideService';
-import { deleteFile } from '~/servies/UploadFileService';
+import { deleteSlide, showSlide } from '~/services/SlideService';
+import { deleteFile } from '~/services/UploadFileService';
 
 
 
@@ -100,4 +100,3 @@ const items = (row: any) => [
   </UTable>
   </div>
 </template>
-

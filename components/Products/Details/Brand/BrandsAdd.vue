@@ -21,9 +21,9 @@
     </template>
     <script setup lang="ts">
     import { object, string } from 'yup';
-    import { createBrand, updateBrand } from '~/servies/BrandService';
+    import { createBrand, updateBrand } from '~/services/BrandService';
     import type { BrandsModel } from "~/models/BrandsModel";
-    import { insertFile} from '~/servies/UploadFileService';
+    import { insertFile} from '~/services/UploadFileService';
     const props = defineProps<{
       editMode: boolean;
       brandData: any;

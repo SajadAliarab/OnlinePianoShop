@@ -45,7 +45,7 @@
 </template>
 <script setup lang="ts" >
 import * as yup from 'yup';
-import { RegisterUser } from '~/servies/AuthService';
+import { RegisterUser } from '~/services/AuthService';
 const router = useRouter();
 const userSchema = yup.object({
   name: yup.string().required('Required!'),

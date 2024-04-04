@@ -1,4 +1,4 @@
-import { getUserToken } from "~/servies/AuthService";
+import { getUserToken } from "~/services/AuthService";
 
 export default defineNuxtRouteMiddleware(async(to,from)=>{
     if(to.path.startsWith('/admin')){

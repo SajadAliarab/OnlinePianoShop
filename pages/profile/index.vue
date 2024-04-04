@@ -9,8 +9,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { getUserToken } from '~/servies/AuthService';
-import { deleteUser } from '~/servies/UserService';
+import { getUserToken } from '~/services/AuthService';
+import { deleteUser } from '~/services/UserService';
 
 const router = useRouter();
 const DeleteUser = async () => {

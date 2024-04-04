@@ -159,9 +159,9 @@
 
 </template>
 <script setup lang="ts">
-import { showBrandById } from '~/servies/BrandService';
-import { showCategoryById } from '~/servies/CategoryService';
-import { showProductBySlug } from '~/servies/ProductService';
+import { showBrandById } from '~/services/BrandService';
+import { showCategoryById } from '~/services/CategoryService';
+import { showProductBySlug } from '~/services/ProductService';
 
 const route: any = useRoute();
 const router: any = useRouter();

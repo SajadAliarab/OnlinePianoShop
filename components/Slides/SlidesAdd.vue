@@ -26,9 +26,9 @@
 </template>
 <script setup lang="ts">
 import { object, string } from 'yup';
-import { createSlide, updateSlide } from '~/servies/SlideService';
+import { createSlide, updateSlide } from '~/services/SlideService';
 import type { SlidesModel } from "~/models/SlidesModel";
-import { insertFile} from '~/servies/UploadFileService';
+import { insertFile} from '~/services/UploadFileService';
 const props = defineProps<{
   editMode: boolean;
   slideData: any;

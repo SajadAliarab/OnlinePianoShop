@@ -33,6 +33,7 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::put('change_password/{id}',[UserController::class,'changePassword']);
     Route::delete('user_delete/{id}',[UserController::class,'deleteUser']);
     Route::put('user_update/{id}',[UserController::class,'updateUser']);
+    Route::get('users_show',[UserController::class,'getUsers']);
     Route::post('upload_file',[FileController::class,'upload']);
     Route::delete('delete_file/{fileName}',[FileController::class,'deleteFile']);
     Route::post('slide_create',[SlideController::class,'create']);

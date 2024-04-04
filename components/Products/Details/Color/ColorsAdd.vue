@@ -21,9 +21,9 @@
     </template>
     <script setup lang="ts">
     import { object, string } from 'yup';
-    import { createColor, updateColor } from '~/servies/ColorService';
+    import { createColor, updateColor } from '~/services/ColorService';
     import type { ColorsModel } from "~/models/ColorsModel";
-    import { insertFile} from '~/servies/UploadFileService';
+    import { insertFile} from '~/services/UploadFileService';
     const props = defineProps<{
       editMode: boolean;
       colorData: any;

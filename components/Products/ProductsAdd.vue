@@ -61,11 +61,11 @@
 <script setup lang="ts">
 import { number, object, string } from 'yup';
 import type { ProductsModel } from '~/models/ProductsModel';
-import { showBrand } from '~/servies/BrandService';
-import { showCategory } from '~/servies/CategoryService';
-import { showColor } from '~/servies/ColorService';
-import { createProduct , updateProduct } from '~/servies/ProductService';
-import { insertFile } from '~/servies/UploadFileService';   
+import { showBrand } from '~/services/BrandService';
+import { showCategory } from '~/services/CategoryService';
+import { showColor } from '~/services/ColorService';
+import { createProduct , updateProduct } from '~/services/ProductService';
+import { insertFile } from '~/services/UploadFileService';   
 const props = defineProps<{
       editMode: boolean;
       productData: any;

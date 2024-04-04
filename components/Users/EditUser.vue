@@ -70,9 +70,9 @@
 import { ref, watch } from 'vue';
 import { object, string } from 'yup';
 import type { UsersModel } from '~/models/UsersModel';
-import { getUserData, getUserToken } from '~/servies/AuthService';
+import { getUserData, getUserToken } from '~/services/AuthService';
 import { Country } from '~/enums/country.enum';
-import { updateUser, changePassword } from '~/servies/UserService';
+import { updateUser, changePassword } from '~/services/UserService';
 
 const countries = Object.values(Country);
 const addresses = ref();
