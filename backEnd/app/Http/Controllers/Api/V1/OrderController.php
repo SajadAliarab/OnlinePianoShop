@@ -204,4 +204,41 @@ public function updateOrder(Request $request, $id){
     }
 
 }
+
+
+/**
+ * @OA\Get(
+ *     path="/api/v1/order_show",
+ *     summary="Get Orders",
+ *     description="Get all orders",
+ *     tags={"Order"},
+ *     @OA\Response(
+ *        response=200,
+ *       description="Orders found",
+ *      @OA\MediaType(
+   *           mediaType="application/json",
+   *      )
+   *  ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Orders not found"
+ *     )
+ * )
+ */
+public function showOrder(){
+    $orders = Order::with('orderDetails')->get();
+
+    if ($orders->isNotEmpty()) {
+        return response()->json([
+            'result' => true,
+            'message' => 'Orders found',
+            'data' => $orders
+        ], 200);
+    } else {
+        return response()->json([
+            'result' => false,
+            'message' => 'Orders not found'
+        ], 404);
+    }
+}
 }

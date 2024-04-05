@@ -84,6 +84,12 @@
           active-class="text-primary"
           inactive-class="text-gray-400 hover:text-gray-200">Users</ULink>
           </template>
+          <template #orders>
+          <ULink
+          to="/admin/orders"
+          active-class="text-primary"
+          inactive-class="text-gray-400 hover:text-gray-200">Orders</ULink>
+          </template>
       
   </UDropdown>
             
@@ -127,7 +133,11 @@ const items = [[
       slot:"slides"
     },{
       label: 'Users',
-      slot:"users"}
+      slot:"users"
+    },{
+      label: 'Orders',
+      slot:"orders"
+    }
 
   ]]
 const checkAuthentication = async () => {

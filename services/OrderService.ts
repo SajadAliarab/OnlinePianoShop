@@ -38,3 +38,12 @@ export function updateOrder(orderData:OrdersModel,orderId:number) {
 }
    );
 }
+
+export function getOrdeList(){
+    return $fetch('http://localhost:8000/api/v1/order_show', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+}

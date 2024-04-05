@@ -24,9 +24,11 @@
   "dependencies": {
     "@nuxt/ui": "^2.13.0",
     "@pinia/nuxt": "^0.5.1",
+    "@stripe/stripe-js": "^3.2.0",
     "aws-amplify": "^6.0.18",
     "date-fns": "^2.30.0",
     "pinia": "^2.1.7",
+    "stripe": "^14.24.0",
     "v-calendar": "^3.1.2",
     "vee-validate": "^4.12.5",
     "vue3-carousel": "^0.3.1",

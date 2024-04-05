@@ -65,4 +65,5 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::post('order_create',[OrderController::class,'orderCreate']);
     Route::get('order_last_user/{id}',[OrderController::class,'getLastOrderByUser']);
     Route::put('order_update/{id}',[OrderController::class,'updateOrder']);
+    Route::get('order_show',[OrderController::class,'showOrder']);
 });

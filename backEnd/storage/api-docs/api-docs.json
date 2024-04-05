@@ -447,6 +447,27 @@
                 }
             }
         },
+        "/api/v1/order_show": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get Orders",
+                "description": "Get all orders",
+                "operationId": "b12c47d64196eedc643f4d82ff4ccd6b",
+                "responses": {
+                    "200": {
+                        "description": "Orders found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Orders not found"
+                    }
+                }
+            }
+        },
         "/api/v1/product_create": {
             "post": {
                 "tags": [
