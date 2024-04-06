@@ -2,11 +2,11 @@
     <div class="flex flex-col items-center">
         <div class="w-screen my-5">
             <div class="flex justify-center px-3 py-3.5 border-gray-700">
-                <UInput v-model="search" placeholder="Filter users..." />
+                <UInput v-model="search" placeholder="Filter orders..." />
             </div>
         </div>
         <div class=" justify-center w-screen">
-            <UTable :loading="loading" :rows="(search) ? filteredRows : rows" :columns="columns"
+            <UTable  :loading="loading" :rows="(search) ? filteredRows : rows" :columns="columns"
                 class=" border rounded-lg bg-gray-900 w-screen">
                 <template #order_date-data="{ row }">
                     <span>{{ format(new Date(row.order_date), 'dd MMM, yyy') }}</span>
@@ -15,6 +15,10 @@
                     <span>
                         <ThePriceFormmater :price="row.total_price" />
                     </span>
+                </template>
+                <template #payment_status-data="{ row }">
+                    <span v-if="row.payment_status == 'paid'" class="text-green-700">{{row.payment_status}}</span>
+                    <span v-else class="text-red-700">{{row.payment_status}}</span>
                 </template>
                 <template #shipping_method-data="{ row }">
                     <span v-if="row.shipping_method == 0">Delivery</span>
@@ -42,17 +46,11 @@
                     <span>{{ format(new Date(row.delivery_date), 'dd MMM, yyy') }}</span>
                 </template>
 
-                <!-- <template #role-data="{row}">
-       <span>{{(row.role==1)?'Admin':'Client'}}</span>
-     </template>
-     <template #created_at-data="{row}">
-       <span>{{format(new Date(row.created_at), 'd MMM, yyy')}}</span>
-     </template>
      <template #actions-data="{ row }">
-       <UDropdown :items="items(row)">
-         <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
-       </UDropdown>
-     </template> -->
+        <RouterLink :to="'/admin/orderDetail/' + row.id">
+            <UButton size="2xs" icon="i-heroicons-queue-list"> Details </UButton>
+        </RouterLink>
+     </template>
             </UTable>
         </div>
         <div class="w-full mt-5">
@@ -66,7 +64,7 @@
 import { getOrdeList } from '~/services/OrderService';
 import { format } from 'date-fns';
 import { getUsers } from '~/services/UserService';
-
+import { RouterLink } from 'vue-router';
 
 const columns = [
     {
@@ -120,11 +118,13 @@ const page = ref(1);
 const pageCount = 10;
 const loading = ref(false);
 const users: any = ref([]);
+
 const getItems = async () => {
     try {
         loading.value = true;
         const data: any = await getOrdeList();
         orders.value = data.data;
+        orders.value.sort((a:any, b:any) => b.id - a.id);
     } catch (err) {
         console.log(err);
     }
@@ -166,35 +166,6 @@ const getuserPhone=(id:any)=>{
     const user=users.value.find((user:any)=>user.id==id);
     return user.phone;
 }
-//  const items = (row: any) => [
-//    [
-//      {
-//        label: 'Change Role',
-//        icon: 'i-heroicons-user-circle-20-solid',
-//        click:async () => {
-//          if(row.role=='1'){
-//            row.role='0';
-//            const test = {...row};
-//            await updateUser(row.id,test);
-//            getItems();
-//        }else{
-//            row.role='1';
-//            const test = {...row};
-//            await updateUser(row.id,test);
-//            getItems();
-//        }
-//        }
-//      },
-//      {
-//        label: 'Delete',
-//        icon: 'i-heroicons-trash-20-solid',
-//        click:async() => {
-//          await deleteUser(row.id);
-//          getItems();
-//        }
-//      }
-//    ]
-//  ];
 
 const rows = computed(() => {
     return orders.value.slice((page.value - 1) * pageCount, (page.value) * pageCount)

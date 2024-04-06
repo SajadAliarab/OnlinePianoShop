@@ -468,6 +468,118 @@
                 }
             }
         },
+        "/api/v1/order_details/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get Order Details",
+                "description": "Get order details by order ID",
+                "operationId": "613b5355ec99cf5f058f2377837f4f12",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of order to return details",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order details found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Order details not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/order_detail_update/{id}": {
+            "put": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Update Order Detail",
+                "description": "Update order detail by ID",
+                "operationId": "a7576d695d8b956fb5ce04e7582cdeba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of order detail to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "order_id": {
+                                        "type": "integer"
+                                    },
+                                    "product": {
+                                        "type": "integer"
+                                    },
+                                    "color": {
+                                        "type": "string"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "discount": {
+                                        "type": "number"
+                                    },
+                                    "total_price": {
+                                        "type": "number"
+                                    },
+                                    "order_status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Order detail updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order detail not found"
+                    }
+                }
+            }
+        },
         "/api/v1/product_create": {
             "post": {
                 "tags": [

@@ -76,7 +76,7 @@ class OrderController extends Controller
        if($product->discount == 0){
            $total_price += $product->price * $item['quantity'];
        } else{
-              $total_price += ($product->price - $product->discount) * $item['quantity'];
+              $total_price += ($product->price-$product->discount) * $item['quantity'];
        }
     }
     $order= Order::create([
@@ -99,7 +99,7 @@ class OrderController extends Controller
             'quantity'=> $item['quantity'],
             'price'=> $product->price,
             'discount'=> $product->discount,
-            'total_price'=> ($product->price-$product->discount) * $item['quantity'],
+            'total_price'=> ($product->price-$product->discount)*$item['quantity'],
             'order_status'=> 'pending',
         ]);
     }
@@ -239,6 +239,106 @@ public function showOrder(){
             'result' => false,
             'message' => 'Orders not found'
         ], 404);
+    }
+}
+
+/**
+ * @OA\Get(
+ *     path="/api/v1/order_details/{id}",
+ *     summary="Get Order Details",
+ *     description="Get order details by order ID",
+ *     tags={"Order"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID of order to return details",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *        response=200,
+ *       description="Order details found",
+ *      @OA\MediaType(
+   *           mediaType="application/json",
+   *      )
+   *  ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Order details not found"
+ *     )
+ * )
+ */
+
+public function getOrderDetails($id){
+   $orderdetails = OrderDetail::where('order_id', $id)->get();
+    if($orderdetails->isNotEmpty()){
+         return response()->json([
+              'result' => true,
+              'message' => 'Order details found',
+              'data' => $orderdetails
+         ], 200);
+    } else{
+         return response()->json([
+              'result' => false,
+              'message' => 'Order details not found'
+         ], 404);
+    }
+}
+
+/**
+ * @OA\Put(
+ *     path="/api/v1/order_detail_update/{id}",
+ *     summary="Update Order Detail",
+ *     description="Update order detail by ID",
+ *     tags={"Order"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID of order detail to update",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer"
+ *         )
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *            @OA\Property(property="order_id", type="integer"),
+ *             @OA\Property(property="product", type="integer"),
+ *             @OA\Property(property="color", type="string"),
+ *             @OA\Property(property="quantity", type="integer"),
+ *             @OA\Property(property="price", type="number"),
+ *             @OA\Property(property="discount", type="number"),
+ *             @OA\Property(property="total_price", type="number"),
+ *             @OA\Property(property="order_status", type="string")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Order detail updated",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="result", type="boolean"),
+ *             @OA\Property(property="message", type="string")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Order detail not found"
+ *     )
+ * )
+ */
+public function updateOrderDetail(Request $request, $id){
+    $orderdetail = OrderDetail::find($id);
+    if(!$orderdetail){
+        return response()->json(['result'=>false,
+        'message' => 'Order detail not found',
+      ], 404);
+    }else{
+    $orderdetail->update($request->all());
+    return response()->json(['result'=>true,
+    'message' => 'Order detail updated'],200);
     }
 }
 }

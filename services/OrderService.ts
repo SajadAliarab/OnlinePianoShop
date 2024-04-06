@@ -47,3 +47,24 @@ export function getOrdeList(){
         }
     });
 }
+
+export function getOrderDetail(orderId:number){
+    return $fetch(`http://localhost:8000/api/v1/order_details/${orderId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+}
+
+export function updateOrderStatus(orderId:number,status:string){
+    return $fetch(`http://localhost:8000/api/v1/order_detail_update/${orderId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: {
+            order_status:status
+        }
+    });
+}
