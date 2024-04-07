@@ -1742,6 +1742,140 @@
                     }
                 }
             }
+        },
+        "/api/v1/payment": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Create a new payment",
+                "operationId": "44472dc218d6766a42d217b87c4c4c14",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "type": "integer",
+                                        "example": 1000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Payment created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "pi_1J2K3K4L5M6N7O8P9Q0R"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "payment_intent"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "succeeded"
+                                        },
+                                        "amount": {
+                                            "type": "integer",
+                                            "example": 1000
+                                        },
+                                        "currency": {
+                                            "type": "string",
+                                            "example": "gbp"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Payment not created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Payment Not Created"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/payment_confirm": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Confirm a payment",
+                "operationId": "3cef79d64c2421e752cf7d1d849d59f7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "payment_intent_id": {
+                                        "type": "string",
+                                        "example": "pi_1J2K3K4L5M6N7O8P9Q0R"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Payment confirmed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Payment confirmed successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Payment not confirmed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Payment Not Confirmed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

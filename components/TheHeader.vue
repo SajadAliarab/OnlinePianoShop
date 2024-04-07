@@ -94,7 +94,7 @@
   </UDropdown>
             
              
-          </li>
+</li>
     </ul>
   </div>
   
@@ -160,10 +160,20 @@ onMounted(()=>{checkAuthentication();});
 
 //   checkAuthentication();
 // });
-
+const cartData=()=>
+{
+  const data= localStorage.getItem('cart');
+  if(data){
+    const dataInfo= JSON.parse(data);
+    cartItem.value=dataInfo.length;
+  }else{
+    cartItem.value=0;
+  }
+}
+onMounted(()=>{cartData();});
 router.beforeEach(async (to, from, next) => {
   await checkAuthentication();
-  await cartData();
+  cartData();
   next();
 });
 
@@ -179,15 +189,7 @@ const logout = () => {
   router.push('/auth/Login');
 };
 
-const cartData=()=>
-{
-  const data= localStorage.getItem('cart');
-  if(data){
-    const dataInfo= JSON.parse(data);
-    cartItem.value=dataInfo.length;
-  }
-}
-onMounted(()=>{cartData();});
+
 
 
 

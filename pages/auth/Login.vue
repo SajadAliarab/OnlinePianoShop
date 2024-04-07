@@ -55,9 +55,12 @@ const logIn = async () => {
   const result:any=await LoginUser(userData.email,userData.password);
  
  localStorage.setItem('auth-data',JSON.stringify(result.data));
- router.push('/').then(() => {
- // window.location.reload();
-});
+ const cartData:any= localStorage.getItem('cart');
+  if(cartData){
+    router.push('/cart');
+  }else{
+ router.push('/');
+  }
   } catch (err: any) {
     warning.value = "Your Email or Password is not Authorization";
 

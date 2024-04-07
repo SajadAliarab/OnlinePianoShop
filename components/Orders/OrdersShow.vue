@@ -116,10 +116,10 @@ const checkOut = async() => {
     const userToken=JSON.parse(token);
     const userData:any = await getUserToken(userToken);
     const userId = userData.data.user;
-    if(dataInfo){
+    if(data){
         try{
         await createOrder(userId,dataInfo);
-        localStorage.removeItem('cart');
+        // localStorage.removeItem('cart');
         router.push('/cart/checkOut');
         }catch(e){
             console.log(e);

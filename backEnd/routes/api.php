@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\ProductDetailsController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\OrderController;
+use App\Http\Controllers\Api\V1\paymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -68,4 +69,6 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::get('order_show',[OrderController::class,'showOrder']);
     Route::get('order_details/{id}',[OrderController::class,'getOrderDetails']);
     Route::put('order_detail_update/{id}',[OrderController::class,'updateOrderDetail']);
+    Route::post('payment',[paymentController::class,'createPayment']);
+    Route::post('payment_confirm',[paymentController::class,'confirmPayment']);
 });

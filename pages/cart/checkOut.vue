@@ -22,8 +22,8 @@ const items = [{
     <template v-if="!deliveryComplete"  #Delivery>
      <OrdersDelivery  @deliveryComplete="deliveryComplete=true" />
     </template>
-    <template v-if="deliveryComplete" #Payment>
+    <template v-if="deliveryComplete" #Payment> 
       <OrdersPayment />
-    </template>
+     </template>
   </UAccordion>
 </template>
