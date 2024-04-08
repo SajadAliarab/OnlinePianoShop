@@ -21,8 +21,10 @@
                     <span v-else class="text-red-700">{{row.payment_status}}</span>
                 </template>
                 <template #shipping_method-data="{ row }">
-                    <span v-if="row.shipping_method == 0">Delivery</span>
-                    <span v-if="row.shipping_method == 1">Click and Collect</span>
+                    <span v-if="row.shipping_method == 1">Delivery</span>
+                    <span v-else-if="row.shipping_method == 2">Click and Collect</span>
+                    <span v-else> Not Choosen</span>
+
                 </template>
                 <template #user_id-data="{ row }">
                     <span>{{getuserName(row.user_id) }}</span>

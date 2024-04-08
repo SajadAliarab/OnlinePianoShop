@@ -580,6 +580,38 @@
                 }
             }
         },
+        "/api/v1/order_user/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get Order by User",
+                "description": "Get order by user ID",
+                "operationId": "6335f7b1a7c122a39c1d263a90c2d4e3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of user to return orders",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Orders found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Orders not found"
+                    }
+                }
+            }
+        },
         "/api/v1/product_create": {
             "post": {
                 "tags": [
@@ -849,6 +881,50 @@
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product_update_stock/{id}": {
+            "put": {
+                "tags": [
+                    "Product Api"
+                ],
+                "description": "use for update stock of product",
+                "operationId": "799b8f7342ab7e1ad0c395b363d6e0df",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "stock": {
+                                        "description": "Stock of the product",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Its Ok",

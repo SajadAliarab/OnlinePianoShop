@@ -51,8 +51,7 @@ export function updateProduct(id:number,productData:ProductsModel){
             description:productData.description,
             status:productData.status,
             brand_id:productData.brand,
-            category_id:productData.category,
-            colors:productData.colors
+            category_id:productData.category
           },
         });
 }
@@ -62,4 +61,16 @@ export function showProductBySlug(slug:string){
 
 export function showProductById(id:number){
   return $fetch(`http://localhost:8000/api/v1/product_show_by_id/${id}`);
+}
+
+export function updateProductStock(id:number,stock:number){
+  return $fetch(`http://localhost:8000/api/v1/product_update_stock/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            stock:stock
+          },
+        });
 }

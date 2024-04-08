@@ -125,6 +125,7 @@ const tokenData = JSON.parse(token);
 const userByToken:any = await getUserToken(tokenData);
 userId.value = userByToken.data.user;
 const user:any= await getUserData(userId.value);
+userData.role = user.data.role;
 userData.name = user.data.name;
 userData.email = user.data.email;
 userData.phone = user.data.phone;

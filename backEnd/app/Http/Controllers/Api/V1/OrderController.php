@@ -341,4 +341,48 @@ public function updateOrderDetail(Request $request, $id){
     'message' => 'Order detail updated'],200);
     }
 }
+
+/**
+ * @OA\Get(
+ *     path="/api/v1/order_user/{id}",
+ *     summary="Get Order by User",
+ *     description="Get order by user ID",
+ *     tags={"Order"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID of user to return orders",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *        response=200,
+ *       description="Orders found",
+ *      @OA\MediaType(
+   *           mediaType="application/json",
+   *      )
+   *  ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Orders not found"
+ *     )
+ * )
+ */
+public function getOrderByUser($id){
+    $orders = Order::where('user_id', $id)->get();
+    if($orders->isNotEmpty()){
+        return response()->json([
+            'result' => true,
+            'message' => 'Orders found',
+            'data' => $orders
+        ], 200);
+    } else{
+        return response()->json([
+            'result' => false,
+            'message' => 'Orders not found'
+        ], 404);
+    }
+}
 }

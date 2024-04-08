@@ -63,12 +63,14 @@ Route::prefix('v1')->namespace('api\v1')->group(function(){
     Route::delete('product_delete/{id}',[ProductController::class,'deleteProduct']);
     Route::get('product_show_by_slug/{slug}',[ProductController::class,'showProductBySlug']);
     Route::get('product_show_by_id/{id}',[ProductController::class,'showProductById']);
+    Route::put('product_update_stock/{id}',[ProductController::class,'updateStock']);
     Route::post('order_create',[OrderController::class,'orderCreate']);
     Route::get('order_last_user/{id}',[OrderController::class,'getLastOrderByUser']);
     Route::put('order_update/{id}',[OrderController::class,'updateOrder']);
     Route::get('order_show',[OrderController::class,'showOrder']);
     Route::get('order_details/{id}',[OrderController::class,'getOrderDetails']);
     Route::put('order_detail_update/{id}',[OrderController::class,'updateOrderDetail']);
+    Route::get('order_user/{id}',[OrderController::class,'getOrderByUser']);
     Route::post('payment',[paymentController::class,'createPayment']);
     Route::post('payment_confirm',[paymentController::class,'confirmPayment']);
 });

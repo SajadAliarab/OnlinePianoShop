@@ -399,4 +399,57 @@ class ProductController extends Controller
             ], 400);
         }
     }
+
+    /**
+     * @OA\Put(
+     * path="/api/v1/product_update_stock/{id}",
+     * tags={"Product Api"},
+     * description="use for update stock of product",
+     * @OA\Parameter(
+     * name="id",
+     * in="path",
+     * description="ID of the product",
+     * required=true,
+     * @OA\Schema(
+     * type="integer"
+     * )
+     * ),
+     * @OA\RequestBody(
+     * required=true,
+     * @OA\MediaType(
+     * mediaType="application/json",
+     * @OA\Schema(
+     * @OA\Property(
+     * property="stock",
+     * type="integer",
+     * description="Stock of the product"
+     * )
+     * )
+     * )
+     * ),
+     * @OA\Response(
+     * response=200,
+     * description="Its Ok",
+     * @OA\MediaType(
+     * mediaType="application/json",
+     * )
+     * )
+     * )
+     */
+    public function updateStock(Request $request,$id){
+        $product = Product::find($id);
+        if($product!=null){
+            $product->stock = $request->stock;
+            $product->save();
+            return response()->json([
+                'result' => true,
+                'message' => 'Stock updated successfully'
+            ], 200);
+        }else{
+            return response()->json([
+                'result' => false,
+                'message' => 'Stock not updated'
+            ], 400);
+        }
+    }
 }

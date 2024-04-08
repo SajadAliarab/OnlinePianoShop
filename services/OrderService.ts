@@ -68,3 +68,12 @@ export function updateOrderStatus(orderId:number,status:string){
         }
     });
 }
+
+export function showOrderByUser(userId:number){
+    return $fetch(`http://localhost:8000/api/v1/order_user/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+}
