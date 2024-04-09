@@ -51,7 +51,8 @@ export function updateProduct(id:number,productData:ProductsModel){
             description:productData.description,
             status:productData.status,
             brand_id:productData.brand,
-            category_id:productData.category
+            category_id:productData.category,
+            colors:productData.colors
           },
         });
 }
