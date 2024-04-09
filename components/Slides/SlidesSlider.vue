@@ -1,79 +1,49 @@
-<template>
-  <div class="carousel overflow-hidden"
-  @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
-    @mousemove="handleMouseMove"
-    @mouseover="handleMouseOver"
-    @mouseleave="handleMouseLeave">
-    <div v-if="slideData.length > 0" class="w-full h-80 slide flex transition-transform duration-500 ease-in-out" :style="{ transform: 'translateX(' + (-currentIndex * 100) + '%)' }">
-      <div v-for="(item, index) in slideData" :key="index" class="slide-item w-full flex-shrink-0">
-        <img :src="item.file" :alt="item.alt" class="w-screen h-80 object-contain" />
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
+
 import { showSlide } from '~/services/SlideService';
 
 
-const slideData:any = ref([]);
-const currentIndex = ref(0);
-const isDragging = ref(false);
-
-let intervalId: NodeJS.Timeout | null = null;
+const items:any =ref([]);
 const getItem=async()=>{
 try{
-     const data:any= await showSlide();
-      
-  let items= data.data[0];
-  slideData.value =items;
+    const data:any= await showSlide();
+     data.data[0].forEach((item:any)=>{
+        items.value.push(item)
+     })
+
 }catch(err){
- console.log(err)
-}   
-}
-getItem();
-const startAutoPlay = () => {
-  intervalId = setInterval(() => {
-    if (!isDragging.value) {
-    currentIndex.value = (currentIndex.value + 1) % slideData.value.length;
+    console.log(err)
+    }   
     }
-  }, 4000); 
-};
+   
+const carouselRef = ref()
 
 onMounted(() => {
-  getItem();
-  startAutoPlay();
-});
-const handleMouseUp = () => {
-  isDragging.value = false;
-};
+  setInterval(() => {
+    if (!carouselRef.value) return
 
-const handleMouseDown = () => {
-  isDragging.value = true;
-};
-const handleMouseMove = (event: MouseEvent) => {
-  if (isDragging.value) {
-    const movementX = event.movementX;
-    const threshold = 100; 
-    if (movementX > threshold) {
-      currentIndex.value = Math.max(currentIndex.value - 1, 0);
-    } else if (movementX < -threshold) {
-      currentIndex.value = Math.min(currentIndex.value + 1, slideData.value.length - 1);
+    if (carouselRef.value.page === carouselRef.value.pages) {
+      return carouselRef.value.select(0)
     }
-  }
-};
-const handleMouseOver = () => {
-  if (intervalId) {
-    clearInterval(intervalId);
-  }
-};
-const handleMouseLeave = () => {
-   startAutoPlay();
-};
-onBeforeUnmount(() => {
-  if (intervalId) {
-    clearInterval(intervalId);
-  }
-});
+
+    carouselRef.value.next()
+  }, 1000)
+})
+getItem();
 </script>
+
+<template>
+   <UCarousel
+    ref="carouselRef"
+    v-slot="{ item }"
+    :items="items"
+    :ui="{ item: 'basis-full' }"
+    class="rounded-lg overflow-hidden h-screen w-full relative"
+    indicators
+    arrows
+  >
+  <ULink :to="item.link" class="w-full h-screen">
+    <img :src="item.file"  class="w-full h-screen" draggable="true">
+    </ULink>
+  </UCarousel>
+</template>

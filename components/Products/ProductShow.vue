@@ -45,7 +45,9 @@ const columns = [
     label: 'Actions'
   }
 ];
-
+const search = ref('');
+const page = ref(1);
+const pageCount = 5;
 const productData = ref([]);
 const loading = ref(false);
 const editMode = ref(false);
@@ -91,15 +93,33 @@ const items = (row: any) => [
     }
   ]
 ];
+const rows = computed(() => {
+  return productData.value.slice((page.value - 1) * pageCount, (page.value) * pageCount)
+})
+
+const filteredRows = computed(() => {
+  if (!search.value) {
+    return productData
+  }
+
+  return productData.value.filter((product:any) => {
+    return Object.values(product).some((value) => {
+      return String(value).toLowerCase().includes(search.value.toLowerCase())
+    })
+  })
+})
 
 </script>
 
 <template>
     <ProductsAdd :productData="selectedProductData" :editMode="editMode" @productAdded="productHandler"/>
      <hr class="border-t-2 border-white my-10"/>
-  <div class="flex justify-center  h-auto">
+  <div class="flex flex-col items-center  h-auto">
+    <div class="flex justify-center px-3 py-3.5 border-gray-700">
+      <UInput v-model="search" placeholder="Filter product..." />
+    </div>
    
-    <UTable :loading="loading" :rows="productData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
+    <UTable :loading="loading" :rows="(search)?filteredRows : rows" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
     <template #title-data="{ row }">
       <span class="text-primary-400">{{ row.title}}</span>
     </template>
@@ -122,5 +142,10 @@ const items = (row: any) => [
     </template>
   </UTable>
   </div>
+  <div class="w-full mt-5">
+      <div class="flex justify-center px-3 py-3.5 border-t  border-gray-700">
+      <UPagination v-model="page" :page-count="pageCount" :total="productData.length" />
+    </div>
+    </div>
 </template>
 

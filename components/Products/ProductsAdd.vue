@@ -21,9 +21,8 @@
                     <UInput color="primary" type="number" id="stock" class=" w-full p-2.5 " placeholder="Enter Product Stock"
                         v-model="product.stock" />
                 </UFormGroup>
-                <UFormGroup label="Product Image" name="image" required>
-                    <UInput color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"
-                        capture />
+                <UFormGroup label="Product Image" name="image">
+                    <input color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged" />
                 </UFormGroup>
                 <UFormGroup label="Product Discount" name="discount" required>
                     <UInput color="primary" type="number" id="discount" class=" w-full p-2.5 "
@@ -46,7 +45,7 @@
                     <USelectMenu  class=" w-full p-2.5 " v-model="selectedColorIds" :options="colorName" multiple placeholder="Select colors" />
                 </UFormGroup>
                 <UFormGroup label="Product Description" name="description" required>
-                    <UTextarea class=" w-full p-2.5 " v-model="product.description"/>
+                    <UTextarea  autoresize size="4xl" rows="20" color="primary"  class=" w-full p-2.5 " v-model="product.description"/>
                 </UFormGroup>
                 <UButton v-if="!editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="submitProduct">Submit</UButton>
           <UButton v-if="editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="editForm">Edit</UButton>

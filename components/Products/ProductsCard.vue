@@ -1,11 +1,18 @@
 <template>
           <UProgress v-if="loading" animation="carousel" />
      <USkeleton v-if="loading" class="h-[460px] w-screen" />
-    <div v-if="!loading" class="bg-gray-800 py-16">
-    <div class="container ml-72 mx-auto px-4">
+    <div v-if="!loading" class="bg-gray-800 py-16 w-screen h-auto">
+    <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-white mb-8">Products</h2>
-        <div  class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div v-for="product in productData" class="bg-gray-800 rounded-lg shadow-lg p-8">
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center">
+                <USelectMenu v-model="selectedCategory" :options="categories" placeholder="Select Category" />
+                <USelectMenu v-model="selectedBrand" :options="brands" placeholder="Select Brand" />
+            </div>
+            </div>
+            <div v-if="rows.length==0" class="text-white text-center text-2xl">No products found</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div v-for="product in rows" class="bg-gray-800 rounded-lg shadow-lg p-8">
                 <div class="relative overflow-hidden">
                     <img class="object-cover w-full h-80" :src="product.image" :alt="product.title">
                     <div class="absolute inset-0 flex items-center justify-center">
@@ -15,6 +22,8 @@
                     </div>
                 </div>
                 <h3 class="text-xl font-bold text-white mt-4">{{product.title}}</h3>
+
+
                  <p class="text-gray-300 text-sm mt-2">{{truncatedDescription(product.description)}}<span v-if="showMore"> <RouterLink :to="'/product/' + product.slug" class="text-primary-500"> Read More</RouterLink></span></p>
                 <div class="flex items-center justify-between mt-4">
                     <span v-if="product.discount==0" class="text-white font-bold text-lg"><ThePriceFormmater :price=product.price /></span>
@@ -95,22 +104,35 @@
                 <span v-if="product.discount>0" class="text-red-500 font-bold text-lg"><ThePriceFormmater :price=product.price-product.discount /></span>
             </div>
 
+            
 
             
 
 
         </div>
+        <div class="w-full mt-5">
+      <div class="flex justify-center px-3 py-3.5 border-t  border-gray-700">
+      <UPagination v-model="page" :page-count="pageCount" :total="productData.length" />
+        <USelectMenu v-model="pageCount" :options="[6, 12, 24, 50]" />
 
+    </div>
+    </div>
     </div>
 </div>
 
 </template>
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import { showBrandById } from '~/services/BrandService';
-import { showCategoryById } from '~/services/CategoryService';
+import { showBrand, showBrandById } from '~/services/BrandService';
+import { showCategory, showCategoryById } from '~/services/CategoryService';
 import { showProduct } from '~/services/ProductService';
 import { showColorById } from '~/services/ColorService';
+const categories:any = ref([]);
+const brands:any = ref([]);
+const selectedCategory= ref({id:0});
+const selectedBrand= ref({id:0});
+const page = ref(1);
+const pageCount = ref(6);
 const productData:any = ref([]);
 const selectedProductBrand = ref('');
 const selectedProductCategory = ref('');
@@ -129,8 +151,20 @@ const getItem = async () => {
   try {
     loading.value = true;
     const data:any= await showProduct();
-    loading.value = false;
     productData.value = data.data;
+    const category:any= await showCategory();
+    const categoriesData = category.data[0];
+    categoriesData.forEach((category:any) => {
+        categories.value.push({ label: category.name, id: category.id });
+    });
+    categories.value.unshift({ label: 'All Categories', id: 0 });
+    const brand:any= await showBrand();
+    const brandsData = brand.data[0];
+    brandsData.forEach((brand:any) => {
+        brands.value.push({ label: brand.name, id: brand.id });
+    });
+    brands.value.unshift({ label: 'All Brands', id: 0 });
+    loading.value = false;
   } catch (err) {
     console.log(err);
   }
@@ -246,6 +280,17 @@ const checkOut = (productid:number,productStock:number) => {
     router.push('/cart/');
 }
 };
+const rows = computed(() => {
+    if(selectedCategory.value.id === 0 && selectedBrand.value.id === 0){
+        return productData.value.slice((page.value - 1) * pageCount.value, (page.value) * pageCount.value)
+    }else if(selectedCategory.value.id !== 0 && selectedBrand.value.id === 0){
+        return productData.value.filter((product:any) => product.category == selectedCategory.value.id).slice((page.value - 1) * pageCount.value, (page.value) * pageCount.value)
+    }else if(selectedCategory.value.id === 0 && selectedBrand.value.id !== 0){
+        return productData.value.filter((product:any) => product.brand === selectedBrand.value.id).slice((page.value - 1) * pageCount.value, (page.value) * pageCount.value)
+    }else{
+        return productData.value.filter((product:any) => product.category === selectedCategory.value.id && product.brand === selectedBrand.value.id).slice((page.value - 1) * pageCount.value, (page.value) * pageCount.value)
+    }
+})
 
 onMounted(getItem);
 
