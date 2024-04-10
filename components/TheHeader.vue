@@ -17,6 +17,11 @@
       <UButton v-if="authenticated" color="red" @click="logout" class="mx-4 font-medium text-sm px-4 py-2 text-center">Log Out</UButton>
   
   </div>
+  <button @click="toggleMobileMenu" class="md:hidden block text-gray-400 focus:outline-none">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
       <li>
@@ -43,8 +48,8 @@
         active-class="text-primary"
         inactive-class="text-gray-400 hover:text-gray-200">Contact</ULink>
       </li>
-      <li >
-        <UDropdown v-if="user.role==1" class="bg-red-800" :items="items" mode="hover" :popper="{ placement: 'bottom-start' }">
+      <li class="bg-primary-800">
+        <UDropdown v-if="user.role==1"  :items="items" mode="hover" :popper="{ placement: 'bottom-start' }">
           <ULink 
         active-class="text-primary"
         inactive-class="text-gray-400 hover:text-gray-200">Admin</ULink>
@@ -91,13 +96,75 @@
           inactive-class="text-gray-400 hover:text-gray-200">Orders</ULink>
           </template>
       
-  </UDropdown>
-            
+  </UDropdown>    
              
 </li>
     </ul>
   </div>
-  
+     <!-- Mobile Menu -->
+  <div :class="{ 'block': isMobileMenuOpen, 'hidden': !isMobileMenuOpen }" class="md:hidden">
+  <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
+    <li>
+      <ULink 
+        to="/"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200">Home</ULink>
+    </li>
+    <li>
+      <ULink 
+        to="/products"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
+    </li>
+    <li>
+      <ULink 
+        to="/aboutUs"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200">About Us</ULink>
+    </li>
+    <li>
+      <ULink 
+        to="/contact"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200">Contact</ULink>
+    </li>
+    <!-- Admin dropdown Mobile -->
+    <li>
+      <button v-if="user.role==1" @click="toggleAdminMenu" class="focus:outline-none text-gray-400 hover:text-gray-200">
+        <span>Admin</span>
+        <svg v-if="isMobileAdminMenuOpen" class="w-4 h-4 inline-block ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+        <svg v-else class="w-4 h-4 inline-block ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M7.707 13.707a1 1 0 011.414 0L10 15.414l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L10 15.414l-1.293-1.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <ul v-if="isMobileAdminMenuOpen" class="ml-4 mt-2">
+        <li>
+          <ULink to="/admin/addProduct" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
+        </li>
+        <li>
+          <ULink to="/admin/addBrand" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Brands</ULink>
+        </li>
+        <li>
+          <ULink to="/admin/addCategory" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Categories</ULink>
+        </li>
+        <li>
+          <ULink to="/admin/addColor" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Colors</ULink>
+        </li>
+        <li>
+          <ULink to="/admin/addSlide" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Slides</ULink>
+        </li>
+        <li>
+          <ULink to="/admin/users" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Users</ULink>
+        </li>
+        <li>
+          <ULink to="/admin/orders" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Orders</ULink>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
   </div>
 </nav>
 </template>
@@ -110,6 +177,7 @@ const router = useRouter();
 const user:any = ref('');
 const userData:any=ref('');
 const cartItem = ref(0);
+const isMobileMenuOpen = ref(false);
 
 const items = [[
     {
@@ -189,7 +257,15 @@ const logout = () => {
   router.push('/auth/Login');
 };
 
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
 
+const isMobileAdminMenuOpen = ref(false);
+
+const toggleAdminMenu = () => {
+  isMobileAdminMenuOpen.value = !isMobileAdminMenuOpen.value;
+};
 
 
 

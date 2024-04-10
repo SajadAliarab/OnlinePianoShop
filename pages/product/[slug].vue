@@ -7,7 +7,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row -mx-4">
 
-                <div class="w-1/2 md:flex-1 px-4">
+                <div class="w-full md:flex-1 px-4">
                     <div class="h-[460px] rounded-lg bg-gray-700 mb-4">
 
                         <img class="w-full h-full object-cover"

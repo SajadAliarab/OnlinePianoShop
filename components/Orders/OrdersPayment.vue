@@ -61,7 +61,7 @@ const getOrder = async () => {
 
 const getPayment = async (total: number) => {
     stripe.value = await loadStripe(config.public.STRIPE_PUBLIC_KEY);
-    paymentIntent = await createPaymentIntent(total);
+    paymentIntent = await createPaymentIntent(total*100);
     const clientSecret = paymentIntent.client_secret;
     elements.value = stripe.value.elements({ clientSecret: clientSecret, appearance });
     const paymentElement = elements.value.create('payment');
