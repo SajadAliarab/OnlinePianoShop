@@ -68,7 +68,7 @@ const submitForm = async () => {
     loadingBtn.value=true;
     await RegisterUser(userData); 
     warning.value = [true, "Congrats! You make your Account sucessfully, please wait a moment."];
-   setTimeout(()=>router.push('/auth/login'),5000);
+   setTimeout(()=>router.push('/auth/login'),3000);
   } catch (error) {
     warning.value = [false, "Can not access to database , please try again later"];
   }

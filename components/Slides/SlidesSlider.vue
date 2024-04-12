@@ -3,7 +3,10 @@ import { onMounted, ref } from 'vue';
 import { showSlide } from '~/services/SlideService';
 
 const items:any = ref([]);
-const carouselRef:any = ref(null);
+import { Carousel, Pagination, Slide } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
+
 
 const getItem = async () => {
   try {
@@ -38,17 +41,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <UCarousel
-    ref="carouselRef"
-    v-slot="{ item }"
-    :items="items"
-    :ui="{ item: 'basis-full' }"
-    class="rounded-lg overflow-hidden h-screen w-full relative"
-    indicators
-    arrows
-  >
-    <ULink :to="item.link" class="w-full h-screen">
-      <img :src="item.file" class="w-full h-screen" draggable="true">
-    </ULink>
-  </UCarousel>
+  <Carousel :autoplay="2000" :wrap-around="true">
+    <Slide v-for="slide in items" :key="slide">
+      <div class="carousel__item">
+        <img :src="slide.file" alt="slide" class="w-screen h-screen" @click=""/>
+      </div>
+    </Slide>
+
+    <template #addons>
+      <Pagination />
+    </template>
+  </Carousel>
 </template>

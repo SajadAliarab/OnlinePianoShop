@@ -49,7 +49,11 @@
                     </UFormGroup>     
                 </span>
                 <URadioGroup v-model="orderData.shipping_method" legend="Choose your prefer shipping:" :options="DeliveryMethod" />
-                
+                <span v-if="orderData.shipping_method==2" class="text-primary-100 m-5">Please come to our store to collect your order:
+                <br> Address: LE11TH ,11 Morledge, Leicester, United Kingdom
+                <br> Phone: 07936766999
+                <br> Opening Hours:Mon-Fri 9:00-17:00
+                </span>
 
                 <p v-if="orderData.delivery_date"  class=" font-bold text-primary-100 m-5">Perefer Date for Delivery or click and Collect.(After {{ format(new Date(orderData.delivery_date),'d MMM, yyy') }})</p>
                 <UPopover v-if="orderData.delivery_date" >
@@ -201,6 +205,7 @@ watch(selected, () => {
     userData.address = street.join(", ");
     isOpen.value = false;
 }, { deep: true });
+
 getData();
 
 </script>

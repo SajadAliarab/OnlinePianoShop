@@ -20,6 +20,10 @@
             <span v-else-if="row.shipping_method == 2">Click and Collect</span>
             <span v-else> Not Choosen</span>
           </template>
+          <template #delivery_date-data="{ row }">
+            <span v-if="row.delivery_date">{{ format(new Date(row.delivery_date), 'dd MMM, yyy') }}</span>
+            <span v-else>Not Choosen</span>
+          </template>
           <template #actions-data="{ row }">
             <RouterLink :to="'/profile/orderDetail/' + row.id">
               <UButton size="2xs" icon="i-heroicons-queue-list"> Details </UButton>

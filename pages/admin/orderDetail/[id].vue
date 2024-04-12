@@ -1,4 +1,5 @@
 <template>
+     <div class="relative h-screen w-full bg-cover bg-gray-800 pb-10">
   <div class="flex flex-col items-center">
         <div class="w-screen">
         <UButton @click="router.push('/admin/orders')" class="m-5">Back</UButton>
@@ -14,6 +15,9 @@
         <template #product_name-data="{ row }">
             <span>{{ getProduct(row.product) }}{{ productName }}</span>
         </template>
+        <template #price-data="{ row }">
+            <span> <ThePriceFormmater :price= row.price></ThePriceFormmater></span>
+          </template>   
         <template #order_status-data="{ row }">
             <span v-if="row.order_status == 'delivered'" class="text-green-700">{{ row.order_status }}</span>
             <span v-else-if="row.order_status == 'pending'" class="text-yellow-700">{{ row.order_status }}</span>
@@ -27,6 +31,7 @@
         </template>
 
     </UTable>
+    </div>
 </template>
 <script setup lang="ts">
 import { useRouter } from 'vue-router';

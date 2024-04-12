@@ -15,9 +15,8 @@ const items = [{
 </script>
 
 <template>
+
   <UAccordion   :items="items">
-
-
 
     <template v-if="!deliveryComplete"  #Delivery>
      <OrdersDelivery  @deliveryComplete="deliveryComplete=true" />
@@ -26,4 +25,5 @@ const items = [{
       <OrdersPayment />
      </template>
   </UAccordion>
+
 </template>

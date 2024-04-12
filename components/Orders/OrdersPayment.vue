@@ -13,7 +13,11 @@
             </div>
             <div class="mt-4">
                 <p class="text-red-800" v-if="warning[0]">{{ warning[1] }}</p>
-                <p class="text-primary-100" v-else>Payment will be processed by Stripe</p>
+                <p class="text-primary-100 font-bold">For trying payment methode you can use this card:
+                    <br>card number : 4242 4242 4242 4242
+                    <br>exp date : a valid future date, such as 12/34
+                    <br>cvc : any three-digit CVC 
+                </p>
             </div>
         </div>
     </div>

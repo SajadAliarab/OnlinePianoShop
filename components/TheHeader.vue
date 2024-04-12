@@ -8,7 +8,7 @@
   </a>
 
   <div class="flex md:order-2   rtl:space-x-reverse">
-    <UChip v-if="cartItem!=0" :text="cartItem" size="2xl">
+    <UChip v-if="cartItem!=0" :text="cartItem" size="2xl" >
     <UButton icon="i-heroicons-shopping-cart" color="gray" to="/cart" class=" font-medium text-sm px-4 py-2 text-center"></UButton>
     </UChip>
     <UButton v-if="cartItem==0" icon="i-heroicons-shopping-cart" color="gray" to="/cart" class=" font-medium text-sm px-4 py-2 text-center"></UButton>
@@ -178,7 +178,6 @@ const user:any = ref('');
 const userData:any=ref('');
 const cartItem = ref(0);
 const isMobileMenuOpen = ref(false);
-
 const items = [[
     {
       label: 'Products',
@@ -221,7 +220,9 @@ const checkAuthentication = async () => {
     authenticated.value =false;
   }
 };
-onMounted(()=>{checkAuthentication();});
+onMounted(()=>{checkAuthentication();
+});
+
 
 
 // onBeforeRouteUpdate(() => {
@@ -244,6 +245,7 @@ router.beforeEach(async (to, from, next) => {
   cartData();
   next();
 });
+
 
 const logout = () => {
   const data:string|null = localStorage.getItem('auth-data');

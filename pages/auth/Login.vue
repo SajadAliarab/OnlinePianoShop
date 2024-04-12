@@ -28,6 +28,11 @@
         <p class="font-medium text-red-800" v-text="warning"></p>
       </div>
     </UForm>
+    <p class="text-gray-100 text-center mt-5">
+      For trying login as Admin you can use this account:
+      <br>email :admin@admin
+      <br>password : adm!n123
+    </p>
   </div>
 </template>
 <script setup lang="ts">

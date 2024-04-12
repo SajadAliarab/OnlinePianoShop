@@ -134,7 +134,7 @@ const checkOut = async() => {
 </script>
 
 <template>
-   <div class="flex justify-center  h-auto">
+   <div class="flex justify-center">
     <UTable :loading="loading" :rows="orderData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
     <template #title-data="{ row }">
       <span class="text-primary-400">{{ row.title}}</span>
