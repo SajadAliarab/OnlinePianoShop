@@ -15,7 +15,7 @@ export function createSlide(slideData:SlidesModel){
           });
 }
 export function showSlide(){
-  return $fetch('http://api.sajad.uk/api/v1/slide_show');
+  return $fetch('https://api.sajad.uk/api/v1/slide_show');
 }
 
 export function deleteSlide(slideId:number){
