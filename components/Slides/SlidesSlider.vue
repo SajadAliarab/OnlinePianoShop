@@ -18,6 +18,7 @@ const getItem = async () => {
     console.error(err);
   }
 };
+console.log(items.value);
 
 onMounted(() => {
 //   const autoplayInterval = setInterval(() => {
