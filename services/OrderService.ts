@@ -1,7 +1,7 @@
 import type { OrdersModel } from "~/models/OrdersModel";
 
 export function createOrder(userId:number,orderData:Array<any>) {
-    return $fetch('http://localhost:8000/api/v1/order_create', {
+    return $fetch('https://api.sajad.uk/api/v1/order_create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ export function createOrder(userId:number,orderData:Array<any>) {
 }
 
 export function getOrderListLast(userId:number) {
-    return $fetch(`http://localhost:8000/api/v1/order_last_user/${userId}`, {
+    return $fetch(`https://api.sajad.uk/api/v1/order_last_user/${userId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export function getOrderListLast(userId:number) {
 }
 
 export function updateOrder(orderData:OrdersModel,orderId:number) {
-    return $fetch(`http://localhost:8000/api/v1/order_update/${orderId}`, {
+    return $fetch(`https://api.sajad.uk/api/v1/order_update/${orderId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export function updateOrder(orderData:OrdersModel,orderId:number) {
 }
 
 export function getOrdeList(){
-    return $fetch('http://localhost:8000/api/v1/order_show', {
+    return $fetch('https://api.sajad.uk/api/v1/order_show', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export function getOrdeList(){
 }
 
 export function getOrderDetail(orderId:number){
-    return $fetch(`http://localhost:8000/api/v1/order_details/${orderId}`, {
+    return $fetch(`https://api.sajad.uk/api/v1/order_details/${orderId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export function getOrderDetail(orderId:number){
 }
 
 export function updateOrderStatus(orderId:number,status:string){
-    return $fetch(`http://localhost:8000/api/v1/order_detail_update/${orderId}`, {
+    return $fetch(`https://api.sajad.uk/api/v1/order_detail_update/${orderId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export function updateOrderStatus(orderId:number,status:string){
 }
 
 export function showOrderByUser(userId:number){
-    return $fetch(`http://localhost:8000/api/v1/order_user/${userId}`, {
+    return $fetch(`https://api.sajad.uk/api/v1/order_user/${userId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

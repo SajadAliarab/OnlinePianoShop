@@ -1,7 +1,7 @@
 import type { SlidesModel } from "~/models/SlidesModel";
 
 export function createSlide(slideData:SlidesModel){
-    return $fetch('http://localhost:8000/api/v1/slide_create', {
+    return $fetch('https://api.sajad.uk/api/v1/slide_create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -19,13 +19,13 @@ export function showSlide(){
 }
 
 export function deleteSlide(slideId:number){
-  return $fetch(`http://localhost:8000/api/v1/slide_delete/${slideId}`, {
+  return $fetch(`https://api.sajad.uk/api/v1/slide_delete/${slideId}`, {
           method: 'DELETE',
         });
 }
 
 export function updateSlide(id:number,slideData:SlidesModel){
-  return $fetch(`http://localhost:8000/api/v1/slide_update/${id}`, {
+  return $fetch(`https://api.sajad.uk/api/v1/slide_update/${id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

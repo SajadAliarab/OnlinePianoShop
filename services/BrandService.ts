@@ -2,7 +2,7 @@ import type { BrandsModel } from "~/models/BrandsModel";
 
 
 export function createBrand(brandData:BrandsModel){
-    return $fetch('http://localhost:8000/api/v1/brand_create', {
+    return $fetch('https://api.sajad.uk/api/v1/brand_create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -15,17 +15,17 @@ export function createBrand(brandData:BrandsModel){
           });
 }
 export function showBrand(){
-  return $fetch('http://localhost:8000/api/v1/brand_show');
+  return $fetch('https://api.sajad.uk/api/v1/brand_show');
 }
 
 export function deleteBrand(brandId:number){
-  return $fetch(`http://localhost:8000/api/v1/brand_delete/${brandId}`, {
+  return $fetch(`https://api.sajad.uk/api/v1/brand_delete/${brandId}`, {
           method: 'DELETE',
         });
 }
 
 export function updateBrand(id:number,brandData:BrandsModel){
-  return $fetch(`http://localhost:8000/api/v1/brand_update/${id}`, {
+  return $fetch(`https://api.sajad.uk/api/v1/brand_update/${id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -37,5 +37,5 @@ export function updateBrand(id:number,brandData:BrandsModel){
         });
 }
 export function showBrandById(id:number){
-  return $fetch(`http://localhost:8000/api/v1/brand_show_by_id/${id}`);
+  return $fetch(`https://api.sajad.uk/api/v1/brand_show_by_id/${id}`);
 }

@@ -1,7 +1,7 @@
 import type { ColorsModel } from "~/models/ColorsModel";
 
 export function createColor(colorData:ColorsModel){
-    return $fetch('http://localhost:8000/api/v1/color_create', {
+    return $fetch('https://api.sajad.uk/api/v1/color_create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -14,15 +14,15 @@ export function createColor(colorData:ColorsModel){
           });
 }
 export function showColor(){
-  return $fetch('http://localhost:8000/api/v1/color_show');
+  return $fetch('https://api.sajad.uk/api/v1/color_show');
 }
 export function deleteColor(colorId:number){    
-  return $fetch(`http://localhost:8000/api/v1/color_delete/${colorId}`, {
+  return $fetch(`https://api.sajad.uk/api/v1/color_delete/${colorId}`, {
           method: 'DELETE',
         });
 }
 export function updateColor(id:number,colorData:ColorsModel){
-  return $fetch(`http://localhost:8000/api/v1/color_update/${id}`, {
+  return $fetch(`https://api.sajad.uk/api/v1/color_update/${id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -34,11 +34,11 @@ export function updateColor(id:number,colorData:ColorsModel){
         });
 }
 export function showColorById(id:number){
-  return $fetch(`http://localhost:8000/api/v1/color_show_by_id/${id}`);
+  return $fetch(`https://api.sajad.uk/api/v1/color_show_by_id/${id}`);
 }
 
 export function showColorByName(name:string){
-  return $fetch(`http://localhost:8000/api/v1/color_show_by_name/${name}`);
+  return $fetch(`https://api.sajad.uk/api/v1/color_show_by_name/${name}`);
 }
 
 
