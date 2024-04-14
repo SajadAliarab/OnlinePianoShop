@@ -101,7 +101,7 @@ class paymentController extends Controller
             $test=$paymentIntent = PaymentIntent::retrieve($request->paymentIntentId,[]);
             $res=$paymentIntent->confirm([
                 'payment_method' => 'pm_card_visa',
-                'return_url' => 'http://localhost:3000/success',
+                'return_url' => 'https://sajad.uk/success',
               ]);
 
             // Payment confirmed successfully

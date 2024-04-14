@@ -68,7 +68,7 @@
                                             <div class="flex items-center">
                                                 <img v-for="color in selectedProductColor"
                                                     class="w-12 h-12 rounded-full bg-gray-200 mr-2"
-                                                    :src="'http://localhost:8000/uploads/' + color.image"
+                                                    :src="'https://api.sajad.uk/uploads/' + color.image"
                                                     :alt="color.name" :title="color.name"
                                                     @click="selectColor(color.name)"></img>
                                             </div>
