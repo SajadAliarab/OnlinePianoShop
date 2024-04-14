@@ -108,25 +108,29 @@
       <ULink 
         to="/"
         active-class="text-primary"
-        inactive-class="text-gray-400 hover:text-gray-200">Home</ULink>
+        inactive-class="text-gray-400 hover:text-gray-200"
+        @click="closeMobileMenu">Home</ULink>
     </li>
     <li>
       <ULink 
         to="/products"
         active-class="text-primary"
-        inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
+        inactive-class="text-gray-400 hover:text-gray-200"
+        @click="closeMobileMenu">Products</ULink>
     </li>
     <li>
       <ULink 
         to="/aboutUs"
         active-class="text-primary"
-        inactive-class="text-gray-400 hover:text-gray-200">About Us</ULink>
+        inactive-class="text-gray-400 hover:text-gray-200"
+        @click="closeMobileMenu">About Us</ULink>
     </li>
     <li>
       <ULink 
         to="/contact"
         active-class="text-primary"
-        inactive-class="text-gray-400 hover:text-gray-200">Contact</ULink>
+        inactive-class="text-gray-400 hover:text-gray-200"
+        @click="closeMobileMenu">Contact</ULink>
     </li>
     <!-- Admin dropdown Mobile -->
     <li>
@@ -141,25 +145,25 @@
       </button>
       <ul v-if="isMobileAdminMenuOpen" class="ml-4 mt-2">
         <li>
-          <ULink to="/admin/addProduct" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Products</ULink>
+          <ULink to="/admin/addProduct" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200" @click="closeMobileMenu">Products</ULink>
         </li>
         <li>
-          <ULink to="/admin/addBrand" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Brands</ULink>
+          <ULink to="/admin/addBrand" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200" @click="closeMobileMenu">Brands</ULink>
         </li>
         <li>
-          <ULink to="/admin/addCategory" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Categories</ULink>
+          <ULink to="/admin/addCategory" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200" @click="closeMobileMenu">Categories</ULink>
         </li>
         <li>
-          <ULink to="/admin/addColor" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Colors</ULink>
+          <ULink to="/admin/addColor" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200" @click="closeMobileMenu">Colors</ULink>
         </li>
         <li>
-          <ULink to="/admin/addSlide" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Slides</ULink>
+          <ULink to="/admin/addSlide" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200" @click="closeMobileMenu">Slides</ULink>
         </li>
         <li>
-          <ULink to="/admin/users" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Users</ULink>
+          <ULink to="/admin/users" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200" @click="closeMobileMenu">Users</ULink>
         </li>
         <li>
-          <ULink to="/admin/orders" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200">Orders</ULink>
+          <ULink to="/admin/orders" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200" @click="closeMobileMenu">Orders</ULink>
         </li>
       </ul>
     </li>
@@ -268,7 +272,9 @@ const isMobileAdminMenuOpen = ref(false);
 const toggleAdminMenu = () => {
   isMobileAdminMenuOpen.value = !isMobileAdminMenuOpen.value;
 };
-
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false;
+};
 
 
 </script>

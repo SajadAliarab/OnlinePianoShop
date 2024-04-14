@@ -55,7 +55,7 @@ const getItem = async () => {
             const productData:any = await showProductById(item.product);
             const productColorData =  productData.colors.find((color: any) => color.name === item.color);
             const productColor = "https://api.sajad.uk/uploads/"+productColorData.image;
-            const productImage = "http://api.sajad.uk/uploads/"+productData.data.image;
+            const productImage = "https://api.sajad.uk/uploads/"+productData.data.image;
             const productPrice = (productData.data.price-productData.data.discount);
             const quantity = item.quantity;
             const totalPrice = (productData.data.price-productData.data.discount) * quantity;
