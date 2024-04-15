@@ -11,7 +11,7 @@
                     <div class="h-[460px] rounded-lg bg-gray-700 mb-4">
 
                         <img class="w-full h-full object-cover"
-                            :src="'http://localhost:8000/uploads/' + productData.image" alt="Product Image">
+                            :src="'https://api.sajad.uk/uploads/' + productData.image" alt="Product Image">
                     </div>
                     <div class="flex -mx-2 mb-4">
                         <div class="w-full px-2">
@@ -53,7 +53,7 @@
                                             <div class="flex items-center">
                                                 <img v-for="color in productColor"
                                                     class="w-12 h-12 rounded-full bg-gray-200 mr-2"
-                                                    :src="'http://localhost:8000/uploads/' + color.image"
+                                                    :src="'https://api.sajad.uk/uploads/' + color.image"
                                                     :alt="color.name" :title="color.name"
                                                     @click="selectColor(color.name)"></img>
                                             </div>
@@ -128,7 +128,7 @@
                     <div class="mb-4">
                         <span class="text-lg font-bold text-gray-300">Brand:</span>
                         <div class="flex items-center mt-2">
-                            <img class="w-1/2 h-1/2  mr-2" :src="'http://localhost:8000/uploads/' + productBrandImage"
+                            <img class="w-1/2 h-1/2  mr-2" :src="'https://api.sajad.uk/uploads/' + productBrandImage"
                                 :title="productBrand" :alt="productBrand"></img>
 
                         </div>
@@ -138,7 +138,7 @@
                         <span class="text-lg font-bold text-gray-300">Color:</span>
                         <div class="flex items-center mt-2">
                             <img v-for="color in productColor" class="w-12 h-12 rounded-full bg-gray-200 mr-2"
-                                :src="'http://localhost:8000/uploads/' + color.image" :alt="color.name"
+                                :src="'https://api.sajad.uk/uploads/' + color.image" :alt="color.name"
                                 :title="color.name"></img>
 
                         </div>
