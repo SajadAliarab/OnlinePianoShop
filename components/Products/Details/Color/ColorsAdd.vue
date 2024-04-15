@@ -1,6 +1,6 @@
 <template>
     <UForm :schema="schema" :state="state" class="max-w-sm mx-auto pt-20"  >
-      <UIcon name="i-heroicons-plus-circle"  class=" max-w-sm w-full text-2xl"/>
+      <icon name="i-heroicons-plus-circle"  class=" max-w-sm w-full text-6xl"/>
             <h1 v-if="!editMode" class="w-ful text-center text-2xl font-bold">Add Color</h1>
             <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold">Edit Color</h1>
             <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">

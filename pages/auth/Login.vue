@@ -1,7 +1,7 @@
 <template>
   <div class="relative h-auto w-full bg-cover bg-gray-800 pb-10">
     <UForm :schema="schemaUser" :state="userData" @submit="logIn" class="max-w-sm mx-auto pt-20">
-      <UIcon name="i-heroicons-lock-closed" class=" max-w-sm w-full text-2xl" />
+      <icon name="i-heroicons-lock-closed" class=" max-w-sm w-full text-6xl" />
       <h1 class="w-ful text-center text-2xl font-bold">Login</h1>
       <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
         <p class=" text-gray-400 p-2">Enter your credentials to access your account.</p>

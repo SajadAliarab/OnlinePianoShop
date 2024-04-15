@@ -1,7 +1,7 @@
 <template>
   <div class="relative h-auto w-full bg-cover bg-gray-800 pb-10">
     <UForm class="max-w-sm mx-auto pt-20" @submit="submitForm" :schema="userSchema" :state="userData">
-      <UIcon name="i-heroicons-user-circle" class=" max-w-sm w-full text-2xl" />
+      <icon name="i-heroicons-user-circle" class=" max-w-sm w-full text-6xl" />
       <h1 class="w-ful text-center text-2xl font-bold">Create an account</h1>
       <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
         <UFormGroup label="Your Name" name="name" required>
