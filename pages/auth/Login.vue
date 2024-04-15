@@ -1,20 +1,20 @@
 <template>
   <div class="relative h-auto w-full bg-cover bg-gray-800 pb-10">
     <UForm :schema="schemaUser" :state="userData" @submit="logIn" class="max-w-sm mx-auto pt-20">
-      <icon name="i-heroicons-lock-closed" class=" max-w-sm w-full text-6xl" />
-      <h1 class="w-ful text-center text-2xl font-bold">Login</h1>
-      <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
+      <icon name="i-heroicons-lock-closed" class=" max-w-sm w-full text-6xl text-white" />
+      <h1 class="w-ful text-center text-2xl font-bold text-white">Login</h1>
+      <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl text-white">
         <p class=" text-gray-400 p-2">Enter your credentials to access your account.</p>
         <p class=" text-gray-400 p-2 mb-5">Don't have an account? <NuxtLink to="/auth/register"
             class="text-primary font-medium">Sign Up</NuxtLink>
         </p>
-        <UFormGroup label="Email" name="email">
-          <UInput color="primary" type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address"
+        <UFormGroup label="Email" name="email" >
+          <UInput  type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address"
             v-model="userData.email" />
         </UFormGroup>
         <div class="mb-5">
           <UFormGroup label="Password" name="password">
-            <UInput color="primary" type="password" id="password" class="w-full p-2.5"
+            <UInput  type="password" id="password" class="w-full p-2.5"
               placeholder="Please Enter your Password" v-model="userData.password" />
           </UFormGroup>
         </div>

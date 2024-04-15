@@ -4,7 +4,7 @@
  <div v-if="!loading">    
 <div class="flex flex-col items-center">
     <h1 class="font-bold text-primary-100">Orders Delivery</h1>
-    <span  class="text-center mt-3" v-if="phone">Phone:{{ userData.phone }}
+    <span  class="text-center mt-3 text-gray-100" v-if="phone">Phone:{{ userData.phone }}
         <p class=" text-center text-red-800 m-5" @click=editPhone>
         Change Phone Number
     </p></span>
@@ -14,7 +14,7 @@
                         v-model="userData.phone" />
                 </UFormGroup>
                 </span>
-    <span v-if="userAddress">Delivery Address: {{userData.address}},{{ userData.city }},{{ userData.country }}
+    <span  class="text-gray-100" v-if="userAddress">Delivery Address: {{userData.address}},{{ userData.city }},{{ userData.country }}
     <p class=" text-center text-red-800 m-5" @click=editAddress>
         Change delivery address
     </p></span>
@@ -23,7 +23,7 @@
                     <USelect color="primary" id="country" class=" w-full p-2.5 " placeholder="Select Your Country"
                         v-model="userData.country" :options="countries" />
                     <UFormGroup v-if="userData.country=='United Kingdom'" label="postCode:" name="postCode" required>
-                        <UInput color="primary" type="text" id="name" class=" w-full p-2.5 "
+                        <UInput  type="text" id="name" class=" w-full p-2.5 "
                             placeholder="Enter Your postecode" v-model="userData.postCode" />
                         <UButton   variant="solid" icon="i-heroicons-magnifying-glass-circle"
                         size="sm" color="primary" class="ml-2" square 
@@ -33,18 +33,18 @@
                                 :groups="[{ key: 'addresse', commands: addresses }]" />
                         </UModal>
                         <UFormGroup label="Address:" name="address" required>
-                            <UInput color="primary" type="text" id="city" class=" w-full p-2.5 " v-model="userData.city"
+                            <UInput  type="text" id="city" class=" w-full p-2.5 " v-model="userData.city"
                                 disabled />
-                        <UTextarea color="primary" type="text" id="address" class=" w-full p-2.5 " v-model="userData.address"
+                        <UTextarea  type="text" id="address" class=" w-full p-2.5 " v-model="userData.address"
                             disabled />
                             </UFormGroup>
                         </UFormGroup>
                     <UFormGroup v-else-if="userData.country!='United Kingdom'&& userData.country!=null" label="Address:" name="address" required>
-                        <UInput color="primary" type="text" id="city" class=" w-full p-2.5 " placeholder="Enter Your City"
+                        <UInput  type="text" id="city" class=" w-full p-2.5 " placeholder="Enter Your City"
                             v-model="userData.city" />
-                            <UTextarea color="primary" type="text" id="address" class=" w-full p-2.5 " placeholder="Enter Your Address"
+                            <UTextarea  type="text" id="address" class=" w-full p-2.5 " placeholder="Enter Your Address"
                             v-model="userData.address" />
-                            <UInput color="primary" type="text" id="postCode" class=" w-full p-2.5 " placeholder="Enter Your PostCode" v-model="userData.postCode"/>
+                            <UInput  type="text" id="postCode" class=" w-full p-2.5 " placeholder="Enter Your PostCode" v-model="userData.postCode"/>
                     </UFormGroup>
                     </UFormGroup>     
                 </span>

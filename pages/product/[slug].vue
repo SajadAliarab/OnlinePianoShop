@@ -22,23 +22,23 @@
                                 <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
                                     <template #header>
                                         <Placeholder class="h-8" />
-                                        <h2 class="text-2xl font-bold text-gray-300">Add to Cart</h2>
+                                        <h2 class="text-2xl font-bold  text-gray-900 dark:text-white">Add to Cart</h2>
 
                                     </template>
 
                                     <Placeholder class="h-32" />
                                     <div class="flex items-start">
                                         <div class="ml-4">
-                                            <h3 class="text-lg font-bold text-gray-300">{{ productData.title }}</h3>
+                                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ productData.title }}</h3>
                                             <span class="text-gray-500 text-sm">{{ productCategory }}</span>
                                         </div>
                                         <div class="ml-7 flex items-center">
-                                            <span class="text-lg font-bold text-gray-300 mr-5">Quantity:</span>
+                                            <span class="text-lg font-bold  text-gray-900 dark:text-white mr-5">Quantity:</span>
                                             <div class="flex items-center">
                                                 <UButton icon="i-heroicons-plus" size="sm" color="primary" square
                                                     variant="ghost" @click="addQuantity" />
                                                 <UInput type="text" size="sm"
-                                                    class="w-10 text-sm font-bold text-gray-300" v-model="quantity" />
+                                                    class="w-10 text-sm font-bold  text-gray-900 dark:text-white" v-model="quantity" />
                                                 <UButton icon="i-heroicons-minus" size="sm" color="primary" square
                                                     variant="ghost" @click="minusQuantity" />
                                             </div>
@@ -46,10 +46,10 @@
                                     </div>
                                     <div class="flex items-start">
                                         <div class="ml-4">
-                                            <h3 class="text-lg font-bold text-gray-300">{{ selectedColor }}</h3>
+                                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ selectedColor }}</h3>
                                         </div>
                                         <div class="ml-7 flex items-center">
-                                            <span class="text-lg font-bold text-gray-300 mr-5">SelecColor:</span>
+                                            <span class="text-lg font-bold text-gray-900 dark:text-white mr-5">SelecColor:</span>
                                             <div class="flex items-center">
                                                 <img v-for="color in productColor"
                                                     class="w-12 h-12 rounded-full bg-gray-200 mr-2"

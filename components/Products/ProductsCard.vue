@@ -45,15 +45,15 @@
 
                                     <div class="flex items-start">
                                         <div class="ml-4">
-                                            <h3 class="text-lg font-bold text-gray-300">{{ selectedProductTitle}}</h3>
+                                            <h3 class="text-lg font-bold text-gray-900 dark:text-gray-300">{{ selectedProductTitle}}</h3>
                                             <span class="text-gray-500 text-sm">{{ selectedProductCategory }}</span>
                                         </div>
                                         <div class="ml-7 flex items-center">
-                                            <span class="text-lg font-bold text-gray-300 mr-5">Quantity:</span>
+                                            <span class="text-lg font-bold text-gray-900 dark:text-white mr-5">Quantity:</span>
                                             <div class="flex items-center">
                                                 <UButton icon="i-heroicons-plus" size="sm" color="primary" square
                                                     variant="ghost" @click="addQuantity(selectedProductStock)" />
-                                                <span class="text-lg font-bold text-gray-300">{{ quantity }}</span>
+                                                <span class="text-lg font-bold  text-gray-900 dark:text-white">{{ quantity }}</span>
                                                 <UButton icon="i-heroicons-minus" size="sm" color="primary" square
                                                     variant="ghost" @click="minusQuantity" />
                                             </div>
@@ -61,10 +61,10 @@
                                     </div>
                                     <div class="flex items-start">
                                         <div class="ml-4">
-                                            <h3 class="text-lg font-bold text-gray-300">{{ selectedColor }}</h3>
+                                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ selectedColor }}</h3>
                                         </div>
                                         <div class="ml-7 flex items-center">
-                                            <span class="text-lg font-bold text-gray-300 mr-5">SelecColor:</span>
+                                            <span class="text-lg font-bold text-gray-900 dark:text-white mr-5">SelecColor:</span>
                                             <div class="flex items-center">
                                                 <img v-for="color in selectedProductColor"
                                                     class="w-12 h-12 rounded-full bg-gray-200 mr-2"

@@ -1,31 +1,31 @@
 <template>
     <div class="relative h-auto w-full bg-cover bg-gray-800 pb-10">
         <UForm :schema="schemaProduct" :state="product" class="max-w-sm mx-auto pt-20" @submit="submitProduct">
-            <icon name="i-heroicons-plus-circle" class=" max-w-sm w-full text-6xl" />
-             <h1 v-if="!editMode" class="w-ful text-center text-2xl font-bold">Add Product</h1>
-            <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold">Edit Product</h1>
+            <icon name="i-heroicons-plus-circle" class=" max-w-sm w-full text-6xl text-white" />
+             <h1 v-if="!editMode" class="w-ful text-center text-2xl font-bold text-white">Add Product</h1>
+            <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold text-white">Edit Product</h1>
             <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
                 <UFormGroup label="Product Title:" name="title" required>
-                    <UInput color="primary" type="text" id="title" class=" w-full p-2.5 " placeholder="Enter Product Title"
+                    <UInput  type="text" id="title" class=" w-full p-2.5 " placeholder="Enter Product Title"
                         v-model="product.title" />
                 </UFormGroup>
                 <UFormGroup label="Product Slug" name="slug" required>
-                    <UInput color="primary" type="text" id="slug" class=" w-full p-2.5 " placeholder="Enter Product Slug"
+                    <UInput  type="text" id="slug" class=" w-full p-2.5 " placeholder="Enter Product Slug"
                         v-model="product.slug" />
                 </UFormGroup>
                 <UFormGroup label="Product Price" name="price" required>
-                    <UInput color="primary" type="number" id="price" class=" w-full p-2.5 " placeholder="Enter Product Price"
+                    <UInput  type="number" id="price" class=" w-full p-2.5 " placeholder="Enter Product Price"
                         v-model="product.price" />
                 </UFormGroup>
                 <UFormGroup label="Product Stock" name="stock" required>
-                    <UInput color="primary" type="number" id="stock" class=" w-full p-2.5 " placeholder="Enter Product Stock"
+                    <UInput  type="number" id="stock" class=" w-full p-2.5 " placeholder="Enter Product Stock"
                         v-model="product.stock" />
                 </UFormGroup>
                 <UFormGroup label="Product Image" name="image">
-                    <input color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged" />
+                    <input  type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged" />
                 </UFormGroup>
                 <UFormGroup label="Product Discount" name="discount" required>
-                    <UInput color="primary" type="number" id="discount" class=" w-full p-2.5 "
+                    <UInput  type="number" id="discount" class=" w-full p-2.5 "
                         placeholder="Enter Product Discount" v-model="product.discount" />
                 </UFormGroup>
 
@@ -45,7 +45,7 @@
                     <USelectMenu  class=" w-full p-2.5 " v-model="selectedColorIds" :options="colorName" multiple placeholder="Select colors" />
                 </UFormGroup>
                 <UFormGroup label="Product Description" name="description" required>
-                    <UTextarea  autoresize size="4xl" rows="20" color="primary"  class=" w-full p-2.5 " v-model="product.description"/>
+                    <UTextarea  autoresize size="4xl" rows="20"  class=" w-full p-2.5 " v-model="product.description"/>
                 </UFormGroup>
                 <UButton v-if="!editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="submitProduct">Submit</UButton>
           <UButton v-if="editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="editForm">Edit</UButton>

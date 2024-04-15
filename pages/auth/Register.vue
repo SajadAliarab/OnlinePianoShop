@@ -1,26 +1,26 @@
 <template>
   <div class="relative h-auto w-full bg-cover bg-gray-800 pb-10">
     <UForm class="max-w-sm mx-auto pt-20" @submit="submitForm" :schema="userSchema" :state="userData">
-      <icon name="i-heroicons-user-circle" class=" max-w-sm w-full text-6xl" />
+      <icon name="i-heroicons-user-circle" class=" max-w-sm w-full text-6xl text-white" />
       <h1 class="w-ful text-center text-2xl font-bold">Create an account</h1>
       <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
         <UFormGroup label="Your Name" name="name" required>
-          <UInput color="primary" type="text" id="name" class=" w-full p-2.5 " placeholder="Enter Your Full Name"
+          <UInput  type="text" id="name" class=" w-full p-2.5 " placeholder="Enter Your Full Name"
             v-model="userData.name" />
         </UFormGroup>
         <UFormGroup label="Your Email" name="email" required>
-          <UInput color="primary" type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address"
+          <UInput  type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address"
             v-model="userData.email" />
         </UFormGroup>
         <div class="mb-5">
           <UFormGroup label="Password" name="password" required>
-            <UInput color="primary" type="password" id="password" class="w-full p-2.5"
+            <UInput  type="password" id="password" class="w-full p-2.5"
               placeholder="Please Enter aleast 8 digit" v-model="userData.password" />
           </UFormGroup>
         </div>
         <div class="mb-5">
           <UFormGroup label="Confirm Password" name="confirmPassword" required>
-            <UInput color="primary" type="password" id="confirmPassword" class="w-full p-2.5"
+            <UInput  type="password" id="confirmPassword" class="w-full p-2.5"
               placeholder="Please Enter your Password Again" v-model="userData.confirmPassword" />
           </UFormGroup>
         </div>

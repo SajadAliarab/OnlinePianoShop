@@ -1,11 +1,11 @@
 <template>
     <UForm  class="max-w-sm mx-auto pt-20"  >
-      <icon name="i-heroicons-plus-circle"  class=" max-w-sm w-full text-6xl"/>
-            <h1 v-if="!editMode" class="w-ful text-center text-2xl font-bold">Add Category</h1>
-            <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold">Edit Category</h1>
+      <icon name="i-heroicons-plus-circle"  class=" max-w-sm w-full text-6xl text-white"/>
+            <h1 v-if="!editMode" class="w-ful text-center text-2xl font-bold text-white">Add Category</h1>
+            <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold text-white">Edit Category</h1>
             <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
         <UFormGroup label="Category Name" name="categoryName" required>
-            <UInput color="primary" type="text" id="categoryName" class=" w-full p-2.5 " placeholder="Enter Category Name" v-model="categoryName" />
+            <UInput  type="text" id="categoryName" class=" w-full p-2.5 " placeholder="Enter Category Name" v-model="categoryName" />
           </UFormGroup>
           <UButton v-if="!editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="submitForm">Submit</UButton>
           <UButton v-if="editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="editForm">Edit</UButton>

@@ -1,11 +1,11 @@
 <template>
     <UForm :schema="schema" :state="state" class="max-w-sm mx-auto pt-20"  >
-      <icon name="i-heroicons-plus-circle"  class=" max-w-sm w-full text-6xl"/>
-            <h1 v-if="!editMode" class="w-ful text-center text-2xl font-bold">Add Brand</h1>
-            <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold">Edit Brand</h1>
+      <icon name="i-heroicons-plus-circle"  class=" max-w-sm w-full text-6xl text-white"/>
+            <h1 v-if="!editMode" class="w-ful text-center text-2xl font-bold text-white">Add Brand</h1>
+            <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold text-white">Edit Brand</h1>
             <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
         <UFormGroup label="Brand Name" name="brandName" required>
-            <UInput color="primary" type="text" id="brandName" class=" w-full p-2.5 " placeholder="Enter Brand Name" v-model="state.brandName" />
+            <UInput  type="text" id="brandName" class=" w-full p-2.5 " placeholder="Enter Brand Name" v-model="state.brandName" />
           </UFormGroup>
           <UFormGroup label="Brand Image" name="brandImage">
             <input color="primary" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"  />
