@@ -5,9 +5,9 @@
             <div class=" md:mb-0 mb-4">
                 <h2 class="text-primary-300 font-manrope text-4xl font-semibold leading-10 mb-5 md:text-left text-center">Get In Touch</h2>
                 <p class="text-primary-100 text-lg font-normal leading-7 mb-7 md:text-left text-center">Whether you have a concern or simply want to say hello, We are here to facilitate communication with you.</p>
-                <div class="flex md:items-center md:justify-start justify-center">
+                <!-- <div class="flex md:items-center md:justify-start justify-center">
                     <button class="w-36 h-12 rounded-full bg-indigo-600 transition-all duration-700 hover:bg-indigo-800 shadow text-white text-center text-base font-semibold leading-6">Contact Us</button>
-                </div>
+                </div> -->
             </div>
             <div class="border-l-2 md:border-indigo-600 border-white px-10 py-6">
                 <div class="mb-8">
