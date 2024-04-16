@@ -3,7 +3,8 @@ import { deleteCategory, showCategory } from '~/services/CategoryService';
 import CategoriesAdd from './CategoriesAdd.vue';
 
 
-
+const colorMode = useColorMode()
+colorMode.value = 'dark'
 const columns = [
   {
     key: 'id',

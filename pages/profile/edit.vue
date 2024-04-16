@@ -5,4 +5,6 @@
 </template>
 <script setup lang="ts">
 import EditUser from '~/components/Users/EditUser.vue';
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 </script>

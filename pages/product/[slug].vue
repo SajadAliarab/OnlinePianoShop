@@ -37,7 +37,7 @@
                                             <div class="flex items-center">
                                                 <UButton icon="i-heroicons-plus" size="sm" color="primary" square
                                                     variant="ghost" @click="addQuantity" />
-                                                <UInput type="text" size="sm"
+                                                <UInput color="primary"  type="text" size="sm"
                                                     class="w-10 text-sm font-bold  text-gray-900 dark:text-white" v-model="quantity" />
                                                 <UButton icon="i-heroicons-minus" size="sm" color="primary" square
                                                     variant="ghost" @click="minusQuantity" />
@@ -162,7 +162,8 @@
 import { showBrandById } from '~/services/BrandService';
 import { showCategoryById } from '~/services/CategoryService';
 import { showProductBySlug } from '~/services/ProductService';
-
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const route: any = useRoute();
 const router: any = useRouter();
 const productData: any = ref({});

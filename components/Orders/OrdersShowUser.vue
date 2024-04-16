@@ -45,7 +45,8 @@
   import { RouterLink } from 'vue-router';
   import { getUserToken } from '~/services/AuthService';
   import { ref, computed } from 'vue';
-  
+  const colorMode = useColorMode()
+colorMode.value = 'dark'
   const columns = [
     { key: 'id', label: 'ID' },
     { key: 'order_date', label: 'Order Date' },

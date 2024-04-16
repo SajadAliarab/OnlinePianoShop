@@ -10,7 +10,7 @@
     </p></span>
     <span v-else>
         <UFormGroup label="Phone:" name="phone" required>
-                    <UInput color="primary" type="text" id="phone" class=" w-full p-2.5 " placeholder="Enter Your Phone without code"
+                    <UInput color="primary"  type="text" id="phone" class=" w-full p-2.5 " placeholder="Enter Your Phone without code"
                         v-model="userData.phone" />
                 </UFormGroup>
                 </span>
@@ -23,7 +23,7 @@
                     <USelect color="primary" id="country" class=" w-full p-2.5 " placeholder="Select Your Country"
                         v-model="userData.country" :options="countries" />
                     <UFormGroup v-if="userData.country=='United Kingdom'" label="postCode:" name="postCode" required>
-                        <UInput  type="text" id="name" class=" w-full p-2.5 "
+                        <UInput color="primary"  type="text" id="name" class=" w-full p-2.5 "
                             placeholder="Enter Your postecode" v-model="userData.postCode" />
                         <UButton   variant="solid" icon="i-heroicons-magnifying-glass-circle"
                         size="sm" color="primary" class="ml-2" square 
@@ -33,18 +33,18 @@
                                 :groups="[{ key: 'addresse', commands: addresses }]" />
                         </UModal>
                         <UFormGroup label="Address:" name="address" required>
-                            <UInput  type="text" id="city" class=" w-full p-2.5 " v-model="userData.city"
+                            <UInput color="primary"  type="text" id="city" class=" w-full p-2.5 " v-model="userData.city"
                                 disabled />
                         <UTextarea  type="text" id="address" class=" w-full p-2.5 " v-model="userData.address"
                             disabled />
                             </UFormGroup>
                         </UFormGroup>
                     <UFormGroup v-else-if="userData.country!='United Kingdom'&& userData.country!=null" label="Address:" name="address" required>
-                        <UInput  type="text" id="city" class=" w-full p-2.5 " placeholder="Enter Your City"
+                        <UInput color="primary"  type="text" id="city" class=" w-full p-2.5 " placeholder="Enter Your City"
                             v-model="userData.city" />
                             <UTextarea  type="text" id="address" class=" w-full p-2.5 " placeholder="Enter Your Address"
                             v-model="userData.address" />
-                            <UInput  type="text" id="postCode" class=" w-full p-2.5 " placeholder="Enter Your PostCode" v-model="userData.postCode"/>
+                            <UInput color="primary"  type="text" id="postCode" class=" w-full p-2.5 " placeholder="Enter Your PostCode" v-model="userData.postCode"/>
                     </UFormGroup>
                     </UFormGroup>     
                 </span>
@@ -81,7 +81,8 @@ import 'v-calendar/style.css';
 import { addDays, format } from 'date-fns';
 import { updateUser } from '~/services/UserService';
 
-
+const colorMode = useColorMode()
+colorMode.value = 'dark'
 
 
 const userData: UsersModel = reactive({

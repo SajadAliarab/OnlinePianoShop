@@ -127,6 +127,8 @@ import { showBrand, showBrandById } from '~/services/BrandService';
 import { showCategory, showCategoryById } from '~/services/CategoryService';
 import { showProduct } from '~/services/ProductService';
 import { showColorById } from '~/services/ColorService';
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const categories:any = ref([]);
 const brands:any = ref([]);
 const selectedCategory= ref({id:0});

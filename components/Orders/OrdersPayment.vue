@@ -30,7 +30,8 @@ import { showProductById, updateProductStock } from '~/services/ProductService';
 import { confirmPayment, createPaymentIntent } from '~/services/PaymentService';
 import { getUserToken } from '~/services/AuthService';
 import { getOrderListLast, updateOrder } from '~/services/OrderService';
-
+const colorMode = useColorMode()
+colorMode.value = 'dark'
 const router = useRouter();
 const config = useRuntimeConfig();
 const stripe: any = ref(null);

@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center">
         <div class="w-screen my-5">
             <div class="flex justify-center px-3 py-3.5 border-gray-700">
-                <UInput v-model="search" placeholder="Filter orders..." />
+                <UInput color="primary" style="color: white !important;" v-model="search" placeholder="Filter orders..." />
             </div>
         </div>
         <div class=" justify-center w-screen">

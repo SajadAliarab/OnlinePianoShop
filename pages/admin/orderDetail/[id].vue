@@ -38,7 +38,8 @@ import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { getOrderDetail, updateOrderStatus } from '~/services/OrderService';
 import { showProductById } from '~/services/ProductService';
-
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const router = useRouter();
 const orderDetail: any = ref([]);
 const productDetail: any = ref([]);

@@ -175,7 +175,8 @@
 <script setup lang="ts">
 import type { ULink } from '#build/components';
 import { getUserData, logOutUser, getUserToken } from '~/services/AuthService';
-
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const router = useRouter();
  const authenticated = ref(false);
 const user:any = ref('');

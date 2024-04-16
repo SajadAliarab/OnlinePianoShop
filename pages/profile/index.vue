@@ -20,7 +20,8 @@
   import { getUserToken } from '~/services/AuthService';
   import { deleteUser } from '~/services/UserService';
   import { useRouter } from 'vue-router';
-  
+  const colorMode = useColorMode();
+  colorMode.value = 'dark';
   const router = useRouter();
   const DeleteUser = async () => {
     const token = localStorage.getItem('auth-data');

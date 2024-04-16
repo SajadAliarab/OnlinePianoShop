@@ -5,24 +5,24 @@
             <h1 class="text-2xl text-white font-bold text-center">Compelete Your Profile</h1>
             <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
                 <UFormGroup label="Name:" name="name" required>
-                    <UInput color="primary" type="text" id="title" class=" w-full p-2.5 "
+                    <UInput color="primary" style="color: white !important;" type="text" id="title" class=" w-full p-2.5 "
                         placeholder="Enter Product Title" v-model="userData.name" />
                 </UFormGroup>
                 <UFormGroup label="Email:" name="email">
-                    <UInput color="primary" type="email" id="email" class=" w-full p-2.5 "
+                    <UInput color="primary" style="color: white !important;" type="email" id="email" class=" w-full p-2.5 "
                         placeholder="Enter Your Email" v-model="userData.email" disabled />
                 </UFormGroup>
                 <UFormGroup label="Password:" name="password">
-                    <UInput color="primary" type="password" id="password" class=" w-full p-2.5 "
+                    <UInput color="primary" style="color: white !important;" type="password" id="password" class=" w-full p-2.5 "
                         placeholder="Enter Your Password" v-model="password" />
                         <p class=" ml-2 text-xs text-green-400">If you do not want change your password please leave it empty</p>
                 </UFormGroup>
                 <UFormGroup v-if="password!=''"label="Confirm Password" name="confirmPassword" required>
-            <UInput color="primary" type="password" id="confirmPassword" class="w-full p-2.5"
+            <UInput color="primary" style="color: white !important;" type="password" id="confirmPassword" class="w-full p-2.5"
               placeholder="Please Enter your Password Again" v-model="confirmPassword" />
           </UFormGroup>
                 <UFormGroup label="Phone:" name="phone" required >
-                    <UInput color="primary" type="text" id="phone" class=" w-full p-2.5 " placeholder="Enter Your Phone without code"
+                    <UInput color="primary" style="color: white !important;" type="text" id="phone" class=" w-full p-2.5 " placeholder="Enter Your Phone without code"
                         v-model="userData.phone" />
                 </UFormGroup>
                 <UFormGroup v-if="!addAddress" label="add Address">
@@ -30,10 +30,10 @@
                         @click="addAddress = true" />
                 </UFormGroup>
                 <UFormGroup v-if="addAddress" label="Country:" name="country">
-                    <USelect color="primary" id="country" class=" w-full p-2.5 " placeholder="Select Your Country"
+                    <USelect color="primary" style="color: white !important;" id="country" class=" w-full p-2.5 " placeholder="Select Your Country"
                         v-model="userData.country" :options="countries" />
                     <UFormGroup v-if="userData.country=='United Kingdom'" label="postCode:" name="postCode">
-                        <UInput color="primary" type="text" id="name" class=" w-full p-2.5 "
+                        <UInput color="primary" style="color: white !important;" type="text" id="name" class=" w-full p-2.5 "
                             placeholder="Enter Your postecode" v-model="userData.postCode" />
                         <UButton   variant="solid" icon="i-heroicons-magnifying-glass-circle"
                         size="sm" color="primary" class="ml-2" square 
@@ -43,18 +43,18 @@
                                 :groups="[{ key: 'addresse', commands: addresses }]" />
                         </UModal>
                         <UFormGroup label="Address:" name="address">
-                            <UInput color="primary" type="text" id="city" class=" w-full p-2.5 " v-model="userData.city"
+                            <UInput color="primary" style="color: white !important;" type="text" id="city" class=" w-full p-2.5 " v-model="userData.city"
                                 disabled />
-                        <UTextarea color="primary" type="text" id="address" class=" w-full p-2.5 " v-model="userData.address"
+                        <UTextarea color="primary" style="color: white !important;" type="text" id="address" class=" w-full p-2.5 " v-model="userData.address"
                             disabled />
                             </UFormGroup>
                         </UFormGroup>
                     <UFormGroup v-else-if="userData.country!='United Kingdom'&& userData.country!=null" label="Address:" name="address">
-                        <UInput color="primary" type="text" id="city" class=" w-full p-2.5 " placeholder="Enter Your City"
+                        <UInput color="primary" style="color: white !important;" type="text" id="city" class=" w-full p-2.5 " placeholder="Enter Your City"
                             v-model="userData.city" />
-                            <UTextarea color="primary" type="text" id="address" class=" w-full p-2.5 " placeholder="Enter Your Address"
+                            <UTextarea color="primary" style="color: white !important;" type="text" id="address" class=" w-full p-2.5 " placeholder="Enter Your Address"
                             v-model="userData.address" />
-                            <UInput color="primary" type="text" id="postCode" class=" w-full p-2.5 " placeholder="Enter Your PostCode" v-model="userData.postCode"/>
+                            <UInput color="primary" style="color: white !important;" type="text" id="postCode" class=" w-full p-2.5 " placeholder="Enter Your PostCode" v-model="userData.postCode"/>
                     </UFormGroup>
                         
                     </UFormGroup>

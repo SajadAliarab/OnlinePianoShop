@@ -5,7 +5,8 @@ import ProductsAdd from './ProductsAdd.vue';
 import ThePriceFormaater from '../ThePriceFormmater.vue';
 
 
-
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const columns = [
   {
     key: 'id',
@@ -116,7 +117,7 @@ const filteredRows = computed(() => {
      <hr class="border-t-2 border-white my-10"/>
   <div class="flex flex-col items-center  h-auto">
     <div class="flex justify-center px-3 py-3.5 border-gray-700">
-      <UInput v-model="search" placeholder="Filter product..." />
+      <UInput color="primary"  v-model="search" placeholder="Filter product..." />
     </div>
    
     <UTable :loading="loading" :rows="(search)?filteredRows : rows" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">

@@ -9,12 +9,12 @@
             class="text-primary font-medium">Sign Up</NuxtLink>
         </p>
         <UFormGroup label="Email" name="email" >
-          <UInput  type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address"
+          <UInput color="primary"   type="email" id="email" class=" w-full p-2.5 "  placeholder="Enter Your Email Address"
             v-model="userData.email" />
         </UFormGroup>
         <div class="mb-5">
           <UFormGroup label="Password" name="password">
-            <UInput  type="password" id="password" class="w-full p-2.5"
+            <UInput color="primary"  type="password" id="password" class="w-full p-2.5"
               placeholder="Please Enter your Password" v-model="userData.password" />
           </UFormGroup>
         </div>
@@ -38,7 +38,8 @@
 <script setup lang="ts">
 import { object, string, } from 'yup';
 import { LoginUser } from '~/services/AuthService';
-
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const router = useRouter();
 const schemaUser = object({
   email: string().email('Invalid email').required('Required!'),

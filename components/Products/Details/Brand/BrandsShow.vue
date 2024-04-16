@@ -3,7 +3,8 @@ import { deleteBrand, showBrand } from '~/services/BrandService';
 import { deleteFile } from '~/services/UploadFileService';
 import BrandsAdd from './BrandsAdd.vue';
 
-
+const colorMode = useColorMode()
+colorMode.value = 'dark'
 
 const columns = [
   {
@@ -76,7 +77,7 @@ const items = (row: any) => [
     <BrandsAdd :brandData="selectedBrandData" :editMode="editMode" @brandAdded="brandHandler"/>
      <hr class="border-t-2 border-white my-10"/>
   <div class="flex justify-center  h-auto">
-    <UTable :loading="loading" :rows="brandData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
+    <UTable  :loading="loading" :rows="brandData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4  ">
     <template #brandName-data="{ row }">
       <span class="text-primary-400">{{ row.name }}</span>
     </template>

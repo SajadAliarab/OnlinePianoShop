@@ -2,11 +2,11 @@
    <div class="flex flex-col items-center">
     <div class="w-screen my-5">
     <div class="flex justify-center px-3 py-3.5 border-gray-700">
-      <UInput v-model="search" placeholder="Filter users..." />
+      <UInput color="primary" style="color: white !important;" v-model="search" placeholder="Filter users..." />
     </div>
     </div>
-    <div class=" justify-center w-screen">
-    <UTable :loading="loading" :rows="(search)?filteredRows : rows" :columns="columns" class=" border rounded-lg bg-gray-900 w-screen">
+    <div class=" justify-center w-screen" style="color: white !important;">
+    <UTable  :loading="loading" :rows="(search)?filteredRows : rows" :columns="columns" class=" border rounded-lg bg-gray-900 w-screen ">
       <template #role-data="{row}">
       <span>{{(row.role==1)?'Admin':'Client'}}</span>
     </template>

@@ -5,6 +5,7 @@
 </template>
 <script setup lang="ts">
 import OrdersShow from '~/components/Orders/OrdersShow.vue';
-
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 
 </script>

@@ -5,22 +5,22 @@
       <h1 class="w-ful text-center text-2xl font-bold">Create an account</h1>
       <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
         <UFormGroup label="Your Name" name="name" required>
-          <UInput  type="text" id="name" class=" w-full p-2.5 " placeholder="Enter Your Full Name"
+          <UInput color="primary"  type="text" id="name" class=" w-full p-2.5 " placeholder="Enter Your Full Name"
             v-model="userData.name" />
         </UFormGroup>
         <UFormGroup label="Your Email" name="email" required>
-          <UInput  type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address"
+          <UInput color="primary"  type="email" id="email" class=" w-full p-2.5 " placeholder="Enter Your Email Address"
             v-model="userData.email" />
         </UFormGroup>
         <div class="mb-5">
           <UFormGroup label="Password" name="password" required>
-            <UInput  type="password" id="password" class="w-full p-2.5"
+            <UInput color="primary"  type="password" id="password" class="w-full p-2.5"
               placeholder="Please Enter aleast 8 digit" v-model="userData.password" />
           </UFormGroup>
         </div>
         <div class="mb-5">
           <UFormGroup label="Confirm Password" name="confirmPassword" required>
-            <UInput  type="password" id="confirmPassword" class="w-full p-2.5"
+            <UInput color="primary"  type="password" id="confirmPassword" class="w-full p-2.5"
               placeholder="Please Enter your Password Again" v-model="userData.confirmPassword" />
           </UFormGroup>
         </div>
@@ -46,6 +46,8 @@
 <script setup lang="ts" >
 import * as yup from 'yup';
 import { RegisterUser } from '~/services/AuthService';
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const router = useRouter();
 const userSchema = yup.object({
   name: yup.string().required('Required!'),

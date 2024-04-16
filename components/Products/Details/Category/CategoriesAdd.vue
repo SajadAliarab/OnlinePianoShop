@@ -5,7 +5,7 @@
             <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold text-white">Edit Category</h1>
             <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
         <UFormGroup label="Category Name" name="categoryName" required>
-            <UInput  type="text" id="categoryName" class=" w-full p-2.5 " placeholder="Enter Category Name" v-model="categoryName" />
+            <UInput color="primary"  type="text" id="categoryName" class=" w-full p-2.5 " placeholder="Enter Category Name" v-model="categoryName" />
           </UFormGroup>
           <UButton v-if="!editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="submitForm">Submit</UButton>
           <UButton v-if="editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="editForm">Edit</UButton>
@@ -22,6 +22,8 @@
       editMode: boolean;
       categoryData: any;
     }>()
+    const colorMode = useColorMode()
+colorMode.value = 'dark'
     const  emit  = defineEmits(['categoryAdded']);
 
     watch(() => props.categoryData, (newValue) => {

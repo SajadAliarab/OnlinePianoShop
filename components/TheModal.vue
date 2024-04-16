@@ -30,6 +30,8 @@
             default:false
         }
     })
+    const colorMode = useColorMode();
+colorMode.value = 'dark';
     const emit = defineEmits(['update:modelValue'])
 
   </script>

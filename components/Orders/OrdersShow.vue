@@ -3,7 +3,8 @@ import { showProductById } from '~/services/ProductService';
 import ThePriceFormaater from '../ThePriceFormmater.vue';
 import { getUserToken } from '~/services/AuthService';
 import { createOrder } from '~/services/OrderService';
-
+const colorMode = useColorMode()
+colorMode.value = 'dark'
 
 const columns = [
   {

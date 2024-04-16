@@ -3,7 +3,8 @@ import { deleteSlide, showSlide } from '~/services/SlideService';
 import { deleteFile } from '~/services/UploadFileService';
 
 
-
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const columns = [
   {
     key: 'id',

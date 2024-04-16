@@ -5,16 +5,16 @@
         <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold text-white">Edit Slide</h1>
         <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
     <UFormGroup label="Image Tiltle" name="title" required>
-        <UInput  type="text" id="imageTitle" class=" w-full p-2.5 " placeholder="Enter Image Title" v-model="state.imageTitle" />
+        <UInput color="primary" style="color: white !important;" type="text" id="imageTitle" class=" w-full p-2.5 " placeholder="Enter Image Title" v-model="state.imageTitle" />
       </UFormGroup>
       <UFormGroup label="Image File" name="imageFile" required>
-        <input  type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"  capture />
+        <input color="primary" style="color: white !important;" type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged"  capture />
       </UFormGroup>
       <UFormGroup label="Image alt" name="imageAlt" required>
-        <UInput  type="text" id="imageAlt" class=" w-full p-2.5 " v-model="state.imageAlt" placeholder="Enter image alt name" />
+        <UInput color="primary"  type="text" id="imageAlt" class=" w-full p-2.5 " v-model="state.imageAlt" placeholder="Enter image alt name" />
       </UFormGroup>
       <UFormGroup label="Link" name="imageLink">
-        <UInput  type="text" id="imageLink" class=" w-full p-2.5 " v-model="state.imageLink" placeholder="Please put your link without site name" />
+        <UInput color="primary"  type="text" id="imageLink" class=" w-full p-2.5 " v-model="state.imageLink" placeholder="Please put your link without site name" />
       </UFormGroup>
       <UButton v-if="!editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="submitForm">Submit</UButton>
       <UButton v-if="editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="editForm">Edit</UButton>
@@ -33,6 +33,8 @@ const props = defineProps<{
   editMode: boolean;
   slideData: any;
 }>()
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const  emit  = defineEmits(['slideAdded']);
 const schema = object({
   imageTitle:string().required('Required!'),

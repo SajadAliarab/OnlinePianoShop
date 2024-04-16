@@ -11,6 +11,8 @@ const items = [{
   slot: 'Payment',
   defaultOpen:true
 }]
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 
 </script>
 

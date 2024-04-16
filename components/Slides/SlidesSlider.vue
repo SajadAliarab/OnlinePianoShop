@@ -7,7 +7,8 @@ import { Carousel, Pagination, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
 
-
+const colorMode = useColorMode();
+colorMode.value = 'dark';
 const getItem = async () => {
   try {
     const data: any = await showSlide();

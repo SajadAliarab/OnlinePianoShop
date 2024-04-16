@@ -6,46 +6,46 @@
             <h1 v-if="editMode" class="w-ful text-center text-2xl font-bold text-white">Edit Product</h1>
             <div class=" p-2 border rounded-lg bg-gray-900 shadow-3xl">
                 <UFormGroup label="Product Title:" name="title" required>
-                    <UInput  type="text" id="title" class=" w-full p-2.5 " placeholder="Enter Product Title"
+                    <UInput color="primary"  type="text" id="title" class=" w-full p-2.5 " placeholder="Enter Product Title"
                         v-model="product.title" />
                 </UFormGroup>
                 <UFormGroup label="Product Slug" name="slug" required>
-                    <UInput  type="text" id="slug" class=" w-full p-2.5 " placeholder="Enter Product Slug"
+                    <UInput color="primary"  type="text" id="slug" class=" w-full p-2.5 " placeholder="Enter Product Slug"
                         v-model="product.slug" />
                 </UFormGroup>
                 <UFormGroup label="Product Price" name="price" required>
-                    <UInput  type="number" id="price" class=" w-full p-2.5 " placeholder="Enter Product Price"
+                    <UInput color="primary"  type="number" id="price" class=" w-full p-2.5 " placeholder="Enter Product Price"
                         v-model="product.price" />
                 </UFormGroup>
                 <UFormGroup label="Product Stock" name="stock" required>
-                    <UInput  type="number" id="stock" class=" w-full p-2.5 " placeholder="Enter Product Stock"
+                    <UInput color="primary"  type="number" id="stock" class=" w-full p-2.5 " placeholder="Enter Product Stock"
                         v-model="product.stock" />
                 </UFormGroup>
                 <UFormGroup label="Product Image" name="image">
-                    <input  type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged" />
+                    <input color="primary"  type="file" ref="fileInput" class=" w-full p-2.5 " @change="onFileChanged" />
                 </UFormGroup>
                 <UFormGroup label="Product Discount" name="discount" required>
-                    <UInput  type="number" id="discount" class=" w-full p-2.5 "
+                    <UInput color="primary"  type="number" id="discount" class=" w-full p-2.5 "
                         placeholder="Enter Product Discount" v-model="product.discount" />
                 </UFormGroup>
 
                 <UFormGroup label="Product Status" name="status" required>
-                    <USelectMenu class=" w-full p-2.5 " v-model="product.status" :options="['New', 'Used']"
+                    <USelectMenu color="primary"  class=" w-full p-2.5 " v-model="product.status" :options="['New', 'Used']"
                         placeholder="Select status" />
                 </UFormGroup>
                 <UFormGroup label="Product Brand" name="brand" required>
-                    <USelectMenu class=" w-full p-2.5 " v-model="selectedBrand" :options="brandsName"
+                    <USelectMenu color="primary"  class=" w-full p-2.5 " v-model="selectedBrand" :options="brandsName"
                         placeholder="Select brand" />
                 </UFormGroup>
                 <UFormGroup label="Product Category" name="category" required>
-                    <USelectMenu class=" w-full p-2.5 " v-model="selectedCategory" :options="categoriesName"
+                    <USelectMenu color="primary"  class=" w-full p-2.5 " v-model="selectedCategory" :options="categoriesName"
                         placeholder="Select category" />
                 </UFormGroup>
                 <UFormGroup label="Product Color" name="color" required>
-                    <USelectMenu  class=" w-full p-2.5 " v-model="selectedColorIds" :options="colorName" multiple placeholder="Select colors" />
+                    <USelectMenu color="primary"  class=" w-full p-2.5 " v-model="selectedColorIds" :options="colorName" multiple placeholder="Select colors" />
                 </UFormGroup>
                 <UFormGroup label="Product Description" name="description" required>
-                    <UTextarea  autoresize size="4xl" rows="20"  class=" w-full p-2.5 " v-model="product.description"/>
+                    <UTextarea color="primary"  autoresize size="4xl" rows="20"  class=" w-full p-2.5 text-white " v-model="product.description"/>
                 </UFormGroup>
                 <UButton v-if="!editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="submitProduct">Submit</UButton>
           <UButton v-if="editMode" :loading="loadingBtn" color="primary" type="submit" class=" font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 justify-center mb-5" @click="editForm">Edit</UButton>
@@ -69,6 +69,8 @@ const props = defineProps<{
       editMode: boolean;
       productData: any;
     }>()
+    const colorMode = useColorMode()
+colorMode.value = 'dark'
     const  emit  = defineEmits(['productAdded']);
 const schemaProduct = object({
     title: string().required('Required!'),

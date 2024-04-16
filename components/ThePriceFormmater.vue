@@ -6,6 +6,8 @@
 const props = defineProps<{
       price: number;
     }>()
+    const colorMode = useColorMode();
+colorMode.value = 'dark';
 const formattedPrice = computed(() => {
     if (isNaN(props.price)) return props.price;
       const formatter = new Intl.NumberFormat('en-GB', {
