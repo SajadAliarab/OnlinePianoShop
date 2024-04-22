@@ -99,6 +99,13 @@
   </UDropdown>    
              
 </li>
+<li>
+      <ULink 
+        to="https://api.sajad.uk/api/docs"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200"
+        target="_blanck">API Document</ULink>
+    </li>
     </ul>
   </div>
      <!-- Mobile Menu -->
@@ -166,6 +173,14 @@
           <ULink to="/admin/orders" active-class="text-primary" inactive-class="text-gray-400 hover:text-gray-200" @click="closeMobileMenu">Orders</ULink>
         </li>
       </ul>
+    </li>
+    <li>
+      <ULink 
+        to="https://api.sajad.uk/api/docs"
+        active-class="text-primary"
+        inactive-class="text-gray-400 hover:text-gray-200"
+        @click="closeMobileMenu"
+        target="_blanck">API Document</ULink>
     </li>
   </ul>
 </div>
