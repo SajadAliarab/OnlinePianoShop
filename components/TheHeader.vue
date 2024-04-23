@@ -251,7 +251,7 @@ onMounted(()=>{checkAuthentication();
 // });
 const cartData=()=>
 {
-  const data= localStorage.getItem('cart');
+  const data=localStorage.getItem('cart');
   if(data){
     const dataInfo= JSON.parse(data);
     cartItem.value=dataInfo.length;
@@ -259,12 +259,15 @@ const cartData=()=>
     cartItem.value=0;
   }
 }
+
+
 onMounted(()=>{cartData();});
 router.beforeEach(async (to, from, next) => {
   await checkAuthentication();
   cartData();
   next();
 });
+
 
 
 const logout = () => {

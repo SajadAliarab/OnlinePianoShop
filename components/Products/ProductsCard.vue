@@ -112,8 +112,9 @@
         </div>
         <div class="w-full mt-5">
       <div class="flex justify-center px-3 py-3.5 border-t  border-gray-700">
-      <UPagination v-model="page" :page-count="pageCount" :total="productData.length" />
-        <USelectMenu v-model="pageCount" :options="[6, 12, 24, 50]" />
+      <UPagination v-model="page" :page-count="pageCount" :total="totalProductLength" />
+        <span class="text-white ml-5">Products per page:</span>
+        <USelectMenu v-model="pageCount" :options="[6, 12, 24, 50]"/>
 
     </div>
     </div>
@@ -135,6 +136,7 @@ const selectedCategory= ref({id:0});
 const selectedBrand= ref({id:0});
 const page = ref(1);
 const pageCount = ref(6);
+const totalProductLength:any = ref(0);
 const productData:any = ref([]);
 const selectedProductBrand = ref('');
 const selectedProductCategory = ref('');
@@ -249,6 +251,7 @@ const continueShop = (productid:number,productStock:number) => {
         });
     }
    localStorage.setItem('cart', JSON.stringify(existingCart));
+    router.push('/products/');
 }
 };
 const checkOut = (productid:number,productStock:number) => {
@@ -284,15 +287,21 @@ const checkOut = (productid:number,productStock:number) => {
 };
 const rows = computed(() => {
     if(selectedCategory.value.id === 0 && selectedBrand.value.id === 0){
+        totalProductLength.value = productData.value.length;
         return productData.value.slice((page.value - 1) * pageCount.value, (page.value) * pageCount.value)
     }else if(selectedCategory.value.id !== 0 && selectedBrand.value.id === 0){
+        totalProductLength.value = productData.value.filter((product:any) => product.category == selectedCategory.value.id).length;
         return productData.value.filter((product:any) => product.category == selectedCategory.value.id).slice((page.value - 1) * pageCount.value, (page.value) * pageCount.value)
     }else if(selectedCategory.value.id === 0 && selectedBrand.value.id !== 0){
+        totalProductLength.value = productData.value.filter((product:any) => product.brand === selectedBrand.value.id).length;
         return productData.value.filter((product:any) => product.brand === selectedBrand.value.id).slice((page.value - 1) * pageCount.value, (page.value) * pageCount.value)
     }else{
+        totalProductLength.value = productData.value.filter((product:any) => product.category === selectedCategory.value.id && product.brand === selectedBrand.value.id).length;
         return productData.value.filter((product:any) => product.category === selectedCategory.value.id && product.brand === selectedBrand.value.id).slice((page.value - 1) * pageCount.value, (page.value) * pageCount.value)
     }
 })
+
+
 
 onMounted(getItem);
 

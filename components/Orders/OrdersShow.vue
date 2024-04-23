@@ -135,6 +135,14 @@ const checkOut = async() => {
 </script>
 
 <template>
+      <div class="flex justify-center my-5">
+    <div class="flex justify-between w-1/2">
+        <h1 class="text-primary-100 font-extrabold text-2xl">Your Cart</h1>
+    <ULink to="/products/" class="flex justify-end">
+            <UButton color="primary">Continue Shopping</UButton>
+        </ULink>
+    </div>
+</div>
    <div class="flex justify-center">
     <UTable :loading="loading" :rows="orderData" :columns="columns" class="border rounded-lg bg-gray-900 w-3/4">
     <template #title-data="{ row }">

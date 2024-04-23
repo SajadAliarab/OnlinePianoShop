@@ -242,6 +242,7 @@ const continueShop = () => {
     }
 
     localStorage.setItem('cart', JSON.stringify(existingCart));
+    router.push('/products/');
 }
 };
 const checkOut = () => {
